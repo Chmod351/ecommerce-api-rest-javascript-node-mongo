@@ -11,6 +11,7 @@ const app = express();
 app.use(async (req, res, next) => {
   next(Error.NotFound());
 });
+
 middlewares.forEach((middleware) => {
   console.log(`Loading middleware /${middlewares.length}: ${middleware.name}`);
   app.use(middleware);
