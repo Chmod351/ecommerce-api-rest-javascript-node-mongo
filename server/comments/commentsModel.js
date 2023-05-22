@@ -20,6 +20,12 @@ const CommentSchema = new mongoose.Schema(
       type: String,
       require: true,
       maxLength: 200,
+      minlength: 50,
+    },
+    calification: {
+      type: Number,
+      default: 10,
+      max: 10,
     },
     hide: {
       type: Boolean,

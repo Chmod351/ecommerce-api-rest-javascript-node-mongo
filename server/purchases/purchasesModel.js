@@ -22,8 +22,15 @@ const PurchaseSchema = new mongoose.Schema(
       type: String,
       require: true,
       maxLength: 200,
+      minlength: 5,
     },
-    deliveryStatus: {
+    shippingAddress: {
+      type: String,
+      required: true,
+      maxLength: 100,
+      minlength: 50,
+    },
+    shippingStatus: {
       type: [
         {
           type: String,
