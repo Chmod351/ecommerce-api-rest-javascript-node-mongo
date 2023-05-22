@@ -3,16 +3,23 @@ import mongoose from 'mongoose';
 const CommentSchema = new mongoose.Schema(
   {
     userId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
     productId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Product',
       required: true,
     },
     author: {
       type: String,
       required: true,
+    },
+    description: {
+      type: String,
+      require: true,
+      maxLength: 200,
     },
     hide: {
       type: Boolean,
