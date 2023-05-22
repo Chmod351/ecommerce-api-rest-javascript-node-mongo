@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
-import { MONGO } from './credentials/credentials.js';
-
+import { config } from 'dotenv';
+config();
 const server = mongoose;
 
 export const connect = () => {
   server
-    .connect(MONGO)
+    .connect(process.env.MONGO)
     .then(() => {
       console.log('connected to mongoose');
     })
