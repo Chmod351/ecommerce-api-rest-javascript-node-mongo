@@ -71,8 +71,18 @@ async function signUp(user) {
 
 
 async function getUser(userId) {
-
+  try {
+    const user = await User.findById(userId);
+    if (user) {
+      return user;
+    } else {
+      throw new Error('bad request');
+    }
+  } catch (error) {
+    throw error;
+  }
 }
+
 
 async function createAdmin(userId) {
 
