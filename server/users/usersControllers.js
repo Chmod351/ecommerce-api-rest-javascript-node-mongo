@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import userActions from './usersViews.js';
-import cleanBody from '../helpers/sanitizer.js'
+import cleanBody from '../helpers/sanitizer.js';
 const router = Router();
 
-router.post('/signin',cleanBody, signIn);
-router.post('/signup',cleanBody, signUp);
-router.put('/users/:userId',cleanBody, editUser);
+router.post('/signin', cleanBody, signIn);
+router.post('/signup', cleanBody, signUp);
+router.put('/users/:userId', cleanBody, editUser);
 router.get('/users/:userId', getUser);
 
 router.put('/users/admin/:userId', createAdmin);
@@ -15,7 +15,11 @@ export default router;
 function signIn(req, res, next) {
   userActions
     .signIn(req.body)
-    .then((user) => res.json(user))
+    .then((user) =>
+      user
+        ? res.json(user)
+        : res.status(400).json({ message: 'Email not found in database' }),
+    )
     .catch((error) => next(error));
 }
 function signUp(req, res, next) {

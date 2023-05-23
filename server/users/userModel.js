@@ -11,10 +11,11 @@ const UserSchema = new mongoose.Schema(
       maxLength: 20,
       minlength: 3,
       required: true,
+      unique: true,
     },
     password: {
       type: String,
-      maxLength: 30,
+      maxLength: 255,
       minlength: 8,
       required: true,
       match: [passwordRegex, 'Invalid password format'],
@@ -22,7 +23,7 @@ const UserSchema = new mongoose.Schema(
     email: {
       type: String,
       maxLength: 50,
-      minlength: 15,
+      minlength: 10,
       required: true,
       unique: true,
       validate: {

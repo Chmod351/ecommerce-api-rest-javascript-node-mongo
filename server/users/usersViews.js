@@ -3,6 +3,7 @@ import User from './userModel.js';
 import jwt from 'jsonwebtoken';
 import { JWT_TOKEN } from '../../index.js';
 
+
 const userActions = {
   signIn,
   signUp,
@@ -12,7 +13,7 @@ const userActions = {
 };
 
 async function findByEmail(email) {
-  const alreadyExists = User.findOne({email: { $eq: email }})
+  const alreadyExists = User.findOne({ email: { $eq: email } });
   return alreadyExists;
 }
 
@@ -31,7 +32,17 @@ async function generateToken(userId) {
 
 async function signIn(user) {}
 
-async function signUp(user) {}
+async function signUp(user) {
+  const registeredUser = await findByEmail(user.email);
+  if (!registeredUser) {
+    const encryptPassword = await hashPassword(user.password);
+    const createUser = new User({ ...user, password: encryptPassword });
+    const newUser = await createUser.save();
+    return newUser;
+  } else {
+    throw  new Error('bad request');
+  }
+}
 
 async function editUser(user) {}
 
