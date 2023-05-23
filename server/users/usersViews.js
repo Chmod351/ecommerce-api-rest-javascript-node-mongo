@@ -30,30 +30,22 @@ async function generateToken(userId) {
 
 async function signIn(user) {
   return new Promise(async (resolve, reject) => {
-    try {
-      const alreadyExists = await findByEmail(user.email);
-
-      if (!alreadyExists) {
-        reject(new Error('bad request'));
-        return;
-      }
-
-      const matchPass = await bcrypt.compare(
-        user.password,
-        alreadyExists.password,
-      );
-
-      if (!matchPass) {
-        reject(new Error('wrong credentials'));
-        return;
-      }
-
-      const sendToken = await generateToken(alreadyExists.id);
-
-      resolve({ user: alreadyExists, sendToken });
-    } catch (error) {
-      reject(error);
+    const alreadyExists = await findByEmail(user.email);
+    if (!alreadyExists) {
+      reject(new Error('bad request'));
+      return;
     }
+    const matchPass = await bcrypt.compare(
+      user.password,
+      alreadyExists.password,
+    );
+    if (!matchPass) {
+      reject(new Error('wrong credentials'));
+      return;
+    }
+
+    const sendToken = await generateToken(alreadyExists._id);
+    resolve({ user: alreadyExists, sendToken });
   });
 }
 
@@ -69,7 +61,6 @@ async function signUp(user) {
   }
 }
 
-
 async function getUser(userId) {
   try {
     const user = await User.findById(userId);
@@ -83,9 +74,6 @@ async function getUser(userId) {
   }
 }
 
-
-async function createAdmin(userId) {
-
-}
+async function createAdmin(userId) {}
 
 export default userActions;

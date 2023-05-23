@@ -13,11 +13,17 @@ export default router;
 function signIn(req, res, next) {
   userActions
     .signIn(req.body)
-    .then((user) =>
-      user
-        ? res.json(user)
-        : res.status(400).json({ message: 'Email not found in database' }),
-    )
+    .then(({ user, sendToken }) => {
+      if (user) {
+        res.cookie('token', sendToken, {
+          httpOnly: true,
+          secure: true,
+        });
+        res.json(user);
+      } else {
+        res.status(400).json({ message: 'Email not found in database' });
+      }
+    })
     .catch((error) => next(error));
 }
 function signUp(req, res, next) {
