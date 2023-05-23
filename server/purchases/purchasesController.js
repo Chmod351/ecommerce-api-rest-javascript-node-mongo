@@ -11,30 +11,30 @@ export default router;
 function createPurchase(req, res, next) {
   userActions
     .signUp(req.body)
-    .then((user) => res.json(user))
+    .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
 function getUserPurchases(req, res, next) {
   userActions
-    .signUp(req.body)
-    .then((user) => res.json(user))
+    .signUp(req.params.id)
+    .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
 function getPurchaseById(req, res, next) {
   userActions
-    .signUp(req.body)
-    .then((user) => res.json(user))
+    .signUp(req.body.id)
+    .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
 function cancelPurchase(req, res, next) {
   userActions
     .signUp(req.body)
-    .then((user) => res.json(user))
+    .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
 function updatePurchaseState(req, res, next) {
   userActions
     .signUp(req.body)
-    .then((user) => res.json(user))
+    .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }

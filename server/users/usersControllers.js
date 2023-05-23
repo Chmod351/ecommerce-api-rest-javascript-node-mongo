@@ -1,9 +1,11 @@
 import { Router } from 'express';
+import userActions from './usersViews.js';
+import cleanBody from '../helpers/sanitizer.js'
 const router = Router();
 
-router.post('/signin', signIn);
-router.post('/signup', signUp);
-router.put('/users/:userId', editUser);
+router.post('/signin',cleanBody, signIn);
+router.post('/signup',cleanBody, signUp);
+router.put('/users/:userId',cleanBody, editUser);
 router.get('/users/:userId', getUser);
 
 router.put('/users/admin/:userId', createAdmin);

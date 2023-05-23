@@ -1,4 +1,8 @@
 import mongoose from 'mongoose';
+import validator from 'email-validator';
+
+const passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 const UserSchema = new mongoose.Schema(
   {
@@ -13,12 +17,17 @@ const UserSchema = new mongoose.Schema(
       maxLength: 30,
       minlength: 8,
       required: true,
+      match: [passwordRegex, 'Invalid password format'],
     },
     email: {
       type: String,
       maxLength: 50,
       minlength: 15,
       required: true,
+      validate: {
+        validator: (email) => validator.validate(email),
+        message: 'Invalid email format',
+      },
     },
     isAdmin: {
       type: Boolean,
