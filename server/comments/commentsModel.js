@@ -25,6 +25,7 @@ const CommentSchema = new mongoose.Schema(
     calification: {
       type: Number,
       default: 10,
+      min:1,
       max: 10,
     },
     hide: {

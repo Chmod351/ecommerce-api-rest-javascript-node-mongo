@@ -15,15 +15,6 @@ const UserSchema = new mongoose.Schema(
         },
       },
     ],
-    productsVisited: [
-      {
-        product: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'Product',
-          required: true,
-        },
-      },
-    ],
     name: {
       type: String,
       maxLength: 20,
