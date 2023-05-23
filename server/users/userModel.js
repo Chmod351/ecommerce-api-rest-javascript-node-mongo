@@ -24,6 +24,7 @@ const UserSchema = new mongoose.Schema(
       maxLength: 50,
       minlength: 15,
       required: true,
+      unique: true,
       validate: {
         validator: (email) => validator.validate(email),
         message: 'Invalid email format',

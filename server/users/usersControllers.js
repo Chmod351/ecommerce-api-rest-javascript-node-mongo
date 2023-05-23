@@ -32,7 +32,7 @@ function editUser(req, res, next) {
 }
 function getUser(req, res, next) {
   userActions
-    .getUser(req.body)
+    .getUser(req.params.id)
     .then((user) => res.json(user))
     .catch((error) => next(error));
 }
