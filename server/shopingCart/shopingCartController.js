@@ -9,25 +9,25 @@ export default router;
 
 function addProduct(req, res, next) {
   userActions
-    .signUp(req.body)
-    .then((user) => res.json(user))
+    .signUp(req.body.id, req.user.id)
+    .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 function removeProduct(req, res, next) {
   userActions
-    .signUp(req.body)
-    .then((user) => res.json(user))
+    .signUp(req.params.id)
+    .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 function getUserCart(req, res, next) {
   userActions
-    .signUp(req.body)
-    .then((user) => res.json(user))
+    .signUp(req.params.id)
+    .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 function getTotal(req, res, next) {
   userActions
-    .signUp(req.body)
-    .then((user) => res.json(user))
+    .signUp(req.params.id)
+    .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
