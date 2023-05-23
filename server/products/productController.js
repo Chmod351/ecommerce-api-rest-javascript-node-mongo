@@ -13,49 +13,49 @@ export default router;
 
 function getProductById(req, res, next) {
   userActions
-    .signUp(req.body)
-    .then((user) => res.json(user))
+    .signUp(req.params.id)
+    .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 function getProducts(req, res, next) {
   userActions
-    .signUp(req.body)
-    .then((user) => res.json(user))
+    .signUp()
+    .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 function createProduct(req, res, next) {
   userActions
-    .signUp(req.body)
-    .then((user) => res.json(user))
+    .signUp()
+    .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 function getProductsByTag(req, res, next) {
   userActions
-    .signUp(req.body)
-    .then((user) => res.json(user))
+    .signUp(req.params.tag)
+    .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 function searchProduct(req, res, next) {
   userActions
-    .signUp(req.body)
-    .then((user) => res.json(user))
+    .signUp(req.query)
+    .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 function increaseViews(req, res, next) {
   userActions
-    .signUp(req.body)
-    .then((user) => res.json(user))
+    .signUp(req.params.id)
+    .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 function updateProduct(req, res, next) {
   userActions
     .signUp(req.body)
-    .then((user) => res.json(user))
+    .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 function hideProduct(req, res, next) {
   userActions
-    .signUp(req.body)
-    .then((user) => res.json(user))
+    .signUp(req.params.id)
+    .then((product) => res.json(product))
     .catch((error) => next(error));
 }

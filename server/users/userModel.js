@@ -2,19 +2,6 @@ import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema(
   {
-    productsPurchased: [
-      {
-        product: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'Product',
-          required: true,
-        },
-        quantity: {
-          type: Number,
-          required: true,
-        },
-      },
-    ],
     name: {
       type: String,
       maxLength: 20,
