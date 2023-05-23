@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongoose_delete from 'mongoose-delete';
 
 const ProductSchema = new mongoose.Schema(
   {
@@ -50,5 +51,5 @@ const ProductSchema = new mongoose.Schema(
   },
   { timestamps: true },
 );
-
+ProductSchema.plugin(mongoose_delete, { overrideMethods: true });
 export default mongoose.model('Product', ProductSchema);

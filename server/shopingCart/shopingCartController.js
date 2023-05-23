@@ -6,3 +6,28 @@ router.delete('/cart/:userId/remove/:productId', removeProduct);
 router.get('/cart/:userId', getUserCart);
 router.get('/cart/:userId/total', getTotal);
 export default router;
+
+function addProduct(req, res, next) {
+  userActions
+    .signUp(req.body)
+    .then((user) => res.json(user))
+    .catch((error) => next(error));
+}
+function removeProduct(req, res, next) {
+  userActions
+    .signUp(req.body)
+    .then((user) => res.json(user))
+    .catch((error) => next(error));
+}
+function getUserCart(req, res, next) {
+  userActions
+    .signUp(req.body)
+    .then((user) => res.json(user))
+    .catch((error) => next(error));
+}
+function getTotal(req, res, next) {
+  userActions
+    .signUp(req.body)
+    .then((user) => res.json(user))
+    .catch((error) => next(error));
+}
