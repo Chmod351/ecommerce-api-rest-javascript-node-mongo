@@ -14,7 +14,7 @@ export default router;
 
 function signIn(req, res, next) {
   userActions
-    .signUp(req.body)
+    .signIn(req.body)
     .then((user) => res.json(user))
     .catch((error) => next(error));
 }
@@ -26,19 +26,19 @@ function signUp(req, res, next) {
 }
 function editUser(req, res, next) {
   userActions
-    .signUp(req.body)
+    .editUser(req.body)
     .then((user) => res.json(user))
     .catch((error) => next(error));
 }
 function getUser(req, res, next) {
   userActions
-    .signUp(req.body)
+    .getUser(req.body)
     .then((user) => res.json(user))
     .catch((error) => next(error));
 }
 function createAdmin(req, res, next) {
   userActions
-    .signUp(req.body)
+    .createAdmin(req.body)
     .then((user) => res.json(user))
     .catch((error) => next(error));
 }
