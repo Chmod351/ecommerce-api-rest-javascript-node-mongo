@@ -3,11 +3,9 @@ import User from './userModel.js';
 import jwt from 'jsonwebtoken';
 import { JWT_TOKEN } from '../../index.js';
 
-
 const userActions = {
   signIn,
   signUp,
-  editUser,
   getUser,
   createAdmin,
 };
@@ -30,7 +28,34 @@ async function generateToken(userId) {
   return sendToken;
 }
 
-async function signIn(user) {}
+async function signIn(user) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const alreadyExists = await findByEmail(user.email);
+
+      if (!alreadyExists) {
+        reject(new Error('bad request'));
+        return;
+      }
+
+      const matchPass = await bcrypt.compare(
+        user.password,
+        alreadyExists.password,
+      );
+
+      if (!matchPass) {
+        reject(new Error('wrong credentials'));
+        return;
+      }
+
+      const sendToken = await generateToken(alreadyExists.id);
+
+      resolve({ user: alreadyExists, sendToken });
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
 
 async function signUp(user) {
   const registeredUser = await findByEmail(user.email);
@@ -40,14 +65,17 @@ async function signUp(user) {
     const newUser = await createUser.save();
     return newUser;
   } else {
-    throw  new Error('bad request');
+    throw new Error('bad request');
   }
 }
 
-async function editUser(user) {}
 
-async function getUser(userId) {}
+async function getUser(userId) {
 
-async function createAdmin(userId) {}
+}
+
+async function createAdmin(userId) {
+
+}
 
 export default userActions;

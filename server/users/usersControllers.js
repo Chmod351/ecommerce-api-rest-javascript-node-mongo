@@ -5,9 +5,7 @@ const router = Router();
 
 router.post('/signin', cleanBody, signIn);
 router.post('/signup', cleanBody, signUp);
-router.put('/users/:userId', cleanBody, editUser);
 router.get('/users/:userId', getUser);
-
 router.put('/users/admin/:userId', createAdmin);
 
 export default router;
