@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import mongoose_delete from 'mongoose-delete';
 
 const ProductSchema = new mongoose.Schema(
   {
@@ -17,8 +16,8 @@ const ProductSchema = new mongoose.Schema(
       maxLength: 400,
       required: true,
     },
-    stock: {
-      type: Number,
+    imgUrl: {
+      type: String,
     },
     tags: {
       type: [
@@ -27,18 +26,6 @@ const ProductSchema = new mongoose.Schema(
           enum: ['escuela', 'elegante', 'deportivo', 'casual', 'formal'],
         },
       ],
-    },
-    comments: [
-      {
-        comment: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'Comment',
-        },
-      },
-    ],
-    views: {
-      type: Number,
-      default: 0,
     },
     hot: {
       type: Boolean,
@@ -51,5 +38,4 @@ const ProductSchema = new mongoose.Schema(
   },
   { timestamps: true },
 );
-ProductSchema.plugin(mongoose_delete, { overrideMethods: true });
 export default mongoose.model('Product', ProductSchema);

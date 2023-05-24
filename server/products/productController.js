@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import productActions from './productView.js';
 const router = Router();
 
 router.get('/products/:id', getProductById);
@@ -12,50 +13,57 @@ router.delete('/products/delete/:id', hideProduct);
 export default router;
 
 function getProductById(req, res, next) {
-  userActions
-    .signUp(req.params.id)
+  productActions
+    .getProductById(req.params.id)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
+
 function getProducts(req, res, next) {
-  userActions
-    .signUp()
+  productActions
+    .getProducts()
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
+
 function createProduct(req, res, next) {
-  userActions
-    .signUp()
+  productActions
+    .createProduct()
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
+
 function getProductsByTag(req, res, next) {
-  userActions
-    .signUp(req.params.tag)
+  productActions
+    .getProductsByTag(req.params.tag)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
+
 function searchProduct(req, res, next) {
-  userActions
-    .signUp(req.query)
+  productActions
+    .searchProduct(req.query)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
+
 function increaseViews(req, res, next) {
-  userActions
-    .signUp(req.params.id)
+  productActions
+    .increaseViews(req.params.id)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
+
 function updateProduct(req, res, next) {
-  userActions
-    .signUp(req.body)
+  productActions
+    .updateProduct(req.body)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
+
 function hideProduct(req, res, next) {
-  userActions
-    .signUp(req.params.id)
+  productActions
+    .updateProduct(req.params.id)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
