@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import mongoose_delete from 'mongoose-delete';
 const CommentSchema = new mongoose.Schema(
   {
     userId: {
@@ -18,7 +17,7 @@ const CommentSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      require: true,
+      required: true,
       maxLength: 200,
       minlength: 50,
     },
@@ -35,5 +34,5 @@ const CommentSchema = new mongoose.Schema(
   },
   { timestamps: true },
 );
-CommentSchema.plugin(mongoose_delete, { overrideMethods: true });
+
 export default mongoose.model('Comment', CommentSchema);

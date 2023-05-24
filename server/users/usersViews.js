@@ -50,10 +50,18 @@ async function signIn(user) {
 }
 
 async function signUp(user) {
-  const registeredUser = await findByEmail(user.email);
+  const allowedFields = ['email', 'password', 'name'];
+  const filteredUser = Object.keys(user)
+    .filter((key) => allowedFields.includes(key))
+    .reduce((obj, key) => {
+      obj[key] = user[key];
+      return obj;
+    }, {});
+
+  const registeredUser = await findByEmail(filteredUser.email);
   if (!registeredUser) {
-    const encryptPassword = await hashPassword(user.password);
-    const createUser = new User({ ...user, password: encryptPassword });
+    const encryptPassword = await hashPassword(filteredUser.password);
+    const createUser = new User({ ...filteredUser, password: encryptPassword });
     const newUser = await createUser.save();
     return newUser;
   } else {
