@@ -1,4 +1,5 @@
 import Product from './productModel.js';
+import User from '../users/userModel.js';
 import mongoose from 'mongoose';
 
 const productActions = {
@@ -37,10 +38,11 @@ async function getProductsByTag(tags) {
   return product;
 }
 
-async function createProduct(user, name, img, price, description, tags, hot) {
-  if (user.isAdmin) {
+async function createProduct(userid, name, img, price, description, tags, hot) {
+  const isAdmin = await adminCheck(userid);
+  if (isAdmin) {
     const newProduct = new Product({
-      userId: admin,
+      userId: isAdmin,
       name,
       img,
       price,
@@ -57,14 +59,33 @@ async function createProduct(user, name, img, price, description, tags, hot) {
 async function searchProduct(query) {
   const product = await Product.find({
     name: { $regex: query, $options: 'i' },
+    tags: { $regex: query, $options: 'i' },
   }).limit(40);
   return product;
 }
 
-async function updateProduct(productId, product, admin) {
+async function updateProduct(
+  productId,
+  newImg,
+  newPrice,
+  hot,
+  newDescription,
+  id,
+) {
   const updatedProduct = await Product.findById(productId);
-  if (updatedProduct.userId === admin) {
+  const isAdmin = await adminCheck(id);
+  if (isAdmin) {
   } else {
+    return new Error('unauthorized');
+  }
+}
+
+async function adminCheck(id) {
+  const user = await User.findById(id);
+  if (user.isAdmin) {
+    return user;
+  } else {
+    return false;
   }
 }
 

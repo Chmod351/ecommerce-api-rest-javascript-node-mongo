@@ -29,9 +29,10 @@ function getProducts(req, res, next) {
 }
 
 function createProduct(req, res, next) {
+  console.log(req.user);
   productActions
     .createProduct(
-      req.user,
+      req.user.id,
       req.body.name,
       req.body.imgUrl,
       req.body.price,
@@ -60,7 +61,14 @@ function searchProduct(req, res, next) {
 
 function updateProduct(req, res, next) {
   productActions
-    .updateProduct(req.params.id, req.body, req.user.id)
+    .updateProduct(
+      req.params.id,
+      req.body.imgUrl,
+      req.body.price,
+      req.body.hot,
+      req.body.description,
+      req.user.id,
+    )
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }

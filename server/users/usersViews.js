@@ -43,8 +43,8 @@ async function signIn(user) {
       reject(new Error('wrong credentials'));
       return;
     }
-
-    const sendToken = await generateToken(alreadyExists._id);
+    const userId = alreadyExists._id.toString();
+    const sendToken = await generateToken(userId);
     resolve({ user: alreadyExists, sendToken });
   });
 }
