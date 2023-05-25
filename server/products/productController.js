@@ -1,15 +1,17 @@
 import { Router } from 'express';
 import productActions from './productView.js';
+import cleanBody from '../helpers/sanitizer.js';
+import authMiddleware from '../helpers/jwt.js';
 const router = Router();
 
 router.get('/products/:id', getProductById);
 router.get('/products', getProducts);
-router.post('/products', createProduct);
+router.post('/products', authMiddleware, cleanBody, createProduct);
 router.get('/products/tags/:tag', getProductsByTag);
-router.get('/products/search/:query', searchProduct);
-router.put('/products/view/:id', increaseViews);
-router.put('/products/update/:id', updateProduct);
-router.delete('/products/delete/:id', hideProduct);
+router.get('/products/search/:query', cleanBody, searchProduct);
+router.put('/products/update/:id', authMiddleware, cleanBody, updateProduct);
+router.delete('/products/delete/:id', authMiddleware, hideProduct);
+
 export default router;
 
 function getProductById(req, res, next) {
@@ -28,35 +30,37 @@ function getProducts(req, res, next) {
 
 function createProduct(req, res, next) {
   productActions
-    .createProduct()
+    .createProduct(
+      req.user,
+      req.body.name,
+      req.body.imgUrl,
+      req.body.price,
+      req.body.description,
+      req.body.tags,
+      req.body.hot,
+    )
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 
 function getProductsByTag(req, res, next) {
+  const tags = req.query.tags.split(',');
   productActions
-    .getProductsByTag(req.params.tag)
+    .getProductsByTag(tags)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 
 function searchProduct(req, res, next) {
   productActions
-    .searchProduct(req.query)
-    .then((product) => res.json(product))
-    .catch((error) => next(error));
-}
-
-function increaseViews(req, res, next) {
-  productActions
-    .increaseViews(req.params.id)
+    .searchProduct(req.query.q)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 
 function updateProduct(req, res, next) {
   productActions
-    .updateProduct(req.body)
+    .updateProduct(req.params.id, req.body, req.user.id)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
