@@ -2,15 +2,22 @@ import { Router } from 'express';
 import productActions from './productView.js';
 import cleanBody from '../helpers/sanitizer.js';
 import authMiddleware from '../helpers/jwt.js';
+import adminCheck from '../helpers/adminCheck.js';
 const router = Router();
 
 router.get('/products/:id', getProductById);
 router.get('/products', getProducts);
-router.post('/products', authMiddleware, cleanBody, createProduct);
+router.post('/products', authMiddleware, cleanBody, adminCheck, createProduct);
 router.get('/products/tags/:tag', getProductsByTag);
 router.get('/products/search/:query', cleanBody, searchProduct);
-router.put('/products/update/:id', authMiddleware, cleanBody, updateProduct);
-router.delete('/products/delete/:id', authMiddleware, hideProduct);
+router.put(
+  '/products/update/:id',
+  authMiddleware,
+  cleanBody,
+  adminCheck,
+  updateProduct,
+);
+router.delete('/products/delete/:id', authMiddleware, adminCheck, hideProduct);
 
 export default router;
 
@@ -29,10 +36,11 @@ function getProducts(req, res, next) {
 }
 
 function createProduct(req, res, next) {
-  console.log(req.user);
+  if (!req.user.isAdmin) {
+    res.status(403);
+  }
   productActions
     .createProduct(
-      req.user.id,
       req.body.name,
       req.body.imgUrl,
       req.body.price,
@@ -60,6 +68,10 @@ function searchProduct(req, res, next) {
 }
 
 function updateProduct(req, res, next) {
+  if (!req.user.isAdmin) {
+    res.status(403);
+  }
+
   productActions
     .updateProduct(
       req.params.id,
@@ -67,7 +79,6 @@ function updateProduct(req, res, next) {
       req.body.price,
       req.body.hot,
       req.body.description,
-      req.user.id,
     )
     .then((product) => res.json(product))
     .catch((error) => next(error));

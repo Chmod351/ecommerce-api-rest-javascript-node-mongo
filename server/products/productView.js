@@ -1,5 +1,4 @@
 import Product from './productModel.js';
-import User from '../users/userModel.js';
 import mongoose from 'mongoose';
 
 const productActions = {
@@ -19,6 +18,7 @@ function isValidObjectId(id) {
   }
   return false;
 }
+
 async function getProductById(productId) {
   if (productId && isValidObjectId(productId)) {
     const product = await Product.findById(productId);
@@ -38,22 +38,17 @@ async function getProductsByTag(tags) {
   return product;
 }
 
-async function createProduct(userid, name, img, price, description, tags, hot) {
-  const isAdmin = await adminCheck(userid);
-  if (isAdmin) {
-    const newProduct = new Product({
-      userId: isAdmin,
-      name,
-      img,
-      price,
-      description,
-      tags,
-      hot,
-    });
-    return newProduct;
-  } else {
-    throw new Error('unauthorized');
-  }
+async function createProduct(name, img, price, description, tags, hot) {
+  const newProduct = new Product({
+    userId: isAdmin,
+    name,
+    img,
+    price,
+    description,
+    tags,
+    hot,
+  });
+  return newProduct;
 }
 
 async function searchProduct(query) {
@@ -70,23 +65,24 @@ async function updateProduct(
   newPrice,
   hot,
   newDescription,
-  id,
 ) {
-  const updatedProduct = await Product.findById(productId);
-  const isAdmin = await adminCheck(id);
-  if (isAdmin) {
-  } else {
-    return new Error('unauthorized');
-  }
-}
+  const product = await getProductById(productId);
 
-async function adminCheck(id) {
-  const user = await User.findById(id);
-  if (user.isAdmin) {
-    return user;
-  } else {
-    return false;
+  if (newImg) {
+    product.img = newImg;
   }
+  if (newPrice) {
+    product.price = newPrice;
+  }
+  if (hot !== undefined) {
+    product.hot = hot;
+  }
+  if (newDescription) {
+    product.description = newDescription;
+  }
+
+  const updatedProduct = await product.save();
+  return updatedProduct;
 }
 
 async function hideProduct(params) {}

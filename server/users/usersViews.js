@@ -12,7 +12,11 @@ const userActions = {
 
 async function findByEmail(email) {
   const alreadyExists = User.findOne({ email: { $eq: email } });
-  return alreadyExists;
+  if (alreadyExists) {
+    return alreadyExists;
+  } else {
+    throw new Error('not found');
+  }
 }
 
 async function hashPassword(password) {
@@ -28,25 +32,24 @@ async function generateToken(userId) {
   return sendToken;
 }
 
+async function verifyPassword(user, testUser) {
+  const matchPassword = await bcrypt.compare(user.password, testUser.password);
+  return matchPassword;
+}
+
 async function signIn(user) {
-  return new Promise(async (resolve, reject) => {
-    const alreadyExists = await findByEmail(user.email);
-    if (!alreadyExists) {
-      reject(new Error('bad request'));
-      return;
+  try {
+    const existingUser = await findByEmail(user.email);
+    const isPasswordMatch = await verifyPassword(user, existingUser);
+    if (!isPasswordMatch) {
+      throw new Error('bad request');
     }
-    const matchPass = await bcrypt.compare(
-      user.password,
-      alreadyExists.password,
-    );
-    if (!matchPass) {
-      reject(new Error('wrong credentials'));
-      return;
-    }
-    const userId = alreadyExists._id.toString();
-    const sendToken = await generateToken(userId);
-    resolve({ user: alreadyExists, sendToken });
-  });
+    const userId = existingUser._id.toString();
+    const token = await generateToken(userId);
+    return { user: existingUser, token };
+  } catch (error) {
+    throw error
+  }
 }
 
 async function signUp(user) {
@@ -70,15 +73,11 @@ async function signUp(user) {
 }
 
 async function getUser(userId) {
-  try {
-    const user = await User.findById(userId);
-    if (user) {
-      return user;
-    } else {
-      throw new Error('bad request');
-    }
-  } catch (error) {
-    throw error;
+  const user = await User.findById(userId);
+  if (user) {
+    return user;
+  } else {
+    throw new Error('bad request');
   }
 }
 
