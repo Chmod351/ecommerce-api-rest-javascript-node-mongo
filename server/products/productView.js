@@ -34,8 +34,9 @@ async function getProducts() {
   return products;
 }
 
-async function getProductsByTag(tags) {
-  const product = await Product.find({ tags: { $in: tags } }).limit(20);
+async function getProductsByTag(category) {
+  console.log(category);
+  const product = await Product.find({ tags: { $all: category } }).limit(20);
   return product;
 }
 
@@ -52,9 +53,10 @@ async function createProduct(name, img, price, description, tags, hot) {
 }
 
 async function searchProduct(query) {
+  console.log(query);
   const product = await Product.find({
     name: { $regex: query, $options: 'i' },
-    tags: { $regex: query, $options: 'i' },
+    // tags: { $regex: query, $options: 'i' },
   }).limit(40);
   return product;
 }

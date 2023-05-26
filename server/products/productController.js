@@ -5,11 +5,11 @@ import authMiddleware from '../helpers/jwt.js';
 import adminCheck from '../helpers/adminCheck.js';
 const router = Router();
 
-router.get('/products/:id', getProductById);
 router.get('/products', getProducts);
+router.get('/products/tags', getProductsByTag);
+router.get('/products/search', cleanBody, searchProduct);
+router.get('/products/getById/:id', getProductById);
 router.post('/products', authMiddleware, cleanBody, adminCheck, createProduct);
-router.get('/products/tags/:tag', getProductsByTag);
-router.get('/products/search/:query', cleanBody, searchProduct);
 router.put(
   '/products/update/:id',
   authMiddleware,
@@ -18,8 +18,6 @@ router.put(
   updateProduct,
 );
 router.delete('/products/delete/:id', authMiddleware, adminCheck, hideProduct);
-
-export default router;
 
 function getProductById(req, res, next) {
   productActions
@@ -49,26 +47,24 @@ function createProduct(req, res, next) {
     .catch((error) => next(error));
 }
 
-function getProductsByTag(req, res, next) {
-  const tags = req.query.tags.split(',');
+async function getProductsByTag(req, res, next) {
+  console.log('ad');
+  const category = req.query.tag.split(',');
   productActions
-    .getProductsByTag(tags)
-    .then((product) => res.json(product))
+    .getProductsByTag(category)
+    .then((products) => res.json(products))
     .catch((error) => next(error));
 }
 
 function searchProduct(req, res, next) {
+  const query = req.query.q;
   productActions
-    .searchProduct(req.query.q)
+    .searchProduct(query)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 
 function updateProduct(req, res, next) {
-  if (!req.user.isAdmin) {
-    res.status(403);
-  }
-
   productActions
     .updateProduct(
       req.params.id,
@@ -87,3 +83,5 @@ function hideProduct(req, res, next) {
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
+
+export default router;
