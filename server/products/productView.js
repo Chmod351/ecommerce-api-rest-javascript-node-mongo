@@ -29,7 +29,7 @@ async function getProductById(productId) {
 }
 
 async function getProducts() {
-  const product = await Product.find().sort({ views: -1 }).limit(20);
+  const product = await Product.find().limit(20);
   return product;
 }
 
@@ -61,28 +61,30 @@ async function searchProduct(query) {
 
 async function updateProduct(
   productId,
-  newImg,
-  newPrice,
-  hot,
-  newDescription,
+  { newImg, newPrice, hot, newDescription },
 ) {
-  const product = await getProductById(productId);
+  const updatedProduct = await getProductById(productId);
+
+  const updatedProperties = {};
 
   if (newImg) {
-    product.img = newImg;
+    updatedProperties.img = newImg;
   }
   if (newPrice) {
-    product.price = newPrice;
+    updatedProperties.price = newPrice;
   }
   if (hot !== undefined) {
-    product.hot = hot;
+    updatedProperties.hot = hot;
   }
   if (newDescription) {
-    product.description = newDescription;
+    updatedProperties.description = newDescription;
   }
 
-  const updatedProduct = await product.save();
-  return updatedProduct;
+  const result = await updatedProduct.updateOne(
+    { _id: productId },
+    { $set: updatedProperties },
+  );
+  return result;
 }
 
 async function hideProduct(params) {}

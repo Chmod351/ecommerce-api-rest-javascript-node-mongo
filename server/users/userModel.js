@@ -35,6 +35,19 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    productsPurchased: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+      },
+    ],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+    wishList: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+      },
+    ],
   },
   { timestamps: true },
 );

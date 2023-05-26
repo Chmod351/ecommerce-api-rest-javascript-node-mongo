@@ -37,6 +37,7 @@ const PurchaseSchema = new mongoose.Schema(
           enum: ['pendiente', 'enviado', 'recibido', 'rechazado'],
         },
       ],
+      default: 'pendiente',
     },
   },
   { timestamps: true },
