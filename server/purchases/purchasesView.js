@@ -3,7 +3,7 @@ const purchaseActions = {
   createPurchase,
   getUserPurchases,
   getPurchaseById,
-  cancelPurchase,
+  cleanPurchase,
   updatePurchaseState,
   getAllPurchases,
 };
@@ -39,7 +39,7 @@ async function getPurchaseById(id) {
   return purchase;
 }
 
-async function cancelPurchase(id) {
+async function cleanPurchase(id) {
   const purchase = await Purchase.findByIdAndDelete(id);
   return purchase;
 }

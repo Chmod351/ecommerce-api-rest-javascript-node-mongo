@@ -46,14 +46,15 @@ async function signIn(user) {
     }
     const userId = existingUser._id.toString();
     const token = await generateToken(userId);
-    return { user: existingUser, token };
+    console.log(token);
+    return { user: existingUser, sendToken: token };
   } catch (error) {
-    throw error
+    throw error;
   }
 }
 
 async function signUp(user) {
-  const allowedFields = ['email', 'password', 'name'];
+  const allowedFields = ['email', 'password', 'username'];
   const filteredUser = Object.keys(user)
     .filter((key) => allowedFields.includes(key))
     .reduce((obj, key) => {

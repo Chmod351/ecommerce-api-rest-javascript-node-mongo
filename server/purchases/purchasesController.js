@@ -8,7 +8,7 @@ router.post('/purchase/:userId/purchases', authMiddleware, createPurchase);
 router.get('/purchase/:userId/purchases', authMiddleware, getUserPurchases);
 router.get('/purchase/', authMiddleware, adminCheck, getAllPurchases);
 router.get('/purchases/:purchaseId', authMiddleware, getPurchaseById);
-router.delete('/purchases/:purchaseId', authMiddleware, cancelPurchase);
+router.delete('/purchases/:purchaseId', authMiddleware, cleanPurchase);
 router.put(
   '/purchases/:purchaseId/state',
   authMiddleware,
@@ -49,15 +49,15 @@ function getPurchaseById(req, res, next) {
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
-function cancelPurchase(req, res, next) {
+function cleanPurchase(req, res, next) {
   purchaseActions
-    .cancelPurchase(req.body.id)
+    .cleanPurchase(req.body.id)
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
 function updatePurchaseState(req, res, next) {
   purchaseActions
-    .updatePurchaseState(req.body.userId, req.body.shippingStatus)
+    .updatePurchaseState(req.params.id, req.body.shippingStatus)
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
