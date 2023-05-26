@@ -1,33 +1,36 @@
 import { Router } from 'express';
+import cartActions from './shopingCartView.js';
+import authMiddleware from '../helpers/jwt.js';
+
 const router = Router();
 
-router.put('/cart/:userId/add/:productId', addProduct);
-router.delete('/cart/:userId/remove/:productId', removeProduct);
-router.get('/cart/:userId', getUserCart);
-router.get('/cart/:userId/total', getTotal);
+router.put('/cart/:userId/add/:productId',authMiddleware, addProduct);
+router.delete('/cart/:userId/remove/:productId',authMiddleware, removeProduct);
+router.get('/cart/:userId/total',authMiddleware, getTotal);
+router.get('/cart/:userId',authMiddleware, getUserCart);
 export default router;
 
 function addProduct(req, res, next) {
-  userActions
-    .signUp(req.body.id, req.user.id)
+  cartActions
+    .addProduct(req.body.id, req.user.id)
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 function removeProduct(req, res, next) {
-  userActions
-    .signUp(req.params.id)
+  cartActions
+    .removeProduct(req.params.id)
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 function getUserCart(req, res, next) {
-  userActions
-    .signUp(req.params.id)
+  cartActions
+    .getUserCart(req.params.id)
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 function getTotal(req, res, next) {
-  userActions
-    .signUp(req.params.id)
+  cartActions
+    .getTotal(req.params.id)
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
