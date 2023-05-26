@@ -61,17 +61,9 @@ async function searchProduct(query) {
   return product;
 }
 
-async function updateProduct(
-  productId,
-  { newImg, newPrice, hot, newDescription },
-) {
-  const updatedProduct = await getProductById(productId);
-
+async function updateProduct(productId, newPrice, hot, newDescription) {
   const updatedProperties = {};
 
-  if (newImg) {
-    updatedProperties.img = newImg;
-  }
   if (newPrice) {
     updatedProperties.price = newPrice;
   }
@@ -82,9 +74,10 @@ async function updateProduct(
     updatedProperties.description = newDescription;
   }
 
-  const result = await updatedProduct.updateOne(
+  const result = await Product.findOneAndUpdate(
     { _id: productId },
     { $set: updatedProperties },
+    { new: true },
   );
   return result;
 }

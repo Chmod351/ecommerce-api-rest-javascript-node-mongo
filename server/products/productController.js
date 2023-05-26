@@ -8,7 +8,7 @@ const router = Router();
 router.get('/products', getProducts);
 router.get('/products/tags', getProductsByTag);
 router.get('/products/search', cleanBody, searchProduct);
-router.get('/products/getById/:id', getProductById);
+router.get('/products/:id', getProductById);
 router.post('/products', authMiddleware, cleanBody, adminCheck, createProduct);
 router.put(
   '/products/update/:id',
@@ -68,7 +68,6 @@ function updateProduct(req, res, next) {
   productActions
     .updateProduct(
       req.params.id,
-      req.body.imgUrl,
       req.body.price,
       req.body.hot,
       req.body.description,
