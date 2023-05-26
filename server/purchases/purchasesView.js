@@ -29,12 +29,30 @@ async function getAllPurchases() {
   return purchase;
 }
 
-async function getUserPurchases(params) {}
+async function getUserPurchases(id) {
+  const userPurchases = await Purchase.find({ userId: id });
+  return userPurchases;
+}
 
-async function getPurchaseById(params) {}
+async function getPurchaseById(id) {
+  const purchase = await Purchase.findById(id);
+  return purchase;
+}
 
-async function cancelPurchase(params) {}
+async function cancelPurchase(id) {
+  const purchase = await Purchase.findByIdAndDelete(id);
+  return purchase;
+}
 
-async function updatePurchaseState(params) {}
+async function updatePurchaseState(id, status) {
+  const newStatus = await Purchase.findOneAndUpdate(
+    {
+      _id: id,
+    },
+    { shippingStatus: status },
+    { new: true },
+  );
+  return newStatus;
+}
 
 export default purchaseActions;

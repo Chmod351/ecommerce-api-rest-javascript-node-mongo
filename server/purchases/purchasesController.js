@@ -6,7 +6,7 @@ const router = Router();
 
 router.post('/purchase/:userId/purchases', authMiddleware, createPurchase);
 router.get('/purchase/:userId/purchases', authMiddleware, getUserPurchases);
-router.get('/purchase/',authMiddleware,adminCheck, getAllPurchases);
+router.get('/purchase/', authMiddleware, adminCheck, getAllPurchases);
 router.get('/purchases/:purchaseId', authMiddleware, getPurchaseById);
 router.delete('/purchases/:purchaseId', authMiddleware, cancelPurchase);
 router.put(
@@ -39,25 +39,25 @@ function getAllPurchases(req, res, next) {
 
 function getUserPurchases(req, res, next) {
   purchaseActions
-    .getUserPurchases(req.params.id)
+    .getUserPurchases(req.user.id)
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
 function getPurchaseById(req, res, next) {
-  productActions
-    .getPurchaseById(req.body.id)
+  purchaseActions
+    .getPurchaseById(req.params.id)
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
 function cancelPurchase(req, res, next) {
-  productActions
+  purchaseActions
     .cancelPurchase(req.body.id)
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
 function updatePurchaseState(req, res, next) {
   purchaseActions
-    .updatePurchaseState(req.body.shippingStatus)
+    .updatePurchaseState(req.body.userId, req.body.shippingStatus)
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
