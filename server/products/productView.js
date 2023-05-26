@@ -29,8 +29,9 @@ async function getProductById(productId) {
 }
 
 async function getProducts() {
-  const product = await Product.find().limit(20);
-  return product;
+  const products = await Product.find();
+  console.log(products);
+  return products;
 }
 
 async function getProductsByTag(tags) {
@@ -40,7 +41,6 @@ async function getProductsByTag(tags) {
 
 async function createProduct(name, img, price, description, tags, hot) {
   const newProduct = new Product({
-    userId: isAdmin,
     name,
     img,
     price,
@@ -48,7 +48,7 @@ async function createProduct(name, img, price, description, tags, hot) {
     tags,
     hot,
   });
-  return newProduct;
+  return await newProduct.save();
 }
 
 async function searchProduct(query) {

@@ -36,9 +36,6 @@ function getProducts(req, res, next) {
 }
 
 function createProduct(req, res, next) {
-  if (!req.user.isAdmin) {
-    res.status(403);
-  }
   productActions
     .createProduct(
       req.body.name,
