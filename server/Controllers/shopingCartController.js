@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import cartActions from './shopingCartView.js';
+import cartActions from '../View/shopingCartView.js';
 import authMiddleware from '../helpers/jwt.js';
 
 const router = Router();

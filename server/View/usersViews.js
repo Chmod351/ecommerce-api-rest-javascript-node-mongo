@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import User from './userModel.js';
+import User from '../Models/userModel.js';
 import jwt from 'jsonwebtoken';
 import { JWT_TOKEN } from '../../index.js';
 
@@ -15,7 +15,7 @@ async function findByEmail(email) {
   if (alreadyExists) {
     return alreadyExists;
   } else {
-    throw new Error('not found');
+    return false;
   }
 }
 
@@ -38,18 +38,18 @@ async function verifyPassword(user, testUser) {
 }
 
 async function signIn(user) {
-  try {
-    const existingUser = await findByEmail(user.email);
+  const existingUser = await findByEmail(user.email);
+  if (!existingUser) {
+    throw new Error('not found');
+  } else {
     const isPasswordMatch = await verifyPassword(user, existingUser);
     if (!isPasswordMatch) {
-      throw new Error('bad request');
+      throw new Error('wrong credentials');
+    } else {
+      const userId = existingUser._id.toString();
+      const token = await generateToken(userId);
+      return { user: existingUser, sendToken: token };
     }
-    const userId = existingUser._id.toString();
-    const token = await generateToken(userId);
-    console.log(token);
-    return { user: existingUser, sendToken: token };
-  } catch (error) {
-    throw error;
   }
 }
 

@@ -2,10 +2,10 @@ import express from 'express';
 import importMiddlewares from './middlewaresHandler.js';
 import { connect } from './server.js';
 import { config } from 'dotenv';
-import user from './server/users/usersControllers.js';
-import cart from './server/shopingCart/shopingCartController.js';
-import product from './server/products/productController.js';
-import purchase from './server/purchases/purchasesController.js';
+import user from './server/Controllers/usersControllers.js'
+import cart from './server/Controllers/shopingCartController.js';
+import product from './server/Controllers/productController.js';
+import purchase from './server/Controllers/purchasesController.js';
 import errorHandler from './server/helpers/errorHandler.js';
 
 //config

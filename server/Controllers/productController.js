@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import productActions from './productView.js';
+import productActions from '../View/productView.js';
 import cleanBody from '../helpers/sanitizer.js';
 import authMiddleware from '../helpers/jwt.js';
 import adminCheck from '../helpers/adminCheck.js';

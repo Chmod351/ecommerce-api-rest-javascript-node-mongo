@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import userActions from './usersViews.js';
+import userActions from '../View/usersViews.js';
 import cleanBody from '../helpers/sanitizer.js';
 const router = Router();
 

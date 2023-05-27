@@ -1,8 +1,8 @@
-import Purchase from './purchasesModel.js';
+import Purchase from '../Models/purchasesModel.js';
 const purchaseActions = {
   createPurchase,
   getUserPurchases,
-  getPurchaseById,
+  getMonthly,
   cleanPurchase,
   updatePurchaseState,
   getAllPurchases,
@@ -10,22 +10,23 @@ const purchaseActions = {
 
 async function createPurchase(
   userId,
-  productsId,
-  purchaseDate,
+  products,
+  amount,
   paymentMethod,
   shippingAddress,
 ) {
   const purchase = new Purchase({
     userId,
-    productsId,
-    purchaseDate,
+    products,
+    amount,
     paymentMethod,
     shippingAddress,
   });
   return await purchase.save();
 }
-async function getAllPurchases() {
-  const purchase = await Purchase.find().limit(10);
+
+async function getAllPurchases(limit, skip) {
+  const purchase = await Purchase.find().skip(skip).limit(limit);
   return purchase;
 }
 
@@ -34,9 +35,28 @@ async function getUserPurchases(id) {
   return userPurchases;
 }
 
-async function getPurchaseById(id) {
-  const purchase = await Purchase.findById(id);
-  return purchase;
+
+async function getMonthly() {
+  const date = new Date();
+  const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
+  const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
+
+  const income = await Purchase.aggregate([
+    { $match: { createdAt: { $gte: previousMonth } } },
+    {
+      $project: {
+        month: { $month: '$createdAt' },
+        sales: '$amount',
+      },
+    },
+    {
+      $group: {
+        _id: '$month',
+        total: { $sum: '$sales' },
+      },
+    },
+  ]);
+  return income;
 }
 
 async function cleanPurchase(id) {

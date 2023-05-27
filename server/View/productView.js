@@ -1,4 +1,4 @@
-import Product from './productModel.js';
+import Product from '../Models/productModel.js';
 import mongoose from 'mongoose';
 
 const productActions = {
