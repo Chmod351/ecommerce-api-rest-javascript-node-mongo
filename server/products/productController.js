@@ -9,7 +9,7 @@ router.get('/products', getProducts);
 router.get('/products/tags', getProductsByTag);
 router.get('/products/search', cleanBody, searchProduct);
 router.get('/products/:id', getProductById);
-router.post('/products', authMiddleware, cleanBody, adminCheck, createProduct);
+router.put('/products', authMiddleware, cleanBody, adminCheck, createProduct);
 router.put(
   '/products/update/:id',
   authMiddleware,
@@ -48,7 +48,6 @@ function createProduct(req, res, next) {
 }
 
 async function getProductsByTag(req, res, next) {
-  console.log('ad');
   const category = req.query.tag.split(',');
   productActions
     .getProductsByTag(category)
@@ -80,7 +79,7 @@ function hideProduct(req, res, next) {
   productActions
     .updateProduct(req.params.id)
     .then(() =>
-      res.json({ message: `product with id ${req.params.id} was deleted` }),
+      res.json({ message: `product with id ${req.params.id} was hidden` }),
     )
     .catch((error) => next(error));
 }
