@@ -7,11 +7,11 @@ const userActions = {
   signIn,
   signUp,
   getUser,
-  createAdmin,
+  // createAdmin,
 };
 
 async function findByEmail(email) {
-  const alreadyExists = User.findOne({ email: { $eq: email } });
+  const alreadyExists = await User.findOne({ email: { $eq: email } });
   if (alreadyExists) {
     return alreadyExists;
   } else {
@@ -82,6 +82,6 @@ async function getUser(userId) {
   }
 }
 
-async function createAdmin(userId) {}
+// async function createAdmin(userId) {}
 
 export default userActions;

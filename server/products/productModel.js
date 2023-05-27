@@ -12,7 +12,7 @@ const ProductSchema = new mongoose.Schema(
       required: true,
     },
     description: {
-      type: String, 
+      type: String,
       maxLength: 400,
       required: true,
     },
@@ -28,10 +28,6 @@ const ProductSchema = new mongoose.Schema(
       ],
     },
     hot: {
-      type: Boolean,
-      default: false,
-    },
-    hide: {
       type: Boolean,
       default: false,
     },

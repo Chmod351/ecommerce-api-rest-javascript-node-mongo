@@ -79,7 +79,9 @@ function updateProduct(req, res, next) {
 function hideProduct(req, res, next) {
   productActions
     .updateProduct(req.params.id)
-    .then((product) => res.json(product))
+    .then(() =>
+      res.json({ message: `product with id ${req.params.id} was deleted` }),
+    )
     .catch((error) => next(error));
 }
 

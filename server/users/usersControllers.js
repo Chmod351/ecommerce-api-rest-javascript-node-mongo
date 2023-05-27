@@ -6,7 +6,8 @@ const router = Router();
 router.post('/signin', cleanBody, signIn);
 router.post('/signup', cleanBody, signUp);
 router.get('/users/:id', getUser);
-router.put('/users/admin/:userId', createAdmin);
+// router.put('/users/admin/:userId', createAdmin);
+
 
 export default router;
 
@@ -39,9 +40,9 @@ function getUser(req, res, next) {
     .then((user) => res.json(user))
     .catch((error) => next(error));
 }
-function createAdmin(req, res, next) {
-  userActions
-    .createAdmin(req.params.id)
-    .then((user) => res.json(user))
-    .catch((error) => next(error));
-}
+// function createAdmin(req, res, next) {
+//   userActions
+//     .createAdmin(req.params.id)
+//     .then((user) => res.json(user))
+//     .catch((error) => next(error));
+// }

@@ -7,16 +7,22 @@ const PurchaseSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
-    productsId: [
+    products: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
-        required: true,
+        productId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Product',
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          default: 1,
+        },
       },
     ],
-    purchaseDate: {
-      type: Date,
-      default: Date.now,
+    amount: {
+      type: Number,
+      required: true,
     },
     paymentMethod: {
       type: String,

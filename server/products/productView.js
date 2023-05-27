@@ -24,7 +24,7 @@ async function getProductById(productId) {
     const product = await Product.findById(productId);
     return product;
   } else {
-    throw new Error('bad request');
+    throw new Error('not found');
   }
 }
 
@@ -56,7 +56,7 @@ async function searchProduct(query) {
   console.log(query);
   const product = await Product.find({
     name: { $regex: query, $options: 'i' },
-    // tags: { $regex: query, $options: 'i' },
+    tags: { $regex: query, $options: 'i' },
   }).limit(40);
   return product;
 }
@@ -82,6 +82,13 @@ async function updateProduct(productId, newPrice, hot, newDescription) {
   return result;
 }
 
-async function hideProduct(params) {}
+async function hideProduct(productId) {
+  await getProductById(productId);
+  return await Product.findOneAndUpdate(
+    { _id: productId },
+    { $set: { hide: true } },
+    { new: true },
+  );
+}
 
 export default productActions;

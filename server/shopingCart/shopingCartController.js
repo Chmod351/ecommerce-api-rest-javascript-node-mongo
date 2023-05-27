@@ -10,6 +10,7 @@ router.get('/cart/:userId/total',authMiddleware, getTotal);
 router.get('/cart/:userId',authMiddleware, getUserCart);
 export default router;
 
+
 function addProduct(req, res, next) {
   cartActions
     .addProduct(req.body.id, req.user.id)
@@ -24,13 +25,13 @@ function removeProduct(req, res, next) {
 }
 function getUserCart(req, res, next) {
   cartActions
-    .getUserCart(req.params.id)
+    .getUserCart(req.user.id)
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 function getTotal(req, res, next) {
   cartActions
-    .getTotal(req.params.id)
+    .getTotal(req.body.id)
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }

@@ -9,14 +9,14 @@ const ShopingCartSchema = new mongoose.Schema(
     },
     products: [
       {
-        product: {
+        productId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'Product',
           required: true,
         },
         quantity: {
           type: Number,
-          required: true,
+          default: 1,
         },
       },
     ],
