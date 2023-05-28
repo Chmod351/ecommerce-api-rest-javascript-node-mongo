@@ -27,13 +27,14 @@ router.get(
 productController.getProductById
 );
 
-router.put(
+router.post(
   "/products",
   authMiddleware,
   cleanBody,
   adminCheck,
   productController.createProduct
 );
+
 router.put(
   "/products/update/:id",
   authMiddleware,
@@ -41,6 +42,7 @@ router.put(
   adminCheck,
   productController.updateProduct
 );
+
 router.put(
   "/products/hide/:id",
   authMiddleware,
