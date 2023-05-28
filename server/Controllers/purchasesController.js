@@ -49,6 +49,7 @@ function cleanPurchase(req, res, next) {
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
+
 function updatePurchaseState(req, res, next) {
   purchaseActions
     .updatePurchaseState(req.params.id, req.body.shippingStatus)

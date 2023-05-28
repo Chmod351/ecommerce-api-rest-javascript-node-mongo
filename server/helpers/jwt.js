@@ -1,9 +1,10 @@
-import jwt from 'jsonwebtoken';
+import Token from './token.js';
 import { JWT_TOKEN } from '../../index.js';
+
+const jwt= new Token()
 
 function authMiddleware(req, res, next) {
   const authHeader = req.cookies.token;
-  console.log(authHeader);
   if (!authHeader) {
     return res.status(401).json({
       message: 'Unauthorized: Missing or invalid authorization header',
@@ -11,7 +12,7 @@ function authMiddleware(req, res, next) {
   }
   const token = authHeader;
   try {
-    const decoded = jwt.verify(token, JWT_TOKEN);
+    const decoded = jwt.verifyToken(token, JWT_TOKEN);
     req.user = decoded;
     next();
   } catch (err) {
