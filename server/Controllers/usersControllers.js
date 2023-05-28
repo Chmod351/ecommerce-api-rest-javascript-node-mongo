@@ -12,8 +12,8 @@ function signIn(req, res, next) {
     .then(({ user, sendToken }) => {
       if (user) {
         res.cookie('token', sendToken, {
-          httpOnly: true,
-          secure: true,
+          // httpOnly: true,
+          // secure: true,
         });
         res.json(user);
       } else {
