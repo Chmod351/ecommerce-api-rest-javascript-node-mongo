@@ -1,12 +1,12 @@
-import express from 'express';
-import importMiddlewares from './middlewaresHandler.js';
-import { connect } from './server.js';
-import { config } from 'dotenv';
-import user from './server/Controllers/usersControllers.js'
-import cart from './server/Controllers/shopingCartController.js';
-import product from './server/Controllers/productController.js';
-import purchase from './server/Controllers/purchasesController.js';
-import errorHandler from './server/helpers/errorHandler.js';
+import express from "express";
+import importMiddlewares from "./middlewaresHandler.js";
+import { connect } from "./server.js";
+import { config } from "dotenv";
+import user from "./server/Routes/userRoutes.js";
+import cart from "./server/Routes/shoppingCartRoutes.js";
+import product from "./server/Routes/productRoutes.js";
+import purchase from "./server/Routes/purchasesRoutes.js";
+import errorHandler from "./server/helpers/errorHandler.js";
 
 //config
 
@@ -25,10 +25,10 @@ middlewares.forEach((middleware) => {
 
 //routes
 const apiRouthes = [
-  { route: '/api', controller: user },
-  { route: '/api', controller: cart },
-  { route: '/api', controller: purchase },
-  { route: '/api', controller: product },
+  { route: "/api", controller: user },
+  { route: "/api", controller: cart },
+  { route: "/api", controller: purchase },
+  { route: "/api", controller: product },
 ];
 for (const controller of apiRouthes) {
   app.use(controller.route, controller.controller);
@@ -38,5 +38,5 @@ app.use(errorHandler);
 // server
 app.listen(PORT, () => {
   connect();
-  console.log('conected to port' + PORT);
+  console.log("conected to port" + PORT);
 });

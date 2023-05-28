@@ -1,23 +1,14 @@
-import { Router } from 'express';
-import productActions from '../View/productView.js';
-import cleanBody from '../helpers/sanitizer.js';
-import authMiddleware from '../helpers/jwt.js';
-import adminCheck from '../helpers/adminCheck.js';
-const router = Router();
+import productActions from '../View/productView.js'
 
-router.get('/products', getProducts);
-router.get('/products/tags', getProductsByTag);
-router.get('/products/search', cleanBody, searchProduct);
-router.get('/products/:id', getProductById);
-router.put('/products', authMiddleware, cleanBody, adminCheck, createProduct);
-router.put(
-  '/products/update/:id',
-  authMiddleware,
-  cleanBody,
-  adminCheck,
+const producTController={
+  getProductById,
+  getProducts,
+  getProductsByTag,
+  createProduct,
+  searchProduct,
   updateProduct,
-);
-router.delete('/products/delete/:id', authMiddleware, adminCheck, hideProduct);
+  hideProduct
+}
 
 function getProductById(req, res, next) {
   productActions
@@ -32,6 +23,13 @@ function getProducts(req, res, next) {
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
+function getProductsByTag(req, res, next) {
+  const category = req.query.tag.split(',');
+  productActions
+    .getProductsByTag(category)
+    .then((products) => res.json(products))
+    .catch((error) => next(error));
+}
 
 function createProduct(req, res, next) {
   productActions
@@ -44,14 +42,6 @@ function createProduct(req, res, next) {
       req.body.hot,
     )
     .then((product) => res.json(product))
-    .catch((error) => next(error));
-}
-
-async function getProductsByTag(req, res, next) {
-  const category = req.query.tag.split(',');
-  productActions
-    .getProductsByTag(category)
-    .then((products) => res.json(products))
     .catch((error) => next(error));
 }
 
@@ -84,4 +74,5 @@ function hideProduct(req, res, next) {
     .catch((error) => next(error));
 }
 
-export default router;
+
+export default producTController

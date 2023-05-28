@@ -1,15 +1,9 @@
-import { Router } from 'express';
 import userActions from '../View/usersViews.js';
-import cleanBody from '../helpers/sanitizer.js';
-const router = Router();
-
-router.post('/signin', cleanBody, signIn);
-router.post('/signup', cleanBody, signUp);
-router.get('/users/:id', getUser);
-// router.put('/users/admin/:userId', createAdmin);
-
-
-export default router;
+const usersControllers={
+  signIn,
+  signUp,
+  getUser
+}
 
 function signIn(req, res, next) {
   userActions
@@ -46,3 +40,4 @@ function getUser(req, res, next) {
 //     .then((user) => res.json(user))
 //     .catch((error) => next(error));
 // }
+export default usersControllers
