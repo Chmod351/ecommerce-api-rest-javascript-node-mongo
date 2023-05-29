@@ -8,16 +8,20 @@ const commentControllers = {
 
 function createComment(req, res, next) {
   commentActions
-    .createComment(req.user.id, req.body.calification, req.body.description)
+    .createComment(req.user.id, req.body)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 
 function deleteComment(req, res, next) {
-  commentActions
-    .deleteComment(req.params.id)
-    .then((product) => res.json(product))
-    .catch((error) => next(error));
+  if (req.user.id === comment.userId || req.user.isAdmin) {
+    commentActions
+      .deleteComment(req.params.id)
+      .then((product) => res.json(product))
+      .catch((error) => next(error));
+  } else {
+    res.status(401).json({ message: 'unauthorized' });
+  }
 }
 
 function getAllComments(req, res, next) {

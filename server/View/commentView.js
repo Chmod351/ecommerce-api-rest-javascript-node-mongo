@@ -13,8 +13,14 @@ async function getAllComments(page, size) {
   return await Comments.find().skip(skipCount).limit(pageSize);
 }
 
-async function deleteComment(commentId) {}
+async function deleteComment(commentId) {
+  return await Comments.findByIdAndDelete(commentId);
+}
 
-async function createComment(userId, productId) {}
+async function createComment(userId, body) {
+  const newComment = new Comments({ ...body, userId });
+
+  return await newComment.save();
+}
 
 export default commentActions;
