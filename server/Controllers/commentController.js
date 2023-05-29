@@ -26,7 +26,7 @@ function deleteComment(req, res, next) {
 
 function getAllComment(req, res, next) {
   commentService
-    .getAllComments(req.query.page, req.query.size)
+    .getAllComment(req.query.page, req.query.size)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }

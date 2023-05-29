@@ -43,4 +43,5 @@ router.get(
   purchaseController.getMonthly
 );
 
+router.post("/purchase/paymanet", authMiddleware, purchaseController.payment)
 export default router;

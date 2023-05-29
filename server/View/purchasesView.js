@@ -1,5 +1,5 @@
 import Purchase from '../Models/purchasesModel.js';
-
+import stripe from 'stripe';
 
 const purchaseService = {
   createPurchase,
@@ -8,6 +8,7 @@ const purchaseService = {
   cleanPurchase,
   updatePurchaseState,
   getAllPurchase,
+  createPayment,
 };
 
 async function createPurchase(userId, product, paymentMethod, shippingAddress) {
@@ -67,6 +68,23 @@ async function updatePurchaseState(id, status) {
     { new: true },
   );
   return newStatus;
+}
+
+async function createPayment(tokenId, amount) {
+  stripe.charges.create(
+    {
+      source: tokenId,
+      amount: amount,
+      currency: 'usd',
+    },
+    (stripeErr, stripeRes) => {
+      if (stripeErr) {
+        new Error('500');
+      } else {
+        return stripeRes;
+      }
+    },
+  );
 }
 
 export default purchaseService;

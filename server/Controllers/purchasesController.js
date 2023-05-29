@@ -7,6 +7,7 @@ const purchaseController = {
   cleanPurchase,
   getMonthly,
   updatePurchaseState,
+  payment,
 };
 
 function createPurchase(req, res, next) {
@@ -55,6 +56,13 @@ function updatePurchaseState(req, res, next) {
   purchaseService
     .updatePurchaseState(req.params.id, req.body.shippingStatus)
     .then((purchase) => res.json(purchase))
+    .catch((error) => next(error));
+}
+
+function payment(req, res, next) {
+  purchaseService
+    .createPayment(req.body.tokenId, req.body.amount)
+    .then((payment) => res.json(payment))
     .catch((error) => next(error));
 }
 
