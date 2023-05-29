@@ -4,11 +4,11 @@ import { JWT_TOKEN } from '../../index.js';
 import Token from '../helpers/token.js';
 
 //config
-const userActions = {
+const userService= {
   signIn,
   signUp,
   getUser,
-  getUserStats,
+  getUserStat,
 };
 
 //create instances to call clases
@@ -16,9 +16,9 @@ const encrypt = new Encrypt();
 const jwt = new Token();
 
 async function findByEmail(email) {
-  const alreadyExists = await User.findOne({ email: { $eq: email } });
-  if (alreadyExists) {
-    return alreadyExists;
+  const alreadyExist = await User.findOne({ email: { $eq: email } });
+  if (alreadyExist) {
+    return alreadyExist;
   } else {
     return false;
   }
@@ -76,7 +76,7 @@ async function getUser(userId) {
   }
 }
 
-async function getUserStats() {
+async function getUserStat() {
   const date = new Date();
   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
   const data = await User.aggregate([
@@ -96,4 +96,4 @@ async function getUserStats() {
   return data;
 }
 
-export default userActions;
+export default userService;

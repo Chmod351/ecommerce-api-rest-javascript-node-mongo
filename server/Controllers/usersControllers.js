@@ -1,14 +1,14 @@
-import userActions from '../View/usersViews.js';
+import userService from '../View/usersViews.js';
 
-const usersControllers = {
+const usersController = {
   signIn,
   signUp,
   getUser,
-  getStats,
+  getStat,
 };
 
 function signIn(req, res, next) {
-  userActions
+  userService
     .signIn(req.body)
     .then(({ user, sendToken }) => {
       if (user) {
@@ -25,24 +25,24 @@ function signIn(req, res, next) {
 }
 
 function signUp(req, res, next) {
-  userActions
+  userService
     .signUp(req.body)
     .then((user) => res.json(user))
     .catch((error) => next(error));
 }
 
 function getUser(req, res, next) {
-  userActions
+  userService
     .getUser(req.params.id)
     .then((user) => res.json(user))
     .catch((error) => next(error));
 }
 
-function getStats(req, res, next) {
-  userActions
-    .getUserStats()
+function getStat(req, res, next) {
+  userService
+    .getUserStat()
     .then((stats) => res.json(stats))
     .catch((error) => next(error));
 }
 
-export default usersControllers;
+export default usersController;
