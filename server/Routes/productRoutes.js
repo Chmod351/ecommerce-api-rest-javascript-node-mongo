@@ -1,53 +1,40 @@
-import { Router } from "express";
-import cleanBody from "../helpers/sanitizer.js";
-import authMiddleware from "../helpers/jwt.js";
-import adminCheck from "../helpers/adminCheck.js";
-import productController from "../Controllers/productController.js";
+import { Router } from 'express';
+import cleanBody from '../helpers/sanitizer.js';
+import authMiddleware from '../helpers/jwt.js';
+import adminCheck from '../helpers/adminCheck.js';
+import productController from '../Controllers/productController.js';
 
 const router = Router();
 
-router.get(
-  "/products", 
-productController.getProducts
-);
+router.get('/product', productController.getProduct);
 
-router.get(
-  "/products/tags", 
-productController.getProductsByTag
-);
+router.get('/product/tag', productController.getProductByTag);
 
-router.get(
-  "/products/search", 
-cleanBody, 
-productController.searchProduct
-);
+router.get('/product/search', cleanBody, productController.searchProduct);
 
-router.get(
-  "/products/:id", 
-productController.getProductById
-);
+router.get('/product/:id', productController.getProductById);
 
 router.post(
-  "/products",
+  '/product',
   authMiddleware,
   cleanBody,
   adminCheck,
-  productController.createProduct
+  productController.createProduct,
 );
 
 router.put(
-  "/products/update/:id",
+  '/product/update/:id',
   authMiddleware,
   cleanBody,
   adminCheck,
-  productController.updateProduct
+  productController.updateProduct,
 );
 
 router.put(
-  "/products/hide/:id",
+  '/product/hide/:id',
   authMiddleware,
   adminCheck,
-  productController.hideProduct
+  productController.hideProduct,
 );
 
 export default router;

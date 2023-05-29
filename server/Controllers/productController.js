@@ -1,9 +1,9 @@
-import productActions from '../View/productView.js';
+import productService from '../View/productView.js';
 
-const producTController = {
+const productController = {
   getProductById,
-  getProducts,
-  getProductsByTag,
+  getProduct,
+  getProductByTag,
   createProduct,
   searchProduct,
   updateProduct,
@@ -11,28 +11,28 @@ const producTController = {
 };
 
 function getProductById(req, res, next) {
-  productActions
+  productService
     .getProductById(req.params.id)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 
-function getProducts(req, res, next) {
-  productActions
-    .getProducts(req.query.page, req.query.size)
+function getProduct(req, res, next) {
+  productService
+    .getProduct(req.query.page, req.query.size)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
-function getProductsByTag(req, res, next) {
+function getProductByTag(req, res, next) {
   const category = req.query.tag.split(',');
-  productActions
-    .getProductsByTag(category)
+  productService
+    .getProductByTag(category)
     .then((products) => res.json(products))
     .catch((error) => next(error));
 }
 
 function createProduct(req, res, next) {
-  productActions
+  productService
     .createProduct(
       req.body.name,
       req.body.imgUrl,
@@ -47,14 +47,14 @@ function createProduct(req, res, next) {
 
 function searchProduct(req, res, next) {
   const query = req.query.q;
-  productActions
+  productService
     .searchProduct(query)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 
 function updateProduct(req, res, next) {
-  productActions
+  productService
     .updateProduct(
       req.params.id,
       req.body.price,
@@ -66,10 +66,10 @@ function updateProduct(req, res, next) {
 }
 
 function hideProduct(req, res, next) {
-  productActions
+  productService
     .updateProduct(req.params.id)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 
-export default producTController;
+export default productController;

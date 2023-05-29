@@ -1,10 +1,10 @@
 import Product from '../Models/productModel.js';
 import mongoose from 'mongoose';
 
-const productActions = {
-  getProducts,
+const productService = {
+  getProduct,
   getProductById,
-  getProductsByTag,
+  getProductByTag,
   createProduct,
   searchProduct,
   updateProduct,
@@ -28,14 +28,14 @@ async function getProductById(productId) {
   }
 }
 
-async function getProducts(page, size) {
+async function getProduct(page, size) {
   const actualPage = parseInt(page) || 1;
   const pageSize = parseInt(pageSize) || 10;
   const skipCount = (actualPage - 1) * size;
   return await Product.find().skip(skipCount).limit(pageSize);
 }
 
-async function getProductsByTag(category) {
+async function getProductByTag(category) {
   const product = await Product.find({ tags: { $all: category } }).limit(20);
   return product;
 }
@@ -90,4 +90,4 @@ async function hideProduct(productId) {
   );
 }
 
-export default productActions;
+export default productService;
