@@ -11,14 +11,12 @@ const purchaseActions = {
 async function createPurchase(
   userId,
   products,
-  amount,
   paymentMethod,
   shippingAddress,
 ) {
   const purchase = new Purchase({
     userId,
     products,
-    amount,
     paymentMethod,
     shippingAddress,
   });
@@ -34,7 +32,6 @@ async function getUserPurchases(id) {
   const userPurchases = await Purchase.find({ userId: id });
   return userPurchases;
 }
-
 
 async function getMonthly() {
   const date = new Date();

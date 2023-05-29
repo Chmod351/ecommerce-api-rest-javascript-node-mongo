@@ -1,4 +1,4 @@
-import purchaseActions from "../View/purchasesView.js";
+import purchaseActions from '../View/purchasesView.js';
 
 const purchaseController = {
   createPurchase,
@@ -14,9 +14,8 @@ function createPurchase(req, res, next) {
     .createPurchase(
       req.user.id,
       req.body.products,
-      req.body.amount,
       req.body.paymentMethod,
-      req.body.shippingAddress
+      req.body.shippingAddress,
     )
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
@@ -38,15 +37,17 @@ function getUserPurchases(req, res, next) {
 
 function getMonthly(req, res, next) {
   purchaseActions
-    .getMonthly()
+    .getMonthly(req.user.id)
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
 
 function cleanPurchase(req, res, next) {
   purchaseActions
-    .cleanPurchase(req.body.id)
-    .then((purchase) => res.json(purchase))
+    .cleanPurchase(req.user.id)
+    .then(() =>
+      res.json({ message: `purchase with id ${req.params.id} was deleted` }),
+    )
     .catch((error) => next(error));
 }
 

@@ -1,9 +1,9 @@
 import Token from './token.js';
 import { JWT_TOKEN } from '../../index.js';
 
-const jwt= new Token()
+const jwt = new Token();
 
-function authMiddleware(req, res, next) {
+async function authMiddleware(req, res, next) {
   const authCookie = req.cookies.token;
   if (!authCookie) {
     return res.status(401).json({
@@ -12,12 +12,11 @@ function authMiddleware(req, res, next) {
   }
   const token = authCookie;
   try {
-    const decoded = jwt.verifyToken(token, JWT_TOKEN);
+    const decoded = await jwt.verifyToken(token, JWT_TOKEN);
     req.user = decoded;
     next();
   } catch (err) {
-    console.error(err);
-    return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+    return res.status(401).json(err);
   }
 }
 export default authMiddleware;

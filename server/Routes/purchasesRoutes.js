@@ -5,7 +5,7 @@ import adminCheck from "../helpers/adminCheck.js";
 const router = Router();
 
 router.post(
-  "/purchase/:userId/purchases",
+  "/purchase",
   authMiddleware,
   purchaseController.createPurchase
 );
@@ -17,7 +17,7 @@ router.get(
 );
 
 router.get(
-  "/purchase/",
+  "/purchase",
   authMiddleware,
   adminCheck,
   purchaseController.getAllPurchases

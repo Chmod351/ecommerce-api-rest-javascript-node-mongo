@@ -1,14 +1,14 @@
-import Encrypt from "../helpers/bcrypt.js";
-import User from "../Models/userModel.js";
-import { JWT_TOKEN } from "../../index.js";
-import Token from "../helpers/token.js";
+import Encrypt from '../helpers/bcrypt.js';
+import User from '../Models/userModel.js';
+import { JWT_TOKEN } from '../../index.js';
+import Token from '../helpers/token.js';
 
 //config
 const userActions = {
   signIn,
   signUp,
   getUser,
-  // createAdmin,
+  getUserStats,
 };
 
 //create instances to call clases
@@ -28,26 +28,27 @@ async function signIn(user) {
   const existingUser = await findByEmail(user.email);
 
   if (!existingUser) {
-    throw new Error("not found");
+    throw new Error('not found');
   } else {
-    const isPasswordMatch = await encrypt.comparePassword(user.password, existingUser.password);
-
+    const isPasswordMatch = await encrypt.comparePassword(
+      user.password,
+      existingUser.password,
+    );
     if (!isPasswordMatch) {
-      throw new Error("wrong credentials");
+      throw new Error('wrong credentials');
     } else {
       const userId = existingUser._id.toString();
       const token = await jwt.generateToken(userId, JWT_TOKEN, {
-        expiresIn: "48h",
+        expiresIn: '48h',
       });
-
       return { user: existingUser, sendToken: token };
     }
   }
 }
 
 async function signUp(user) {
-  const allowedFields = ["email", "password", "username"];
-//check if user contains allowedFields
+  const allowedFields = ['email', 'password', 'username'];
+  //check if user contains allowedFields
   const filteredUser = Object.keys(user)
     .filter((key) => allowedFields.includes(key))
     .reduce((obj, key) => {
@@ -60,10 +61,9 @@ async function signUp(user) {
     const encryptPassword = await encrypt.hashPassword(filteredUser.password);
     const createUser = new User({ ...filteredUser, password: encryptPassword });
     const newUser = await createUser.save();
-
     return newUser;
   } else {
-    throw new Error("bad request");
+    throw new Error('bad request');
   }
 }
 
@@ -72,10 +72,28 @@ async function getUser(userId) {
   if (user) {
     return user;
   } else {
-    throw new Error("bad request");
+    throw new Error('bad request');
   }
 }
 
-// async function createAdmin(userId) {}
+async function getUserStats() {
+  const date = new Date();
+  const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+  const data = await User.aggregate([
+    { $match: { createdAt: { $gte: lastYear } } },
+    {
+      $project: {
+        month: { $month: '$createdAt' },
+      },
+    },
+    {
+      $group: {
+        _id: '$month',
+        total: { $sum: 1 },
+      },
+    },
+  ]);
+  return data;
+}
 
 export default userActions;

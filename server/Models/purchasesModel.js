@@ -20,10 +20,6 @@ const PurchaseSchema = new mongoose.Schema(
         },
       },
     ],
-    amount: {
-      type: Number,
-      required: true,
-    },
     paymentMethod: {
       type: String,
       require: true,

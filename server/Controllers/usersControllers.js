@@ -1,10 +1,11 @@
 import userActions from '../View/usersViews.js';
 
-const usersControllers={
+const usersControllers = {
   signIn,
   signUp,
-  getUser
-}
+  getUser,
+  getStats,
+};
 
 function signIn(req, res, next) {
   userActions
@@ -12,8 +13,8 @@ function signIn(req, res, next) {
     .then(({ user, sendToken }) => {
       if (user) {
         res.cookie('token', sendToken, {
-          // httpOnly: true,
-          // secure: true,
+          httpOnly: true,
+          secure: true,
         });
         res.json(user);
       } else {
@@ -22,6 +23,7 @@ function signIn(req, res, next) {
     })
     .catch((error) => next(error));
 }
+
 function signUp(req, res, next) {
   userActions
     .signUp(req.body)
@@ -35,10 +37,12 @@ function getUser(req, res, next) {
     .then((user) => res.json(user))
     .catch((error) => next(error));
 }
-// function createAdmin(req, res, next) {
-//   userActions
-//     .createAdmin(req.params.id)
-//     .then((user) => res.json(user))
-//     .catch((error) => next(error));
-// }
-export default usersControllers
+
+function getStats(req, res, next) {
+  userActions
+    .getUserStats()
+    .then((stats) => res.json(stats))
+    .catch((error) => next(error));
+}
+
+export default usersControllers;
