@@ -7,21 +7,17 @@ const router = Router();
 
 router.post('/cart', authMiddleware, cleanBody, cartControllers.createCart);
 
+router.get('/cart/all', authMiddleware, adminCheck, cartControllers.getAll);
+
+router.delete('/cart/:cartId', authMiddleware, cartControllers.deleteCart);
+
+router.get('/cart/:userId', authMiddleware, cartControllers.getUserCart);
+
 router.put(
   '/cart/:cartId',
   authMiddleware,
   cleanBody,
   cartControllers.editCart,
 );
-
-router.delete(
-  '/cart/:cartId',
-  authMiddleware,
-  cartControllers.deleteCart,
-);
-
-router.get('/cart/all', authMiddleware, adminCheck, cartControllers.getAll);
-
-router.get('/cart/:userId', authMiddleware, cartControllers.getUserCart);
 
 export default router;

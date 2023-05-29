@@ -28,10 +28,11 @@ async function getProductById(productId) {
   }
 }
 
-async function getProducts() {
-  const products = await Product.find();
-  console.log(products);
-  return products;
+async function getProducts(page, size) {
+  const page = parseInt(page) || 1;
+  const pageSize = parseInt(pageSize) || 10;
+  const skipCount = (page - 1) * size;
+  return await Product.find().skip(skipCount).limit(pageSize);
 }
 
 async function getProductsByTag(category) {

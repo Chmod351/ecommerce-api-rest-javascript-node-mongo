@@ -8,7 +8,7 @@ const router = Router();
 router.post('/signin', cleanBody, usersControllers.signIn);
 router.post('/signup', cleanBody, usersControllers.signUp);
 router.get('/users/stats',authMiddleware, adminCheck, usersControllers.getStats);
-router.get('/users/:id', usersControllers.getUser);
+router.get('/users/find/:id', usersControllers.getUser);
 
 
 export default router;

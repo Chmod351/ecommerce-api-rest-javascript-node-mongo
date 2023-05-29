@@ -1,14 +1,14 @@
-import productActions from '../View/productView.js'
+import productActions from '../View/productView.js';
 
-const producTController={
+const producTController = {
   getProductById,
   getProducts,
   getProductsByTag,
   createProduct,
   searchProduct,
   updateProduct,
-  hideProduct
-}
+  hideProduct,
+};
 
 function getProductById(req, res, next) {
   productActions
@@ -19,7 +19,7 @@ function getProductById(req, res, next) {
 
 function getProducts(req, res, next) {
   productActions
-    .getProducts()
+    .getProducts(req.query.page, req.query.size)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
@@ -68,11 +68,8 @@ function updateProduct(req, res, next) {
 function hideProduct(req, res, next) {
   productActions
     .updateProduct(req.params.id)
-    .then(() =>
-      res.json({ message: `product with id ${req.params.id} was hidden` }),
-    )
+    .then((product) => res.json(product))
     .catch((error) => next(error));
 }
 
-
-export default producTController
+export default producTController;
