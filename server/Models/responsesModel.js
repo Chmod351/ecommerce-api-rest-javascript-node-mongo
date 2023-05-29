@@ -7,12 +7,7 @@ const ResponsesSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
-    productId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Product',
-      required: true,
-    },
-    comment: {
+    commentId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Comments',
       required: true,

@@ -19,7 +19,6 @@ async function deleteResponse(responseId) {
 
 async function createResponse(userId, body) {
   const newResponse = new Response({ ...body, userId });
-
   return await newResponse.save();
 }
 
