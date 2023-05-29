@@ -1,38 +1,47 @@
-import cartActions from "../View/shopingCartView.js";
+import cartActions from '../View/shopingCartView.js';
 
 const cartControllers = {
-  addProduct,
-  removeProduct,
+  createCart,
+  editCart,
+  deleteCart,
   getUserCart,
-  getTotal,
+  getAll,
 };
 
-function addProduct(req, res, next) {
+function createCart(req, res, next) {
   cartActions
-    .addProduct(req.body.id, req.user.id)
+    .createCart(req.body)
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 
-function removeProduct(req, res, next) {
+function editCart(req, res, next) {
   cartActions
-    .removeProduct(req.params.id)
+    .editCart(req.body, req.params.id)
+    .then((cart) => res.json(cart))
+    .catch((error) => next(error));
+}
+
+function deleteCart(req, res, next) {
+  cartActions
+    .deleteCart(req.params.id)
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 
 function getUserCart(req, res, next) {
   cartActions
-    .getUserCart(req.user.id)
+    .getUserCart(req.params.userId)
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 
-function getTotal(req, res, next) {
+function getAll(req, res, next) {
   cartActions
-    .getTotal(req.body.id)
+    .getAll()
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 
 export default cartControllers;
+

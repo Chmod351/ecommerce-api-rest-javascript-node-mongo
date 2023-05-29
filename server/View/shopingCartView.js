@@ -1,16 +1,38 @@
+import ShoppingCart from '../Models/shopinCartModel.js';
+
 const cartActions = {
-  addProduct,
-  removeProduct,
+  createCart,
+  editCart,
+  deleteCart,
   getUserCart,
-  getTotal,
+  getAll,
 };
 
-async function addProduct(params) {}
+async function createCart(body) {
+  const newCart = new ShoppingCart(body);
+  return await newCart.save();
+}
 
-async function removeProduct(params) {}
+async function editCart(body, cartId) {
+  return await ShoppingCart.findByIdAndUpdate(
+    cartId,
+    {
+      $set: body,
+    },
+    { new: true },
+  );
+}
 
-async function getUserCart(params) {}
+async function deleteCart(cartId) {
+  return await ShoppingCart.findByIdAndDelete(cartId);
+}
 
-async function getTotal(params) {}
+async function getUserCart(userId) {
+  return await ShoppingCart.findOne({ userId });
+}
 
-export default cartActions 
+async function getAll() {
+  return await ShoppingCart.find();
+}
+
+export default cartActions;

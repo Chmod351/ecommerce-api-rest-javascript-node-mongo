@@ -1,29 +1,27 @@
-import { Router } from "express";
-import cartControllers from "../Controllers/shopingCartController.js";
-import authMiddleware from "../helpers/jwt.js";
-
+import { Router } from 'express';
+import cartControllers from '../Controllers/shopingCartController.js';
+import authMiddleware from '../helpers/jwt.js';
+import cleanBody from '../helpers/sanitizer.js';
+import adminCheck from '../helpers/adminCheck.js';
 const router = Router();
 
+router.post('/cart', authMiddleware, cleanBody, cartControllers.createCart);
+
 router.put(
-  "/cart/:userId/add/:productId",
+  '/cart/:cartId',
   authMiddleware,
-  cartControllers.addProduct
+  cleanBody,
+  cartControllers.editCart,
 );
 
 router.delete(
-  "/cart/:userId/remove/:productId",
+  '/cart/:cartId',
   authMiddleware,
-  cartControllers.removeProduct
+  cartControllers.deleteCart,
 );
 
-router.get("/cart/:userId/total", 
-authMiddleware, 
-cartControllers.getTotal
-);
+router.get('/cart/all', authMiddleware, adminCheck, cartControllers.getAll);
 
-router.get("/cart/:userId",
- authMiddleware, 
-cartControllers.getUserCart
-);
+router.get('/cart/:userId', authMiddleware, cartControllers.getUserCart);
 
 export default router;
