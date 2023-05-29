@@ -1,16 +1,16 @@
-import purchaseActions from '../View/purchasesView.js';
+import purchaseService from '../View/purchasesView.js';
 
 const purchaseController = {
   createPurchase,
-  getUserPurchases,
-  getAllPurchases,
+  getUserPurchase,
+  getAllPurchase,
   cleanPurchase,
   getMonthly,
   updatePurchaseState,
 };
 
 function createPurchase(req, res, next) {
-  purchaseActions
+  purchaseService
     .createPurchase(
       req.user.id,
       req.body.products,
@@ -21,29 +21,29 @@ function createPurchase(req, res, next) {
     .catch((error) => next(error));
 }
 
-function getAllPurchases(req, res, next) {
-  purchaseActions
-    .getAllPurchases(req.query.page, req.query.size)
+function getAllPurchase(req, res, next) {
+  purchaseService
+    .getAllPurchase(req.query.page, req.query.size)
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
 
-function getUserPurchases(req, res, next) {
-  purchaseActions
-    .getUserPurchases(req.user.id)
+function getUserPurchase(req, res, next) {
+  purchaseService
+    .getUserPurchase(req.user.id)
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
 
 function getMonthly(req, res, next) {
-  purchaseActions
+  purchaseService
     .getMonthly(req.user.id)
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
 
 function cleanPurchase(req, res, next) {
-  purchaseActions
+  purchaseService
     .cleanPurchase(req.user.id)
     .then(() =>
       res.json({ message: `purchase with id ${req.params.id} was deleted` }),
@@ -52,7 +52,7 @@ function cleanPurchase(req, res, next) {
 }
 
 function updatePurchaseState(req, res, next) {
-  purchaseActions
+  purchaseService
     .updatePurchaseState(req.params.id, req.body.shippingStatus)
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));

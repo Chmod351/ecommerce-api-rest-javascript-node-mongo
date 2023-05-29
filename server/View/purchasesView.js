@@ -1,38 +1,33 @@
 import Purchase from '../Models/purchasesModel.js';
-const purchaseActions = {
+
+const purchaseService = {
   createPurchase,
-  getUserPurchases,
+  getUserPurchase,
   getMonthly,
   cleanPurchase,
   updatePurchaseState,
-  getAllPurchases,
+  getAllPurchase,
 };
 
-async function createPurchase(
-  userId,
-  products,
-  paymentMethod,
-  shippingAddress,
-) {
+async function createPurchase(userId, product, paymentMethod, shippingAddress) {
   const purchase = new Purchase({
     userId,
-    products,
+    product,
     paymentMethod,
     shippingAddress,
   });
   return await purchase.save();
 }
 
-async function getAllPurchases(page, size) {
+async function getAllPurchase(page, size) {
   const pageNumber = parseInt(page) || 1;
   const pageSize = parseInt(size) || 10;
   const skipCount = (pageNumber - 1) * pageSize;
   return await Purchase.find().skip(skipCount).limit(pageSize);
 }
 
-async function getUserPurchases(id) {
-  const userPurchases = await Purchase.find({ userId: id });
-  return userPurchases;
+async function getUserPurchase(id) {
+  return await Purchase.find({ userId: id });
 }
 
 async function getMonthly() {
@@ -59,8 +54,7 @@ async function getMonthly() {
 }
 
 async function cleanPurchase(id) {
-  const purchase = await Purchase.findByIdAndDelete(id);
-  return purchase;
+  return await Purchase.findByIdAndDelete(id);
 }
 
 async function updatePurchaseState(id, status) {
@@ -74,4 +68,4 @@ async function updatePurchaseState(id, status) {
   return newStatus;
 }
 
-export default purchaseActions;
+export default purchaseService;

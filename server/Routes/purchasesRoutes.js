@@ -13,14 +13,14 @@ router.post(
 router.get(
   "/purchase/:userId/purchases",
   authMiddleware,
-  purchaseController.getUserPurchases
+  purchaseController.getUserPurchase
 );
 
 router.get(
   "/purchase",
   authMiddleware,
   adminCheck,
-  purchaseController.getAllPurchases
+  purchaseController.getAllPurchase
 );
 
 router.delete(
