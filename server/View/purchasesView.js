@@ -23,9 +23,11 @@ async function createPurchase(
   return await purchase.save();
 }
 
-async function getAllPurchases(limit, skip) {
-  const purchase = await Purchase.find().skip(skip).limit(limit);
-  return purchase;
+async function getAllPurchases(page, size) {
+  const pageNumber = parseInt(page) || 1;
+  const pageSize = parseInt(size) || 10;
+  const skipCount = (pageNumber - 1) * pageSize;
+  return await Purchase.find().skip(skipCount).limit(pageSize);
 }
 
 async function getUserPurchases(id) {

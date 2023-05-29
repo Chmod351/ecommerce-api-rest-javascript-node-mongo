@@ -23,7 +23,7 @@ function createPurchase(req, res, next) {
 
 function getAllPurchases(req, res, next) {
   purchaseActions
-    .getAllPurchases()
+    .getAllPurchases(req.query.page, req.query.size)
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
