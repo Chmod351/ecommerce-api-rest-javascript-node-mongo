@@ -6,7 +6,7 @@ import user from './server/Routes/userRoutes.js';
 import cart from './server/Routes/shoppingCartRoutes.js';
 import product from './server/Routes/productRoutes.js';
 import purchase from './server/Routes/purchasesRoutes.js';
-import comments from './server/Routes/commentsRoutes.js';
+import comment from './server/Routes/commentsRoutes.js';
 import errorHandler from './server/helpers/errorHandler.js';
 
 //config
@@ -30,7 +30,7 @@ const apiRouthes = [
   { route: '/api', controller: cart },
   { route: '/api', controller: purchase },
   { route: '/api', controller: product },
-  { route: '/api', controller: comments },
+  { route: '/api', controller: comment },
 ];
 for (const controller of apiRouthes) {
   app.use(controller.route, controller.controller);

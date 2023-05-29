@@ -1,26 +1,26 @@
-import Comments from '../Models/commentModel.js';
+import Comment from '../Models/commentModel.js';
 
-const commentActions = {
-  getAllComments,
+const commentService = {
+  getAllComment,
   deleteComment,
   createComment,
 };
 
-async function getAllComments(page, size) {
+async function getAllComment(page, size) {
   const pageNumber = parseInt(page) || 1;
   const pageSize = parseInt(size) || 10;
   const skipCount = (pageNumber - 1) * pageSize;
-  return await Comments.find().skip(skipCount).limit(pageSize);
+  return await Comment.find().skip(skipCount).limit(pageSize);
 }
 
 async function deleteComment(commentId) {
-  return await Comments.findByIdAndDelete(commentId);
+  return await Comment.findByIdAndDelete(commentId);
 }
 
 async function createComment(userId, body) {
-  const newComment = new Comments({ ...body, userId });
+  const newComment = new Comment({ ...body, userId });
 
   return await newComment.save();
 }
 
-export default commentActions;
+export default commentService;
