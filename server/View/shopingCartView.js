@@ -1,6 +1,6 @@
 import ShoppingCart from '../Models/shopinCartModel.js';
 
-const cartActions = {
+const cartService = {
   createCart,
   editCart,
   deleteCart,
@@ -35,4 +35,4 @@ async function getAll() {
   return await ShoppingCart.find();
 }
 
-export default cartActions;
+export default cartService;

@@ -1,23 +1,23 @@
 import { Router } from 'express';
-import cartControllers from '../Controllers/shopingCartController.js';
+import cartController from '../Controllers/shopingCartController.js';
 import authMiddleware from '../helpers/jwt.js';
 import cleanBody from '../helpers/sanitizer.js';
 import adminCheck from '../helpers/adminCheck.js';
 const router = Router();
 
-router.post('/cart', authMiddleware, cleanBody, cartControllers.createCart);
+router.post('/cart', authMiddleware, cleanBody, cartController.createCart);
 
-router.get('/cart/all', authMiddleware, adminCheck, cartControllers.getAll);
+router.get('/cart/all', authMiddleware, adminCheck, cartController.getAll);
 
-router.delete('/cart/:cartId', authMiddleware, cartControllers.deleteCart);
+router.delete('/cart/:cartId', authMiddleware, cartController.deleteCart);
 
-router.get('/cart/:userId', authMiddleware, cartControllers.getUserCart);
+router.get('/cart/:userId', authMiddleware, cartController.getUserCart);
 
 router.put(
   '/cart/:cartId',
   authMiddleware,
   cleanBody,
-  cartControllers.editCart,
+  cartController.editCart,
 );
 
 export default router;

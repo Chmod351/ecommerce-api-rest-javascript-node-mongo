@@ -1,6 +1,6 @@
-import cartActions from '../View/shopingCartView.js';
+import cartService from '../View/shopingCartView.js';
 
-const cartControllers = {
+const cartController = {
   createCart,
   editCart,
   deleteCart,
@@ -9,39 +9,39 @@ const cartControllers = {
 };
 
 function createCart(req, res, next) {
-  cartActions
+  cartService
     .createCart(req.body)
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 
 function editCart(req, res, next) {
-  cartActions
+  cartService
     .editCart(req.body, req.params.id)
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 
 function deleteCart(req, res, next) {
-  cartActions
+  cartService
     .deleteCart(req.params.id)
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 
 function getUserCart(req, res, next) {
-  cartActions
+  cartService
     .getUserCart(req.params.userId)
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 
 function getAll(req, res, next) {
-  cartActions
+  cartService
     .getAll()
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
 
-export default cartControllers;
+export default cartController;
 

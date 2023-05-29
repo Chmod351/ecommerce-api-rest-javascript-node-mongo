@@ -1,5 +1,6 @@
 import Purchase from '../Models/purchasesModel.js';
 
+
 const purchaseService = {
   createPurchase,
   getUserPurchase,
