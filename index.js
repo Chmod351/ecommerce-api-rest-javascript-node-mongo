@@ -12,19 +12,19 @@ import errorHandler from './server/helpers/errorHandler.js';
 //config
 
 config();
-const middlewares = await importMiddlewares();
 const app = express();
 const PORT = process.env.PORT;
 export const JWT_TOKEN = process.env.JWT_TOKEN;
 
-// middlewares
+// importing middlewares
+const middlewares = await importMiddlewares();
 
 middlewares.forEach((middleware) => {
   console.log(`Loading middleware /${middlewares.length}: ${middleware.name}`);
   app.use(middleware);
 });
 
-//routes
+// importing routes
 const apiRouthes = [
   { route: '/api', controller: user },
   { route: '/api', controller: cart },
@@ -36,7 +36,14 @@ for (const controller of apiRouthes) {
   app.use(controller.route, controller.controller);
 }
 
+// error middleware for undefined routes
+app.use((req, res, next) => {
+  res.status(404).json({ message: 'Route not found' });
+});
+
+// error Handler for custom errors
 app.use(errorHandler);
+
 // server
 app.listen(PORT, () => {
   connect();

@@ -45,7 +45,7 @@ function getMonthly(req, res, next) {
 
 function cleanPurchase(req, res, next) {
   purchaseService
-    .cleanPurchase(req.user.id)
+    .cleanPurchase(req.params.id)
     .then(() =>
       res.json({ message: `purchase with id ${req.params.id} was deleted` }),
     )

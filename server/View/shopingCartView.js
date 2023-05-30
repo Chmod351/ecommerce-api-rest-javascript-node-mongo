@@ -8,8 +8,8 @@ const cartService = {
   getAll,
 };
 
-async function createCart(body) {
-  const newCart = new ShoppingCart(body);
+async function createCart(body, userId) {
+  const newCart = new ShoppingCart({ ...body, userId: userId });
   return await newCart.save();
 }
 

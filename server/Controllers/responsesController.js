@@ -14,13 +14,13 @@ function createResponse(req, res, next) {
 }
 
 function deleteResponse(req, res, next) {
-  if (req.user.id === response.userId) {
+  if (req.user.id === response.userId || req.user.isAdmin) {
     responsesActions
       .deleteResponse(req.params.id)
       .then((response) => res.json(response))
       .catch((error) => next(error));
   } else {
-    res.status(403).json({ message: 'forbidden' });
+    res.status(403).json({ message: 'Unauthorized' });
   }
 }
 

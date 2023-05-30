@@ -31,6 +31,13 @@ function signUp(req, res, next) {
     .catch((error) => next(error));
 }
 
+function getStat(req, res, next) {
+  userService
+    .getUserStat()
+    .then((stats) => res.json(stats))
+    .catch((error) => next(error));
+}
+
 function getUser(req, res, next) {
   userService
     .getUser(req.params.id)
@@ -38,11 +45,6 @@ function getUser(req, res, next) {
     .catch((error) => next(error));
 }
 
-function getStat(req, res, next) {
-  userService
-    .getUserStat()
-    .then((stats) => res.json(stats))
-    .catch((error) => next(error));
-}
+
 
 export default usersController;

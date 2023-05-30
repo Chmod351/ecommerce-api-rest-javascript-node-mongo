@@ -4,7 +4,7 @@ import { JWT_TOKEN } from '../../index.js';
 import Token from '../helpers/token.js';
 
 //config
-const userService= {
+const userService = {
   signIn,
   signUp,
   getUser,
@@ -72,7 +72,7 @@ async function getUser(userId) {
   if (user) {
     return user;
   } else {
-    throw new Error('bad request');
+    throw new Error('not found');
   }
 }
 

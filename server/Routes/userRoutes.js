@@ -9,8 +9,8 @@ router.post('/signin', cleanBody, usersController.signIn);
 
 router.post('/signup', cleanBody, usersController.signUp);
 
-router.get('/user/stat',authMiddleware, adminCheck, usersController.getStat);
+router.get('/user/stat', authMiddleware, adminCheck, usersController.getStat);
 
-router.get('/user/find/:id', usersController.getUser);
+router.get('/user/find/:userId', usersController.getUser);
 
 export default router;
