@@ -1,5 +1,8 @@
 import Purchase from '../Models/purchasesModel.js';
+import dotenv from 'dotenv';
+dotenv.config();
 import stripe from 'stripe';
+process.env.STRIPE_TOKEN;
 
 const purchaseService = {
   createPurchase,
@@ -62,7 +65,7 @@ async function cleanPurchase(id) {
 async function updatePurchaseState(id, status) {
   const newStatus = await Purchase.findOneAndUpdate(
     {
-      _id: id,
+      purchaseId: id,
     },
     { shippingStatus: status },
     { new: true },
