@@ -7,9 +7,13 @@ const router = Router();
 
 router.post('/cart', authMiddleware, cleanBody, cartController.createCart);
 
-router.get('/cart/all', authMiddleware, adminCheck, cartController.getAll);
+router.get('/cart', authMiddleware, adminCheck, cartController.getAll);
 
-router.delete('/cart/:cartId', authMiddleware, cartController.deleteCart);
+router.delete(
+  '/cart/:cartId',
+  authMiddleware,
+  cartController.deleteCart,
+);
 
 router.get('/cart/:userId', authMiddleware, cartController.getUserCart);
 

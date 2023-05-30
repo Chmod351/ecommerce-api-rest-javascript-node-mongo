@@ -1,4 +1,6 @@
 import cartService from '../View/shopingCartView.js';
+import isResourceOwner from '../helpers/isOwner.js';
+import Cart from '../Models/shopinCartModel.js';
 
 const cartController = {
   createCart,
@@ -36,21 +38,23 @@ function createCart(req, res, next) {
 }
 
 function editCart(req, res, next) {
-  if (req.user.id === req.body.userId) {
+  const isOwner = isResourceOwner(Cart, req.params.cartId);
+  if (isOwner) {
     cartService
-      .editCart(req.body, req.params.id)
+      .editCart(req.body, req.params.cartId)
       .then((cart) => res.json(cart))
       .catch((error) => next(error));
-  } else {
-    res.status(401).json({ message: 'Unauthorized' });
   }
 }
 
 function deleteCart(req, res, next) {
-  cartService
-    .deleteCart(req.params.id)
-    .then((cart) => res.json(cart))
-    .catch((error) => next(error));
+  const isOwner = isResourceOwner(Cart, req.params.cartId);
+  if (isOwner) {
+    cartService
+      .deleteCart(req.params.id)
+      .then((cart) => res.json(cart))
+      .catch((error) => next(error));
+  }
 }
 
 function getUserCart(req, res, next) {
