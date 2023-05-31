@@ -1,4 +1,6 @@
 import responsesActions from '../View/responsesView.js';
+import Response from '../Models/responsesModel.js';
+import isResourceOwner from '../helpers/isOwner.js';
 
 const responseControllers = {
   createResponse,
@@ -14,9 +16,10 @@ function createResponse(req, res, next) {
 }
 
 function deleteResponse(req, res, next) {
-  if (req.user.id === response.userId || req.user.isAdmin) {
+  const isOwner = isResourceOwner(Response, req.params.responseId, req.user.id);
+  if (isOwner) {
     responsesActions
-      .deleteResponse(req.params.id)
+      .deleteResponse(req.params.responseId)
       .then((response) => res.json(response))
       .catch((error) => next(error));
   } else {

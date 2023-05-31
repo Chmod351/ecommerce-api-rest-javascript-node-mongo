@@ -1,5 +1,6 @@
 import commentService from '../View/commentView.js';
-
+import Comment from '../Models/commentModel.js';
+import isResourceOwner from '../helpers/isOwner.js';
 const commentController = {
   createComment,
   deleteComment,
@@ -14,7 +15,8 @@ function createComment(req, res, next) {
 }
 
 function deleteComment(req, res, next) {
-  if (req.user.id === comment.userId || req.user.isAdmin) {
+  const isOwner = isResourceOwner(Comment, req.params.commentId, req.user.id);
+  if (isOwner) {
     commentService
       .deleteComment(req.params.id)
       .then((comment) => res.json(comment))
