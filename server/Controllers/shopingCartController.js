@@ -4,10 +4,10 @@ import Cart from '../Models/shopinCartModel.js';
 
 const cartController = {
   createCart,
-  editCart,
-  deleteCart,
   getUserCart,
   getAll,
+  editCart,
+  deleteCart,
 };
 
 function createCart(req, res, next) {
@@ -37,31 +37,16 @@ function createCart(req, res, next) {
     .catch((error) => next(error));
 }
 
-function editCart(req, res, next) {
-  const isOwner = isResourceOwner(Cart, req.params.cartId);
-  if (isOwner) {
-    cartService
-      .editCart(req.body, req.params.cartId)
-      .then((cart) => res.json(cart))
-      .catch((error) => next(error));
-  }
-}
-
-function deleteCart(req, res, next) {
-  const isOwner = isResourceOwner(Cart, req.params.cartId);
-  if (isOwner) {
-    cartService
-      .deleteCart(req.params.id)
-      .then((cart) => res.json(cart))
-      .catch((error) => next(error));
-  }
-}
-
 function getUserCart(req, res, next) {
-  cartService
-    .getUserCart(req.params.userId)
-    .then((cart) => res.json(cart))
-    .catch((error) => next(error));
+  const isOwner = isResourceOwner(Cart, req.params.userId, req.user.id);
+  if (isOwner === true) {
+    cartService
+      .getUserCart(req.params.userId)
+      .then((cart) => res.json(cart))
+      .catch((error) => next(error));
+  } else {
+    res.status(401).json({ message: 'Unauthorized' });
+  }
 }
 
 function getAll(req, res, next) {
@@ -69,6 +54,29 @@ function getAll(req, res, next) {
     .getAll()
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
+}
+function editCart(req, res, next) {
+  const isOwner = isResourceOwner(Cart, req.params.cartId, req.params.userId);
+  if (isOwner === true) {
+    cartService
+      .editCart(req.body, req.params.cartId)
+      .then((cart) => res.json(cart))
+      .catch((error) => next(error));
+  } else {
+    res.status(401).json({ message: 'Unauthorized' });
+  }
+}
+
+function deleteCart(req, res, next) {
+  const isOwner = isResourceOwner(Cart, req.params.cartId, req.params.userId);
+  if (isOwner === true) {
+    cartService
+      .deleteCart(req.params.cartId)
+      .then((cart) => res.json(cart))
+      .catch((error) => next(error));
+  } else {
+    res.status(401).json({ message: 'Unauthorized' });
+  }
 }
 
 export default cartController;

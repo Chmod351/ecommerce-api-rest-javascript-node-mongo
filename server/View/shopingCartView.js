@@ -13,6 +13,14 @@ async function createCart(body, userId) {
   return await newCart.save();
 }
 
+async function getUserCart(userId) {
+  return await ShoppingCart.findOne({ userId });
+}
+
+async function getAll() {
+  return await ShoppingCart.find();
+}
+
 async function editCart(body, cartId) {
   return await ShoppingCart.findByIdAndUpdate(
     cartId,
@@ -25,14 +33,6 @@ async function editCart(body, cartId) {
 
 async function deleteCart(cartId) {
   return await ShoppingCart.findByIdAndDelete(cartId);
-}
-
-async function getUserCart(userId) {
-  return await ShoppingCart.findOne({ userId });
-}
-
-async function getAll() {
-  return await ShoppingCart.find();
 }
 
 export default cartService;

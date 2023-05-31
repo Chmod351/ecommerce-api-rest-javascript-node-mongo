@@ -1,11 +1,11 @@
-function isResourceOwner(resourceModel, paramName) {
-  return async function (req, res, next) {
-    const resource = await resourceModel.findById(req.params[paramName]);
-    if (resource && resource.userId === req.user.id) {
-      next();
-    } else {
-      res.status(401).json({ message: 'Unauthorized' });
-    }
-  };
+async function isResourceOwner(resourceModel, paramName, requestUser) {
+  const resource = await resourceModel.findById(paramName);
+  if (resource && resource.userId === requestUser) {
+    console.log(true);
+    return true;
+  } else {
+    console.log(false);
+    return false;
+  }
 }
 export default isResourceOwner;
