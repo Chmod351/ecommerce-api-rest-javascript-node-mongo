@@ -7,6 +7,7 @@ const commentService = {
 };
 
 async function getAllComment(page, size) {
+  //pagination for comments instead get all comments
   const pageNumber = parseInt(page) || 1;
   const pageSize = parseInt(size) || 10;
   const skipCount = (pageNumber - 1) * pageSize;

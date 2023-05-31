@@ -7,6 +7,7 @@ const responseService = {
 };
 
 async function getAllResponse(page, size) {
+  // create pagination instead get all responses
   const pageNumber = parseInt(page) || 1;
   const pageSize = parseInt(size) || 10;
   const skipCount = (pageNumber - 1) * pageSize;

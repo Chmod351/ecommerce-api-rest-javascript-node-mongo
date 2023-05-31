@@ -48,8 +48,8 @@ async function signIn(user) {
 
 async function signUp(user) {
   const allowedFields = ['email', 'password', 'username'];
-  //check if user contains allowedFields
-  const filteredUser = Object.keys(user)
+
+  const filteredUser = Object.keys(user) //check if user contains allowedFields
     .filter((key) => allowedFields.includes(key))
     .reduce((obj, key) => {
       obj[key] = user[key];
@@ -77,6 +77,7 @@ async function getUser(userId) {
 }
 
 async function getUserStat() {
+  // get the last users created in the last year
   const date = new Date();
   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
   const data = await User.aggregate([

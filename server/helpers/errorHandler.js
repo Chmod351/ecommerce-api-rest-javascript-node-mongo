@@ -5,8 +5,10 @@ function errorHandler(error, req, res, next) {
     res.status(401).json({ error: 'Wrong Credentials' });
   } else if (error.message === 'unauthorized') {
     res.status(403).json({ error: 'Unauthorized' });
-  } else if (error.message == 'not found') {
+  } else if (error.message === 'not found') {
     res.status(404).json({ error: 'Not Found' });
+  } else if (error.message === 'stripe went wrong') {
+    res.status(500).json({ error: 'Payment went wrong' });
   } else {
     next(error);
   }

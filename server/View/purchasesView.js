@@ -25,6 +25,7 @@ async function createPurchase(userId, product, paymentMethod, shippingAddress) {
 }
 
 async function getAllPurchase(page, size) {
+  // get a pagination with purchases instead all purchases
   const pageNumber = parseInt(page) || 1;
   const pageSize = parseInt(size) || 10;
   const skipCount = (pageNumber - 1) * pageSize;
@@ -36,6 +37,7 @@ async function getUserPurchase(id) {
 }
 
 async function getMonthly() {
+  //show the last 2 months sales
   const date = new Date();
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
   const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
@@ -73,6 +75,7 @@ async function updatePurchaseState(id, status) {
   return newStatus;
 }
 
+//stripe integration
 async function createPayment(tokenId, amount) {
   stripe.charges.create(
     {
@@ -82,7 +85,7 @@ async function createPayment(tokenId, amount) {
     },
     (stripeErr, stripeRes) => {
       if (stripeErr) {
-        new Error('500');
+        new Error('stripe went wrong');
       } else {
         return stripeRes;
       }

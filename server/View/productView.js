@@ -12,6 +12,7 @@ const productService = {
 };
 
 function isValidObjectId(id) {
+  // check if the id is in a valid format
   if (mongoose.Types.ObjectId.isValid(id)) {
     if (String(new mongoose.Types.ObjectId(id)) === id) return true;
     return false;
@@ -29,6 +30,7 @@ async function getProductById(productId) {
 }
 
 async function getProduct(page, size) {
+  // pagination for products
   const actualPage = parseInt(page) || 1;
   const pageSize = parseInt(pageSize) || 10;
   const skipCount = (actualPage - 1) * size;
@@ -55,7 +57,6 @@ async function createProduct(name, img, price, description, tags, hot) {
 async function searchProduct(query) {
   const product = await Product.find({
     name: { $regex: query, $options: 'i' },
-    tags: { $regex: query, $options: 'i' },
   }).limit(40);
   return product;
 }
