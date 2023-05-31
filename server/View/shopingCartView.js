@@ -13,12 +13,13 @@ async function createCart(body, userId) {
   return await newCart.save();
 }
 
-async function getUserCart(userId) {
-  return await ShoppingCart.findOne({ userId });
-}
-
 async function getAll() {
   return await ShoppingCart.find();
+}
+
+
+async function getUserCart(userId) {
+  return await ShoppingCart.findOne({ userId });
 }
 
 async function editCart(body, cartId) {

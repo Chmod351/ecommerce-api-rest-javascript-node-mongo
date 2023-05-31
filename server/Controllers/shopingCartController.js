@@ -37,6 +37,13 @@ function createCart(req, res, next) {
     .catch((error) => next(error));
 }
 
+function getAll(req, res, next) {
+  cartService
+    .getAll()
+    .then((cart) => res.json(cart))
+    .catch((error) => next(error));
+}
+
 function getUserCart(req, res, next) {
   const isOwner = isResourceOwner(Cart, req.params.userId, req.user.id);
   if (isOwner === true) {
@@ -49,12 +56,6 @@ function getUserCart(req, res, next) {
   }
 }
 
-function getAll(req, res, next) {
-  cartService
-    .getAll()
-    .then((cart) => res.json(cart))
-    .catch((error) => next(error));
-}
 function editCart(req, res, next) {
   const isOwner = isResourceOwner(Cart, req.params.cartId, req.params.userId);
   if (isOwner === true) {
