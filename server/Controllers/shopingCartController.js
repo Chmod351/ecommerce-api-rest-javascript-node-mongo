@@ -44,9 +44,9 @@ function getAll(req, res, next) {
     .catch((error) => next(error));
 }
 
-function getUserCart(req, res, next) {
-  const isOwner = isResourceOwner(Cart, req.params.userId, req.user.id);
-  if (isOwner === true) {
+async function getUserCart(req, res, next) {
+  const isOwner =await isResourceOwner(Cart, req.params.userId, req.user.id);
+  if (isOwner) {
     cartService
       .getUserCart(req.params.userId)
       .then((cart) => res.json(cart))
@@ -56,9 +56,9 @@ function getUserCart(req, res, next) {
   }
 }
 
-function editCart(req, res, next) {
-  const isOwner = isResourceOwner(Cart, req.params.cartId, req.params.userId);
-  if (isOwner === true) {
+async function editCart(req, res, next) {
+  const isOwner =await isResourceOwner(Cart, req.params.cartId, req.params.userId);
+  if (isOwner) {
     cartService
       .editCart(req.body, req.params.cartId)
       .then((cart) => res.json(cart))
@@ -68,9 +68,9 @@ function editCart(req, res, next) {
   }
 }
 
-function deleteCart(req, res, next) {
-  const isOwner = isResourceOwner(Cart, req.params.cartId, req.params.userId);
-  if (isOwner === true) {
+async function deleteCart(req, res, next) {
+  const isOwner = await isResourceOwner(Cart, req.params.cartId, req.user.id);
+  if (isOwner) {
     cartService
       .deleteCart(req.params.cartId)
       .then((cart) => res.json(cart))
