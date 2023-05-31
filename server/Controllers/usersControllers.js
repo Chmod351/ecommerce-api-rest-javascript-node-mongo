@@ -40,7 +40,7 @@ function getStat(req, res, next) {
 
 function getUser(req, res, next) {
   userService
-    .getUser(req.params.id)
+    .getUser(req.params.userId)
     .then((user) => res.json(user))
     .catch((error) => next(error));
 }

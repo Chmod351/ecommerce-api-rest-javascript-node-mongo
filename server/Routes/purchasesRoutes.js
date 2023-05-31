@@ -1,47 +1,43 @@
-import { Router } from "express";
-import purchaseController from "../Controllers/purchasesController.js";
-import authMiddleware from "../helpers/jwt.js";
-import adminCheck from "../helpers/adminCheck.js";
+import { Router } from 'express';
+import purchaseController from '../Controllers/purchasesController.js';
+import authMiddleware from '../helpers/jwt.js';
+import adminCheck from '../helpers/adminCheck.js';
 const router = Router();
 
-router.post(
-  "/purchase",
-  authMiddleware,
-  purchaseController.createPurchase
-);
+router.post('/purchase', authMiddleware, purchaseController.createPurchase);
 
 router.get(
-  "/purchase/:userId/purchases",
-  authMiddleware,
-  purchaseController.getUserPurchase
-);
-
-router.get(
-  "/purchase",
+  '/purchase',
   authMiddleware,
   adminCheck,
-  purchaseController.getAllPurchase
+  purchaseController.getAllPurchase,
+);
+
+router.get(
+  '/purchase/:userId',
+  authMiddleware,
+  purchaseController.getUserPurchase,
 );
 
 router.delete(
-  "/purchase/:purchaseId",
+  '/purchase/:purchaseId',
   authMiddleware,
-  purchaseController.cleanPurchase
+  purchaseController.cleanPurchase,
 );
 
 router.put(
-  "/purchase/:purchaseId/state",
+  '/purchase/:purchaseId',
   authMiddleware,
   adminCheck,
-  purchaseController.updatePurchaseState
+  purchaseController.updatePurchaseState,
 );
 
 router.get(
-  "/purchase/monthly",
+  '/purchase/monthly',
   authMiddleware,
   adminCheck,
-  purchaseController.getMonthly
+  purchaseController.getMonthly,
 );
 
-router.post("/purchase/paymanet", authMiddleware, purchaseController.payment)
+router.post('/purchase/paymanet', authMiddleware, purchaseController.payment);
 export default router;

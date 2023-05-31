@@ -1,8 +1,9 @@
 const logHeaders = (req, res, next) => {
-  res.on("finish", () => {
-    console.log("Headers sent:", res.getHeaders());
+  res.on('finish', () => {
+    console.log('Headers sent:', res.getHeaders());
   });
   next();
 };
 
-export default logHeaders
+
+export default logHeaders;

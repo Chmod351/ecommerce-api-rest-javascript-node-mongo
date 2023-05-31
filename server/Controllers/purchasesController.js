@@ -61,7 +61,7 @@ function updatePurchaseState(req, res, next) {
 
 function payment(req, res, next) {
   purchaseService
-    .createPayment(req.body.tokenId, req.body.amount)
+    .processPayment(req.body.tokenId, req.body.amount)
     .then((payment) => res.json(payment))
     .catch((error) => next(error));
 }

@@ -1,8 +1,6 @@
 import Purchase from '../Models/purchasesModel.js';
-import dotenv from 'dotenv';
-dotenv.config();
-import stripe from 'stripe';
-process.env.STRIPE_TOKEN;
+import StripePaymentProvider from '../helpers/stripe.js';
+const paymentProvider = new StripePaymentProvider();
 
 const purchaseService = {
   createPurchase,
@@ -11,7 +9,7 @@ const purchaseService = {
   cleanPurchase,
   updatePurchaseState,
   getAllPurchase,
-  createPayment,
+  processPayment,
 };
 
 async function createPurchase(userId, product, paymentMethod, shippingAddress) {
@@ -76,21 +74,13 @@ async function updatePurchaseState(id, status) {
 }
 
 //stripe integration
-async function createPayment(tokenId, amount) {
-  stripe.charges.create(
-    {
-      source: tokenId,
-      amount: amount,
-      currency: 'usd',
-    },
-    (stripeErr, stripeRes) => {
-      if (stripeErr) {
-        new Error('stripe went wrong');
-      } else {
-        return stripeRes;
-      }
-    },
-  );
+async function processPayment(tokenId, amount) {
+  try {
+    const paymentResult = await paymentProvider.createPayment(tokenId, amount);
+    return paymentResult;
+  } catch (error) {
+    return error.message;
+  }
 }
 
 export default purchaseService;

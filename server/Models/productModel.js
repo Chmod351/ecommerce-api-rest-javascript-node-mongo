@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const ProductSchema = new mongoose.Schema(
   {
-price: {
+    price: {
       type: Number,
       required: true,
     },
@@ -10,6 +10,7 @@ price: {
       type: String,
       maxLength: 20,
       required: true,
+      unique: true,
     },
     description: {
       type: String,

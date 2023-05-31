@@ -1,6 +1,8 @@
 import commentService from '../View/commentView.js';
+// function to check ownership
 import Comment from '../Models/commentModel.js';
 import isResourceOwner from '../helpers/isOwner.js';
+
 const commentController = {
   createComment,
   deleteComment,
