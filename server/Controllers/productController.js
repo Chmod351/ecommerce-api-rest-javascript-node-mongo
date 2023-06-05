@@ -22,7 +22,8 @@ function getProduct(req, res, next) {
     .getProduct(req.query.page, req.query.size)
     .then((product) => res.json(product))
     .catch((error) => next(error));
-}
+} 
+
 function getProductByTag(req, res, next) {
   const category = req.query.tag.split(',');
   productService
