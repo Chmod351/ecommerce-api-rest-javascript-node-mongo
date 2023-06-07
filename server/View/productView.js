@@ -32,7 +32,7 @@ async function getProductById(productId) {
 async function getProduct(page, size) {
   // pagination for products
   const actualPage = parseInt(page) || 1;
-  const pageSize = parseInt(pageSize) || 10;
+  const pageSize = parseInt(size) || 10;
   const skipCount = (actualPage - 1) * size;
   return await Product.find().skip(skipCount).limit(pageSize);
 }

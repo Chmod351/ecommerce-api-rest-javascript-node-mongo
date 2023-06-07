@@ -8,13 +8,14 @@ const usersController = {
 };
 
 function signIn(req, res, next) {
+  console.log(req.body);
   userService
     .signIn(req.body)
     .then(({ user, sendToken }) => {
       if (user) {
         res.cookie('token', sendToken, {
-          httpOnly: true,
-          secure: true,
+          httpOnly: false,
+          secure: false,
         });
         res.json(user);
       } else {

@@ -30,7 +30,7 @@ const ProductSchema = new mongoose.Schema(
       type: [
         {
           type: String,
-          enum: ['escuela', 'elegante', 'deportivo', 'casual', 'formal'],
+          enum: ['women', 'men', 'sport', 'casual', 'formal'],
         },
       ],
     },
