@@ -42,13 +42,24 @@ async function getProductByTag(category) {
   return product;
 }
 
-async function createProduct(name, img, price, description, tags, hot) {
+async function createProduct(
+  name,
+  img,
+  price,
+  description,
+  tags,
+  color,
+  size,
+  hot,
+) {
   const newProduct = new Product({
     name,
-    img,
+    imgUrl: img,
     price,
     description,
     tags,
+    color,
+    size,
     hot,
   });
   return await newProduct.save();

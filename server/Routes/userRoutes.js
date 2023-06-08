@@ -6,6 +6,7 @@ import authMiddleware from '../helpers/jwt.js';
 const router = Router();
 
 router.post('/signin', cleanBody, usersController.signIn);
+router.post('/auth/login', cleanBody, usersController.signIn);
 
 router.post('/signup', cleanBody, usersController.signUp);
 

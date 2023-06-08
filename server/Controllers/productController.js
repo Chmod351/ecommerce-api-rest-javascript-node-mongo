@@ -22,10 +22,11 @@ function getProduct(req, res, next) {
     .getProduct(req.query.page, req.query.size)
     .then((product) => res.json(product))
     .catch((error) => next(error));
-} 
+}
 
 function getProductByTag(req, res, next) {
   const category = req.query.tag.split(',');
+  console.log(category);
   productService
     .getProductByTag(category)
     .then((products) => res.json(products))
@@ -40,6 +41,8 @@ function createProduct(req, res, next) {
       req.body.price,
       req.body.description,
       req.body.tags,
+      req.body.color,
+      req.body.size,
       req.body.hot,
     )
     .then((product) => res.json(product))
