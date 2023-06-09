@@ -42,9 +42,18 @@ async function getProduct(page, size) {
   return { products, totalPages };
 }
 
-async function getProductByTag(category) {
-  const product = await Product.find({ tags: { $all: category } }).limit(20);
-  return product;
+async function getProductByTag(category, page, size) {
+  const actualPage = parseInt(page) || 1;
+  const pageSize = parseInt(size) || 8;
+  const skipCount = (actualPage - 1) * pageSize;
+  const products = await Product.find({ tags: { $all: category } })
+    .skip(skipCount)
+    .limit(pageSize);
+
+  const totalCount = await Product.countDocuments();
+  const totalPages = Math.ceil(totalCount / pageSize);
+
+  return { products, totalPages };
 }
 
 async function createProduct(
