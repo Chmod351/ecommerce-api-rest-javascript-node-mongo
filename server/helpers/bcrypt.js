@@ -12,5 +12,4 @@ class Encrypt {
     return matchPassword;
   }
 }
-
 export default Encrypt;
