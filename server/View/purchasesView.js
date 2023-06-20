@@ -10,6 +10,7 @@ const purchaseService = {
   updatePurchaseState,
   getAllPurchase,
   processPayment,
+  order
 };
 
 async function createPurchase(userId, product, paymentMethod, shippingAddress) {
@@ -68,9 +69,18 @@ async function updatePurchaseState(id, status) {
       purchaseId: id,
     },
     { shippingStatus: status },
-    { new: true },
+    { new: true }
   );
   return newStatus;
+}
+
+async function order(body) {
+  const newOrder = new Purchase({ userId,
+    products,
+    amount,
+    shippingAddress
+});
+  return await newOrder.save();
 }
 
 //stripe integration

@@ -20,14 +20,9 @@ const PurchaseSchema = new mongoose.Schema(
         },
       },
     ],
-    paymentMethod: {
-      type: String,
-      require: true,
-      maxLength: 200,
-      minlength: 5,
-    },
+    amount: { type: Number, required: true },
     shippingAddress: {
-      type: String,
+      type: Object,
       required: true,
       maxLength: 100,
       minlength: 50,
@@ -42,6 +37,6 @@ const PurchaseSchema = new mongoose.Schema(
       default: 'pendiente',
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 export default mongoose.model('Purchase', PurchaseSchema);

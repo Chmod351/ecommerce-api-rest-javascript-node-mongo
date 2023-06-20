@@ -10,34 +10,35 @@ router.get(
   '/purchase',
   authMiddleware,
   adminCheck,
-  purchaseController.getAllPurchase,
+  purchaseController.getAllPurchase
 );
 
 router.get(
   '/purchase/:userId',
   authMiddleware,
-  purchaseController.getUserPurchase,
+  purchaseController.getUserPurchase
 );
 
 router.delete(
   '/purchase/:purchaseId',
   authMiddleware,
-  purchaseController.cleanPurchase,
+  purchaseController.cleanPurchase
 );
 
 router.put(
   '/purchase/:purchaseId',
   authMiddleware,
   adminCheck,
-  purchaseController.updatePurchaseState,
+  purchaseController.updatePurchaseState
 );
 
 router.get(
   '/purchase/monthly',
   authMiddleware,
   adminCheck,
-  purchaseController.getMonthly,
+  purchaseController.getMonthly
 );
 
-router.post('/purchase/paymanet', authMiddleware, purchaseController.payment);
+router.post('/purchase/payment', authMiddleware, purchaseController.payment);
+router.post('/purchase/order', authMiddleware, purchaseController.order);
 export default router;
