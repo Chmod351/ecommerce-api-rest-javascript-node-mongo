@@ -46,19 +46,18 @@ function getAll(req, res, next) {
 }
 
 async function getUserCart(req, res, next) {
-  const isOwner =await isResourceOwner(Cart, req.params.userId, req.user.id);
-  if (isOwner) {
-    cartService
-      .getUserCart(req.params.userId)
-      .then((cart) => res.json(cart))
-      .catch((error) => next(error));
-  } else {
-    res.status(401).json({ message: 'Unauthorized' });
-  }
+  cartService
+    .getUserCart(req.params.userId)
+    .then((cart) => res.json(cart))
+    .catch((error) => next(error));
 }
 
 async function editCart(req, res, next) {
-  const isOwner =await isResourceOwner(Cart, req.params.cartId, req.params.userId);
+  const isOwner = await isResourceOwner(
+    Cart,
+    req.params.cartId,
+    req.params.userId,
+  );
   if (isOwner) {
     cartService
       .editCart(req.body, req.params.cartId)
