@@ -8,15 +8,14 @@ const cartService = {
   getAll,
 };
 
-async function createCart(body, userId) {
-  const newCart = new ShoppingCart({ ...body, userId: userId });
+async function createCart(products, userId) {
+  const newCart = new ShoppingCart({ products, userId });
   return await newCart.save();
 }
 
 async function getAll() {
   return await ShoppingCart.find();
 }
-
 
 async function getUserCart(userId) {
   return await ShoppingCart.findOne({ userId });

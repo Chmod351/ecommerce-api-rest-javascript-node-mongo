@@ -7,19 +7,11 @@ const PurchaseSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
-    products: [
-      {
-        productId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'Product',
-          required: true,
-        },
-        quantity: {
-          type: Number,
-          default: 1,
-        },
-      },
-    ],
+    cartId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Cart',
+      required: true,
+    },
     amount: { type: Number, required: true },
     shippingAddress: {
       type: Object,
@@ -37,6 +29,6 @@ const PurchaseSchema = new mongoose.Schema(
       default: 'pendiente',
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 export default mongoose.model('Purchase', PurchaseSchema);

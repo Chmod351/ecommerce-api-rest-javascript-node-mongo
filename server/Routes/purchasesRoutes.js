@@ -40,5 +40,5 @@ router.get(
 );
 
 router.post('/purchase/payment', authMiddleware, purchaseController.payment);
-router.post('/purchase/order', authMiddleware, purchaseController.order);
+router.post('/purchase/order', authMiddleware, purchaseController.createPurchase);
 export default router;

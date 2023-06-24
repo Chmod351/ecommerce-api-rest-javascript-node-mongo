@@ -12,28 +12,8 @@ const cartController = {
 };
 
 function createCart(req, res, next) {
-  if (
-    !req.body.products ||
-    !Array.isArray(req.body.products) ||
-    req.body.products.length === 0
-  ) {
-    return res
-      .status(400)
-      .json({ message: 'Missing or invalid products field' });
-  }
-
-  const hasInvalidProduct = req.body.products.some(
-    (product) => !product.productId || !product.quantity,
-  );
-
-  if (hasInvalidProduct) {
-    return res
-      .status(400)
-      .json({ message: 'Missing required field in one of the products' });
-  }
-
   cartService
-    .createCart(req.body, req.user.id)
+    .createCart(req.body.products, req.user.id)
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
