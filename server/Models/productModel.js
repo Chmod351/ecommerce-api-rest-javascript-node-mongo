@@ -8,7 +8,7 @@ const ProductSchema = new mongoose.Schema(
     },
     name: {
       type: String,
-      maxLength: 20,
+      maxLength: 150,
       required: true,
       unique: true,
     },
@@ -30,7 +30,7 @@ const ProductSchema = new mongoose.Schema(
       type: [
         {
           type: String,
-          enum: ['coat', 'jacket', 'shirt'],
+          enum: ['coats', 'jackets', 'shirts'],
         },
       ],
     },
