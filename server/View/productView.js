@@ -30,14 +30,19 @@ async function getProductById(productId) {
 }
 
 async function getProduct(page, size) {
-  // pagination for products
+  // Pagination for products
   const actualPage = parseInt(page) || 1;
   const pageSize = parseInt(size) || 8;
   const skipCount = (actualPage - 1) * pageSize;
-  const products = await Product.find().skip(skipCount).limit(pageSize);
 
   const totalCount = await Product.countDocuments();
   const totalPages = Math.ceil(totalCount / pageSize);
+
+  const products = await Product.aggregate([
+    { $sample: { size: totalCount } },
+    { $skip: skipCount },
+    { $limit: pageSize },
+  ]);
 
   return { products, totalPages };
 }

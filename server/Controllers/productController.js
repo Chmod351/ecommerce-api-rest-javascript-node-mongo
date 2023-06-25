@@ -26,7 +26,6 @@ function getProduct(req, res, next) {
 
 function getProductByTag(req, res, next) {
   const category = req.query.tag.split(',');
-  console.log(category);
   productService
     .getProductByTag(category, req.query.page, req.query.size)
     .then((products) => res.json(products))

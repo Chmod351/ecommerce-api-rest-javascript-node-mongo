@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import cartController from '../Controllers/shopingCartController.js';
 import authMiddleware from '../helpers/jwt.js';
-import cleanBody from '../helpers/sanitizer.js';
 import adminCheck from '../helpers/adminCheck.js';
+import { cleanBody } from '../helpers/sanitizer.js';
 const router = Router();
 
 router.post('/cart', authMiddleware, cleanBody, cartController.createCart);
