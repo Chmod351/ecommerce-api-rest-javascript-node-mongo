@@ -1,5 +1,6 @@
 import Product from '../Models/productModel.js';
 import mongoose from 'mongoose';
+import { NotFoundError } from '../helpers/errorHandler.js';
 
 const productService = {
   getProduct,
@@ -25,7 +26,7 @@ async function getProductById(productId) {
     const product = await Product.findById(productId);
     return product;
   } else {
-    throw new Error('not found');
+    throw new NotFoundError('Product Not found');
   }
 }
 

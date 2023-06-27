@@ -1,16 +1,45 @@
-function errorHandler(error, req, res, next) {
-  if (error.message === 'bad request') {
-    res.status(400).json({ error: 'Bad Request' });
-  } else if (error.message === 'wrong credentials') {
-    res.status(401).json({ error: 'Wrong Credentials' });
-  } else if (error.message === 'unauthorized') {
-    res.status(403).json({ error: 'Unauthorized' });
-  } else if (error.message === 'not found') {
-    res.status(404).json({ error: 'Not Found' });
-  } else if (error.message === 'stripe went wrong') {
-    res.status(500).json({ error: 'Payment went wrong' });
-  } else {
-    next(error);
+class NotFoundError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'NotFoundError';
+    this.statusCode = 404;
   }
 }
-export default errorHandler;
+
+class AuthenticationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'AuthenticationError';
+    this.statusCode = 401;
+  }
+}
+
+class UnauthorizedError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'UnauthorizedError';
+    this.statusCode = 403;
+  }
+}
+class BadRequestError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'BadRequestError';
+    this.statusCode = 400;
+  }
+}
+
+function errorHandler(error, req, res, next) {
+  if (error.statusCode) {
+    res.status(error.statusCode).json({ error: error.message });
+  } else {
+    res.status(500).json({ error: error.message });
+  }
+}
+export {
+  errorHandler,
+  UnauthorizedError,
+  BadRequestError,
+  AuthenticationError,
+  NotFoundError,
+};

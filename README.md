@@ -9,9 +9,11 @@
 This project is a web application developed using Node.js v16.20.1. It follows the Model-View-Controller (MVC) architectural pattern, providing a structured and modular approach to building web applications.
 
 # THIS DOCUMENTATION IS NOT FINISHED AT THE MOMENT
+
 ## Development Environment Setup
 
 To set up the development environment for this project, follow these steps:
+
 - [Docker File](https://hub.docker.com/repository/docker/clamshell6412/ecomerce_res_api/general) (production only)
 - Install Node.js v16.20.1 (or a compatible version) on your system.
 - Clone the project repository from [repository URL].
@@ -42,12 +44,12 @@ STRIPE_TOKEN=sk_text_z&&2DbCJa9d3gZkxFwJdE$&hHbRe47KHxAF%&N#qRVx*zVFG$W
 
 ### User
 
-| User Actions    | Routes                    | Required                  | Http Verb |
-| --------------- | ------------------------- | ------------------------- | --------- |
-| Sign In         | `/api/users/signIn`       | email, username, password | Post      |
-| Sign Up         | `/api/users/signUp`       | email, password           | Post      |
-| User Stats      | `/api/users/stats`        | must by Admin             | Get       |
-| Find user by Id | `/api/users/find/:userId` | userId                    | Get       |
+| User Actions    | Routes                    | Required                   | Http Verb |
+| --------------- | ------------------------- | -------------------------- | --------- |
+| Sign In         | `/api/users/signIn`       | email , password           | Post      |
+| Sign Up         | `/api/users/signUp`       | email, password , password | Post      |
+| User Stats      | `/api/users/stats`        | must by Admin              | Get       |
+| Find user by Id | `/api/users/find/:userId` | userId                     | Get       |
 
 [Postman Documentation]()
 

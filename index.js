@@ -7,7 +7,7 @@ import cart from './server/Routes/shoppingCartRoutes.js';
 import product from './server/Routes/productRoutes.js';
 import purchase from './server/Routes/purchasesRoutes.js';
 import comment from './server/Routes/commentsRoutes.js';
-import errorHandler from './server/helpers/errorHandler.js';
+import { errorHandler } from './server/helpers/errorHandler.js';
 
 //config
 

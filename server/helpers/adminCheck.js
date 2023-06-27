@@ -1,11 +1,12 @@
 import User from '../Models/userModel.js';
+import { UnauthorizedError } from './errorHandler.js';
 
 async function adminCheck(req, res, next) {
   const user = await User.findById(req.user.id);
   if (user.isAdmin) {
     next();
   } else {
-    next(new Error('unauthorized'));
+    next(new UnauthorizedError('You are Unauthorized'));
   }
 }
 

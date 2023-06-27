@@ -2,6 +2,11 @@ import Encrypt from '../helpers/bcrypt.js';
 import User from '../Models/userModel.js';
 import { JWT_TOKEN } from '../../index.js';
 import Token from '../helpers/token.js';
+import {
+  BadRequestError,
+  NotFoundError,
+  UnauthorizedError,
+} from '../helpers/errorHandler.js';
 
 //config
 const userService = {
@@ -35,7 +40,7 @@ async function signIn(user) {
       existingUser.password,
     );
     if (!isPasswordMatch) {
-      throw new Error('wrong credentials');
+      throw new UnauthorizedError('wrong credentials');
     } else {
       const userId = existingUser._id.toString();
       const token = await jwt.generateToken(userId, JWT_TOKEN, {
@@ -43,6 +48,14 @@ async function signIn(user) {
       });
       return { user: existingUser, sendToken: token };
     }
+  }
+}
+
+async function checkLength(item, num) {
+  if (item.lenght >= num) {
+    return true;
+  } else {
+    throw new BadRequestError(`the minimum allowed is ${num}`);
   }
 }
 
@@ -57,13 +70,14 @@ async function signUp(user) {
     }, {});
 
   const registeredUser = await findByEmail(filteredUser.email);
-  if (!registeredUser) {
+  const validatePass = await checkLength(filteredUser.password, 8);
+  if (!registeredUser && validatePass) {
     const encryptPassword = await encrypt.hashPassword(filteredUser.password);
     const createUser = new User({ ...filteredUser, password: encryptPassword });
     const newUser = await createUser.save();
     return newUser;
   } else {
-    throw new Error('bad request');
+    throw new BadRequestError('email already in use');
   }
 }
 
@@ -72,7 +86,7 @@ async function getUser(userId) {
   if (user) {
     return user;
   } else {
-    throw new Error('not found');
+    throw new NotFoundError('User Not found');
   }
 }
 
