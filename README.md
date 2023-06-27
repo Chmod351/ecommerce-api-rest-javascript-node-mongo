@@ -1,9 +1,9 @@
 # INDEX
 
 - [About this project](#About-this-project)
-- [Project Structure](#Project-Structure])
-- [Development Environment Setup](#Development-Environment-Setup]])
-- [Available Endpoints](#Available-Endpoints])
+- [Project Structure](#Project-Structure)
+- [Development Environment Setup](#Development-Environment-Setup)
+- [Available Endpoints](#Available-Endpoints)
 
 ## About this project
 
