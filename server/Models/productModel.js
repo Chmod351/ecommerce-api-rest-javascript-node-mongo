@@ -17,14 +17,17 @@ const ProductSchema = new mongoose.Schema(
       maxLength: 400,
       required: true,
     },
-    size:{
-    type:Array
+    size: {
+      type: Array,
+      required: true,
     },
-    color:{
-      type:Array
+    color: {
+      type: Array,
+      required: true,
     },
     imgUrl: {
       type: String,
+      required: true,
     },
     tags: {
       type: [

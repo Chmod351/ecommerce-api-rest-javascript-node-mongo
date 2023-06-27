@@ -52,10 +52,12 @@ async function signIn(user) {
 }
 
 async function checkLength(item, num) {
-  if (item.lenght >= num) {
+if (item.length >= num) {
     return true;
   } else {
-    throw new BadRequestError(`the minimum allowed is ${num}`);
+    throw new BadRequestError(
+      `${item}is too short, the minimum allowed is ${num}`,
+    );
   }
 }
 
