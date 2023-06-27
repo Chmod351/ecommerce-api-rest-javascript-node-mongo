@@ -11,7 +11,7 @@ router.post(
   responseControllers.createResponse,
 );
 router.delete(
-  '/responses/delete',
+'/responses/delete/:responsesId',
   authMiddleware,
   responseControllers.deleteResponse,
 );
