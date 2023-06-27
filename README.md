@@ -7,11 +7,11 @@
 
 ## About this project
 
-    This project is a web application developed using Node.js v16.20.1. It follows the Model-View-Controller (MVC) architectural pattern, providing a structured and modular approach to building web applications. The project utilizes various libraries and technologies to enable efficient development and implementation
+This project is a web application developed using Node.js v16.20.1. It follows the Model-View-Controller (MVC) architectural pattern, providing a structured and modular approach to building web applications. The project utilizes various libraries and technologies to enable efficient development and implementation
 
 # Project Structure
 
-    The project follows a well-organized structure to enhance maintainability and scalability. The main components and directories in the project are as follows:
+The project follows a well-organized structure to enhance maintainability and scalability. The main components and directories in the project are as follows:
 
 - Models: Contains the schema definitions for different data entities and handles interactions with the MongoDB database.
 - Controllers: Implements the application logic and handles the processing of HTTP requests, data validation, and business operations.
