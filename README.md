@@ -12,7 +12,7 @@ This project is a web application developed using Node.js v16.20.1. It follows t
 ## Development Environment Setup
 
 To set up the development environment for this project, follow these steps:
-
+- [Docker File](https://hub.docker.com/repository/docker/clamshell6412/ecomerce_res_api/general) (production only)
 - Install Node.js v16.20.1 (or a compatible version) on your system.
 - Clone the project repository from [repository URL].
 - Install project dependencies using npm or yarn. Run npm install or yarn install in the project root directory.
