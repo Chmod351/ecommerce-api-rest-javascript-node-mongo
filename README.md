@@ -6,7 +6,7 @@
 
 ## About this project
 
-This project is a web application developed using Node.js v16.20.1. It follows the Model-View-Controller (MVC) architectural pattern, providing a structured and modular approach to building web applications. The project utilizes various libraries and technologies to enable efficient development and implementation
+This project is a web application developed using Node.js v16.20.1. It follows the Model-View-Controller (MVC) architectural pattern, providing a structured and modular approach to building web applications.
 
 
 ## Development Environment Setup
