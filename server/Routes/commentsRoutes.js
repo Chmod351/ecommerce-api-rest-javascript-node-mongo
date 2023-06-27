@@ -5,12 +5,12 @@ import authMiddleware from '../helpers/jwt.js';
 const router = express.Router();
 
 router.post(
-  '/comment',
+  '/comments/create',
   authMiddleware,
   cleanBody,
   commentController.createComment,
 );
-router.delete('/comment', authMiddleware, commentController.deleteComment);
-router.get('/comment', authMiddleware, commentController.getAllComment);
+router.delete('/comments/delete', authMiddleware, commentController.deleteComment);
+router.get('/comments/getAll', authMiddleware, commentController.getAllComment);
 
 export default router;

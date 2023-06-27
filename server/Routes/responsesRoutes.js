@@ -5,12 +5,20 @@ import authMiddleware from '../helpers/jwt.js';
 const router = express.Router();
 
 router.post(
-  '/responses',
+  '/responses/create',
   authMiddleware,
   cleanBody,
   responseControllers.createResponse,
 );
-router.delete('/responses', authMiddleware, responseControllers.deleteResponse);
-router.get('/responses', authMiddleware, responseControllers.getAllResponse);
+router.delete(
+  '/responses/delete',
+  authMiddleware,
+  responseControllers.deleteResponse,
+);
+router.get(
+  '/responses/getAll',
+  authMiddleware,
+  responseControllers.getAllResponse,
+);
 
 export default router;

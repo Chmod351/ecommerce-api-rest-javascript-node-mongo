@@ -5,12 +5,12 @@ import authMiddleware from '../helpers/jwt.js';
 import {cleanBody} from '../helpers/sanitizer.js';
 const router = Router();
 
-router.post('/signin', cleanBody, usersController.signIn);
+router.post('/users/signin', cleanBody, usersController.signIn);
 
-router.post('/signup', cleanBody, usersController.signUp);
+router.post('/users/signup', cleanBody, usersController.signUp);
 
-router.get('/user/stat', authMiddleware, adminCheck, usersController.getStat);
+router.get('/users/stats', authMiddleware, adminCheck, usersController.getStat);
 
-router.get('/user/find/:userId', usersController.getUser);
+router.get('/users/find/:userId', usersController.getUser);
 
 export default router;
