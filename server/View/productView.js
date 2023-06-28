@@ -9,19 +9,23 @@ const productService = {
   createProduct,
   searchProduct,
   updateProduct,
-  hideProduct,
+  deleteProduct,
 };
 
 function isValidObjectId(id) {
   // check if the id is in a valid format
   if (mongoose.Types.ObjectId.isValid(id)) {
     if (String(new mongoose.Types.ObjectId(id)) === id) return true;
+    else {
+      return false;
+    }
+  } else {
     return false;
   }
-  return false;
 }
 
 async function getProductById(productId) {
+  console.log(productId);
   if (productId && isValidObjectId(productId)) {
     const product = await Product.findById(productId);
     return product;
@@ -115,13 +119,9 @@ async function updateProduct(productId, newPrice, hot, newDescription) {
   return result;
 }
 
-async function hideProduct(productId) {
+async function deleteProduct(productId) {
   await getProductById(productId);
-  return await Product.findOneAndUpdate(
-    { _id: productId },
-    { $set: { hide: true } },
-    { new: true },
-  );
+  return await Product.findOneAndDelete(productId);
 }
 
 export default productService;

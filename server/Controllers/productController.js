@@ -7,7 +7,7 @@ const productController = {
   createProduct,
   searchProduct,
   updateProduct,
-  hideProduct,
+  deleteProduct,
 };
 
 function getProductById(req, res, next) {
@@ -68,9 +68,9 @@ function updateProduct(req, res, next) {
     .catch((error) => next(error));
 }
 
-function hideProduct(req, res, next) {
+function deleteProduct(req, res, next) {
   productService
-    .updateProduct(req.params.id)
+    .deleteProduct(req.params.id)
     .then((product) => res.json(product))
     .catch((error) => next(error));
 }
