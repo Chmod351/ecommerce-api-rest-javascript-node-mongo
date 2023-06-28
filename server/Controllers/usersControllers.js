@@ -1,4 +1,4 @@
-import userService from '../View/usersViews.js';
+import userService from '../Service/usersService.js';
 
 const usersController = {
   signIn,

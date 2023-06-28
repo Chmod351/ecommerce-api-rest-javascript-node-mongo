@@ -1,4 +1,4 @@
-import responsesActions from '../View/responsesView.js';
+import responsesActions from '../Service/responsesService.js';
 import Response from '../Models/responsesModel.js';
 // function to check ownership
 import isResourceOwner from '../helpers/isOwner.js';

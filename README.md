@@ -8,7 +8,6 @@
 
 This project is a web application developed using Node.js v16.20.1. It follows the Model-View-Controller (MVC) architectural pattern, providing a structured and modular approach to building web applications.
 
-
 ## Development Environment Setup
 
 To set up the development environment for this project, follow these steps:
@@ -62,7 +61,7 @@ STRIPE_TOKEN=sk_text_z&&2DbCJa9d3gZkxFwJdE$&hHbRe47KHxAF%&N#qRVx*zVFG$W
 | Get Product By Query | `/api/products/search`            | Get       |
 | Get Product By Id    | `/api/products/:productId`        | Get       |
 | Edit Product Info    | `/api/products/update/:productId` | Put       |
-| Hide Product         | `/api/products/hide/:productId`   | Put       |
+| Delete Product       | `/api/products/delete/:productId` | Put       |
 
 [Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#da18f92d-0285-461d-86d8-af8f93f4b079)
 

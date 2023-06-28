@@ -1,4 +1,4 @@
-import cartService from '../View/shopingCartView.js';
+import cartService from '../Service/shopingCartService.js';
 // function to check ownership
 import isResourceOwner from '../helpers/isOwner.js';
 import Cart from '../Models/shopinCartModel.js';
