@@ -26,7 +26,7 @@ router.delete(
 );
 
 router.put(
-  '/purchases/:id',
+  '/purchases/status/:id',
   authMiddleware,
   adminCheck,
   purchaseController.updatePurchaseState,
