@@ -8,7 +8,6 @@
 
 This project is a web application developed using Node.js v16.20.1. It follows the Model-View-Controller (MVC) architectural pattern, providing a structured and modular approach to building web applications.
 
-# THIS DOCUMENTATION IS NOT FINISHED AT THE MOMENT
 
 ## Development Environment Setup
 
@@ -51,7 +50,7 @@ STRIPE_TOKEN=sk_text_z&&2DbCJa9d3gZkxFwJdE$&hHbRe47KHxAF%&N#qRVx*zVFG$W
 | User Stats      | `/api/users/stats`        | Get       |
 | Find user by Id | `/api/users/find/:userId` | Get       |
 
-[Postman Documentation]()
+[Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#f3eb5112-676b-46c6-89a2-f5dd6b6c0927)
 
 ### Products
 
@@ -65,7 +64,7 @@ STRIPE_TOKEN=sk_text_z&&2DbCJa9d3gZkxFwJdE$&hHbRe47KHxAF%&N#qRVx*zVFG$W
 | Edit Product Info    | `/api/products/update/:productId` | Put       |
 | Hide Product         | `/api/products/hide/:productId`   | Put       |
 
-[Postman Documentation]()
+[Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#da18f92d-0285-461d-86d8-af8f93f4b079)
 
 ### Cart
 
@@ -77,7 +76,7 @@ STRIPE_TOKEN=sk_text_z&&2DbCJa9d3gZkxFwJdE$&hHbRe47KHxAF%&N#qRVx*zVFG$W
 | Edit Cart     | `/api/carts/:cartId` | Put       |
 | Delete Cart   | `/api/carts/:cartId` | Delete    |
 
-[Postman Documentation]()
+[Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#30fad45b-31df-4ebc-a672-1a16c89c1267)
 
 ### Purchases
 
@@ -91,27 +90,7 @@ STRIPE_TOKEN=sk_text_z&&2DbCJa9d3gZkxFwJdE$&hHbRe47KHxAF%&N#qRVx*zVFG$W
 | Delete Purchase       | `/api/purchases/:purchaseId` | Delete    |
 | Edit Purchase         | `/api/purchases/create`      | Put       |
 
-[Postman Documentation]()
-
-### Comments
-
-| Comments Actions | Routes                 | Http Verb |
-| ---------------- | ---------------------- | --------- |
-| Create Comment   | `/api/comments/create` | Post      |
-| Delete Comment   | `/api/comments/delete` | Delete    |
-| Create Comment   | `/api/comments/getAll` | Get       |
-
-[Postman Documentation]()
-
-### Responses
-
-| Responses Actions | Routes                               | Http Verb |
-| ----------------- | ------------------------------------ | --------- |
-| Create Response   | `/api/responses/create`              | Post      |
-| Delete Response   | `/api/responses/delete/:responsesId` | Delete    |
-| Get All Response  | `/api/responses/getAll`              | Get       |
-
-[Postman Documentation]()
+[Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#31c36708-d610-4480-8c8a-628bb32dcfde)
 
 ## Tests
 
