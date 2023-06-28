@@ -20,7 +20,7 @@ function createCart(req, res, next) {
 
 function getAll(req, res, next) {
   cartService
-    .getAll()
+    .getAll(req.query.page, req.query.size)
     .then((cart) => res.json(cart))
     .catch((error) => next(error));
 }
