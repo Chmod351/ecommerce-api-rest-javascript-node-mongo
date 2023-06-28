@@ -16,6 +16,7 @@ function signIn(req, res, next) {
         res.cookie('token', sendToken, {
           httpOnly: true,
           secure: true,
+          sameSite: "None",
         });
         res.json(user);
       } else {
@@ -45,7 +46,5 @@ function getUser(req, res, next) {
     .then((user) => res.json(user))
     .catch((error) => next(error));
 }
-
-
 
 export default usersController;

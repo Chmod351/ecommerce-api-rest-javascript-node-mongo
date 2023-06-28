@@ -11,7 +11,7 @@ const commentController = {
 
 function createComment(req, res, next) {
   commentService
-    .createComment(req.user.id, req.body)
+    .createComment(req.user.id, req.params.id, req.body)
     .then((comment) => res.json(comment))
     .catch((error) => next(error));
 }

@@ -40,8 +40,6 @@ STRIPE_TOKEN=sk_text_z&&2DbCJa9d3gZkxFwJdE$&hHbRe47KHxAF%&N#qRVx*zVFG$W
 
 # Available Endpoints
 
-### User
-
 | User Actions    | Routes                    | Http Verb |
 | --------------- | ------------------------- | --------- |
 | Sign In         | `/api/users/signIn`       | Post      |
@@ -50,8 +48,6 @@ STRIPE_TOKEN=sk_text_z&&2DbCJa9d3gZkxFwJdE$&hHbRe47KHxAF%&N#qRVx*zVFG$W
 | Find user by Id | `/api/users/find/:userId` | Get       |
 
 [Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#f3eb5112-676b-46c6-89a2-f5dd6b6c0927)
-
-### Products
 
 | Products Actions     | Routes                            | Http Verb |
 | -------------------- | --------------------------------- | --------- |
@@ -65,8 +61,6 @@ STRIPE_TOKEN=sk_text_z&&2DbCJa9d3gZkxFwJdE$&hHbRe47KHxAF%&N#qRVx*zVFG$W
 
 [Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#da18f92d-0285-461d-86d8-af8f93f4b079)
 
-### Cart
-
 | Cart Actions  | Routes               | Http Verb |
 | ------------- | -------------------- | --------- |
 | Create Cart   | `/api/carts/create`  | Post      |
@@ -77,8 +71,6 @@ STRIPE_TOKEN=sk_text_z&&2DbCJa9d3gZkxFwJdE$&hHbRe47KHxAF%&N#qRVx*zVFG$W
 
 [Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#30fad45b-31df-4ebc-a672-1a16c89c1267)
 
-### Purchases
-
 | Purchases Actions     | Routes                              | Http Verb |
 | --------------------- | ----------------------------------- | --------- |
 | Create Purchase       | `/api/purchases/create`             | Post      |
@@ -88,6 +80,22 @@ STRIPE_TOKEN=sk_text_z&&2DbCJa9d3gZkxFwJdE$&hHbRe47KHxAF%&N#qRVx*zVFG$W
 | Get user Purchase     | `/api/purchases/:userId`            | Get       |
 | Delete Purchase       | `/api/purchases/:purchaseId`        | Delete    |
 | Edit Status Purchase  | `/api/purchases/status/:purchaseId` | Put       |
+
+[Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#31c36708-d610-4480-8c8a-628bb32dcfde)
+
+| Comments Actions      | Routes                 | Http Verb |
+| --------------------- | ---------------------- | --------- |
+| Create Purchase       | `/api/comments/create` | Post      |
+| Payment               | `/api/comments/getAll` | Get       |
+| Get Monthly Purchases | `/api/comments/delete` | Delete    |
+
+[Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#31c36708-d610-4480-8c8a-628bb32dcfde)
+
+| Responses Actions     | Routes                   | Http Verb |
+| --------------------- | ------------------------ | --------- |
+| Create Purchase       | `/api/purchases/create`  | Post      |
+| Payment               | `/api/purchases/payment` | Get       |
+| Get Monthly Purchases | `/api/purchases/monthly` | Delete    |
 
 [Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#31c36708-d610-4480-8c8a-628bb32dcfde)
 
