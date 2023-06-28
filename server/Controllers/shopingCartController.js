@@ -33,11 +33,7 @@ async function getUserCart(req, res, next) {
 }
 
 async function editCart(req, res, next) {
-  const isOwner = await isResourceOwner(
-    Cart,
-    req.params.cartId,
-    req.params.userId,
-  );
+  const isOwner = await isResourceOwner(Cart, req.params.cartId, req.user.id);
   if (isOwner) {
     cartService
       .editCart(req.body, req.params.cartId)

@@ -4,10 +4,8 @@ async function isResourceOwner(resourceModel, paramName, requestUser) {
     resource &&
     resource.userId.toString().trim() === requestUser.toString().trim()
   ) {
-    console.log(true);
     return true;
   } else {
-    console.log(false);
     return false;
   }
 }
