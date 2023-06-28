@@ -25,12 +25,11 @@ function isValidObjectId(id) {
 }
 
 async function getProductById(productId) {
-  console.log(productId);
   if (productId && isValidObjectId(productId)) {
     const product = await Product.findById(productId);
     return product;
   } else {
-    throw new NotFoundError('Product Not found');
+    throw new NotFoundError(`Product with id ${productId} Not found`);
   }
 }
 

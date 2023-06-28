@@ -20,13 +20,13 @@ router.get(
 );
 
 router.delete(
-  '/purchases/:purchaseId',
+  '/purchases/:id',
   authMiddleware,
   purchaseController.cleanPurchase,
 );
 
 router.put(
-  '/purchases/:purchaseId',
+  '/purchases/:id',
   authMiddleware,
   adminCheck,
   purchaseController.updatePurchaseState,

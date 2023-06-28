@@ -1,5 +1,6 @@
 import Purchase from '../Models/purchasesModel.js';
 import StripePaymentProvider from '../helpers/stripe.js';
+import { NotFoundError } from '../helpers/errorHandler.js';
 const paymentProvider = new StripePaymentProvider();
 
 const purchaseService = {
@@ -12,6 +13,15 @@ const purchaseService = {
   processPayment,
 };
 
+async function findPurchaseById(id) {
+  const purchase = await Purchase.findById(id);
+  if (purchase) {
+    return purchase;
+  } else {
+    throw new NotFoundError(`Purchase with id ${id} Not found`);
+  }
+}
+
 async function createPurchase(userId, cartId, amount, shippingAddress) {
   const purchase = new Purchase({
     userId,
@@ -19,16 +29,26 @@ async function createPurchase(userId, cartId, amount, shippingAddress) {
     amount,
     shippingAddress,
   });
-  
+
   return await purchase.save();
 }
 
 async function getAllPurchase(page, size) {
   // get a pagination with purchases instead all purchases
-  const pageNumber = parseInt(page) || 1;
-  const pageSize = parseInt(size) || 10;
-  const skipCount = (pageNumber - 1) * pageSize;
-  return await Purchase.find().skip(skipCount).limit(pageSize);
+  const actualPage = parseInt(page) || 1;
+  const pageSize = parseInt(size) || 8;
+  const skipCount = (actualPage - 1) * pageSize;
+
+  const totalCount = await Purchase.countDocuments();
+  const totalPages = Math.ceil(totalCount / pageSize);
+
+  const products = await Purchase.aggregate([
+    { $sample: { size: totalCount } },
+    { $skip: skipCount },
+    { $limit: pageSize },
+  ]);
+
+  return { products, totalPages };
 }
 
 async function getUserPurchase(id) {
@@ -60,17 +80,20 @@ async function getMonthly() {
 }
 
 async function cleanPurchase(id) {
+  await findPurchaseById(id);
   return await Purchase.findByIdAndDelete(id);
 }
 
 async function updatePurchaseState(id, status) {
+  await findPurchaseById(id);
   const newStatus = await Purchase.findOneAndUpdate(
     {
-      purchaseId: id,
+      _id: id,
     },
     { shippingStatus: status },
     { new: true },
   );
+  console.log(newStatus);
   return newStatus;
 }
 

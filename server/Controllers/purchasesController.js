@@ -11,13 +11,13 @@ const purchaseController = {
 };
 
 function createPurchase(req, res, next) {
-  console.log(req.body);
+
   purchaseService
     .createPurchase(
       req.user.id,
       req.body.cartId,
       req.body.amount,
-      req.body.address,
+      req.body.shippingAddress,
     )
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
