@@ -119,3 +119,5 @@ npm run test
 -  You have to provide Evidences in your PRs (Postman requests,covering  much edge cases as you can)
 -  Make `git pull` before create your PR
 
+# Licence
+The Project is GPL Project 
