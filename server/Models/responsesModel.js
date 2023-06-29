@@ -17,6 +17,10 @@ const ResponsesSchema = new mongoose.Schema(
       maxLength: 400,
       required: true,
     },
+    hide: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true },
 );

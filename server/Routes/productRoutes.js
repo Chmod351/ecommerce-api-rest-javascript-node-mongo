@@ -6,7 +6,7 @@ import { caching } from '../helpers/cache.js';
 import { cleanBody, validateQuery } from '../helpers/sanitizer.js';
 const router = Router();
 
-router.get('/products', caching('10 minutes'), productController.getProduct);
+router.get('/', caching('10 minutes'), productController.getProduct);
 
 router.get(
   '/tag',
@@ -24,11 +24,7 @@ router.get(
   productController.searchProduct,
 );
 
-router.get(
-  '/:id',
-  caching('10 minutes'),
-  productController.getProductById,
-);
+router.get('/:id', caching('10 minutes'), productController.getProductById);
 
 router.post(
   '/create',

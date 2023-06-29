@@ -5,22 +5,22 @@ import isResourceOwner from '../helpers/isOwner.js';
 
 const responseControllers = {
   createResponse,
-  deleteResponse,
+  hideResponse,
   getAllResponse,
 };
 
 function createResponse(req, res, next) {
   responsesActions
-    .createResponse(req.user.id, req.body)
+    .createResponse(req.user.id, req.params.commentId, req.body.description)
     .then((response) => res.json(response))
     .catch((error) => next(error));
 }
 
-function deleteResponse(req, res, next) {
+function hideResponse(req, res, next) {
   const isOwner = isResourceOwner(Response, req.params.responseId, req.user.id);
   if (isOwner) {
     responsesActions
-      .deleteResponse(req.params.responseId)
+      .hideResponse(req.params.responseId)
       .then((response) => res.json(response))
       .catch((error) => next(error));
   } else {

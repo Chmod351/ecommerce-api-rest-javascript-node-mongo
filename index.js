@@ -7,6 +7,7 @@ import cart from './server/Routes/shoppingCartRoutes.js';
 import product from './server/Routes/productRoutes.js';
 import purchase from './server/Routes/purchasesRoutes.js';
 import comment from './server/Routes/commentsRoutes.js';
+import response from './server/Routes/responsesRoutes.js';
 import { errorHandler } from './server/helpers/errorHandler.js';
 
 //config
@@ -20,7 +21,6 @@ export const JWT_TOKEN = process.env.JWT_TOKEN;
 const middlewares = await importMiddlewares();
 
 middlewares.forEach((middleware) => {
-  console.log(`Loading middleware /${middlewares.length}: ${middleware.name}`);
   app.use(middleware);
 });
 
@@ -31,6 +31,7 @@ const apiRouthes = [
   { route: '/api/purchases', controller: purchase },
   { route: '/api/products', controller: product },
   { route: '/api/comments', controller: comment },
+  { route: '/api/responses', controller: response },
 ];
 for (const controller of apiRouthes) {
   app.use(controller.route, controller.controller);

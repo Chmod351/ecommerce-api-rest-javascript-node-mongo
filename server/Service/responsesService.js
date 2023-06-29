@@ -18,8 +18,8 @@ async function deleteResponse(responseId) {
   return await Response.findByIdAndDelete(responseId);
 }
 
-async function createResponse(userId, body) {
-  const newResponse = new Response({ ...body, userId });
+async function createResponse(userId, description) {
+  const newResponse = new Response({ description, userId });
   return await newResponse.save();
 }
 

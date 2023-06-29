@@ -31,6 +31,10 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    hide: {
+      type: Boolean,
+      default: false,
+    },
     wishList: [
       {
         type: mongoose.Schema.Types.ObjectId,

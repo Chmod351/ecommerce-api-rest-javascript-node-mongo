@@ -1,4 +1,3 @@
-import { NotFoundError } from '../helpers/errorHandler.js';
 import Comment from '../Models/commentModel.js';
 
 const commentService = {

@@ -4,7 +4,7 @@ import authMiddleware from '../helpers/jwt.js';
 import adminCheck from '../helpers/adminCheck.js';
 const router = Router();
 
-router.post('/purchases/create', authMiddleware, purchaseController.createPurchase);
+router.post('/create', authMiddleware, purchaseController.createPurchase);
 
 router.get(
   '/getAll',

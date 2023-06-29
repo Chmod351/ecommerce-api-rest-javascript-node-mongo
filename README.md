@@ -3,6 +3,8 @@
 - [About this project](#About-this-project)
 - [Development Environment Setup](#Development-Environment-Setup)
 - [Available Endpoints](#Available-Endpoints)
+- [Contribution](#Contribution)
+- [Licence](#Licence)
 
 ## About this project
 
@@ -12,10 +14,11 @@ This project is a web application developed using Node.js v16.20.1. It follows t
 
 To set up the development environment for this project, follow these steps:
 
-- [Docker File](https://hub.docker.com/repository/docker/clamshell6412/ecomerce_res_api/general) (production only)
-- Install Node.js v16.20.1 (or a compatible version) on your system.
-- Clone the project repository from [repository URL].
-- Install project dependencies using npm or yarn. Run npm install or yarn install in the project root directory.
+- [Download Docker Desktop](https://www.docker.com/products/docker-desktop/) & [Docker File](https://hub.docker.com/repository/docker/clamshell6412/ecomerce_res_api/general) (production only)
+
+- Or you can just install Node.js [v16.20.1](https://nodejs.org/download/release/latest-gallium/) ([or a compatible version](https://nodejs.org/es/download/releases)) on your system.
+- Clone the project repository using `git clone https://github.com/yamilt351/api-rest.git`
+- Install project dependencies using npm or yarn. Run `npm install` or `yarn install` in the project root directory.
 - Configure the environment variables required for the project.
 
 ```
@@ -31,11 +34,11 @@ PORT=3000
 ```
 
 ```
-STRIPE_TOKEN=sk_text_z&&2DbCJa9d3gZkxFwJdE$&hHbRe47KHxAF%&N#qRVx*zVFG$W
+STRIPE_TOKEN=sk_text_YourStripeToken
 
 ```
 
-- Start the application using the appropriate command. Run npm run dev or yarn run dev to launch the application.
+- Start the application using `npm run dev` or `yarn run dev` to launch the application.
 - Access the application in a web browser using the provided URL or port number.
 
 # Available Endpoints
@@ -81,28 +84,31 @@ STRIPE_TOKEN=sk_text_z&&2DbCJa9d3gZkxFwJdE$&hHbRe47KHxAF%&N#qRVx*zVFG$W
 | Edit Status Purchase  | `/api/purchases/status/:purchaseId` | Put       |
 | Delete Purchase       | `/api/purchases/:purchaseId`        | Delete    |
 
+[Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#31c36708-d610-4480-8c8a-628bb32dcfde)
+
+| Comments Actions      | Routes                           | Http Verb |
+| --------------------- | -------------------------------- | --------- |
+| Create Comments       | `/api/comments/create/productId` | Post      |
+| Get Products Comments | `/api/comments/getAll/productId` | Get       |
+| Delete Comments       | `/api/comments/delete/commentId` | Delete    |
 
 [Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#31c36708-d610-4480-8c8a-628bb32dcfde)
 
-| Comments Actions      | Routes                 | Http Verb |
-| --------------------- | ---------------------- | --------- |
-| Create Purchase       | `/api/comments/create` | Post      |
-| Payment               | `/api/comments/getAll` | Get       |
-| Get Monthly Purchases | `/api/comments/delete` | Delete    |
-
-[Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#31c36708-d610-4480-8c8a-628bb32dcfde)
-
-| Responses Actions     | Routes                   | Http Verb |
-| --------------------- | ------------------------ | --------- |
-| Create Purchase       | `/api/purchases/create`  | Post      |
-| Payment               | `/api/purchases/payment` | Get       |
-| Get Monthly Purchases | `/api/purchases/monthly` | Delete    |
+| Responses Actions      | Routes                            | Http Verb |
+| ---------------------- | --------------------------------- | --------- |
+| Create Responses       | `/api/responses/create/commentId` | Post      |
+| Get Comments Responses | `/api/responses/getAll/commentId` | Get       |
+| Delete Responses       | `/api/responses/responseId`       | Delete    |
 
 [Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#31c36708-d610-4480-8c8a-628bb32dcfde)
 
 ## Tests
 
+- The aplication was tested with [Jest](https://jestjs.io/) and [Supertest](https://www.npmjs.com/package/supertest)
+
 ```
 npm run test
 
 ```
+
+# Contribution.
