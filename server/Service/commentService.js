@@ -1,3 +1,4 @@
+import { NotFoundError } from '../helpers/errorHandler.js';
 import Comment from '../Models/commentModel.js';
 
 const commentService = {
@@ -6,6 +7,29 @@ const commentService = {
   createComment,
 };
 
+// get comment by id
+async function getCommentById(id) {
+  const comment = await Comment.findById(id);
+  if (comment) {
+    return comment;
+  } else {
+    return new NotFoundError(`Comment Not Found`);
+  }
+}
+
+// create comment
+async function createComment(userId, calification, description) {
+  const newComment = new Comment({
+    userId,
+    calification,
+    description,
+  });
+  const res = await newComment.save();
+
+  return res;
+}
+
+// get products comment paginated
 async function getAllComment(page, size) {
   //pagination for comments instead get all comments
   const pageNumber = parseInt(page) || 1;
@@ -14,14 +38,11 @@ async function getAllComment(page, size) {
   return await Comment.find().skip(skipCount).limit(pageSize);
 }
 
+// delete comment by id
 async function deleteComment(commentId) {
-  return await Comment.findByIdAndDelete(commentId);
-}
-
-async function createComment(userId, body) {
-  const newComment = new Comment({ ...body, userId });
-
-  return await newComment.save();
+  await getCommentById(commentId);
+  const res = await Comment.findByIdAndDelete(commentId);
+  return res;
 }
 
 export default commentService;

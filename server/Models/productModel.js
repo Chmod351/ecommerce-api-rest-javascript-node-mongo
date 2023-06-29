@@ -17,6 +17,11 @@ const ProductSchema = new mongoose.Schema(
       maxLength: 400,
       required: true,
     },
+    commentId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Comment',
+      required: true,
+    },
     size: {
       type: Array,
       required: true,
