@@ -26,11 +26,11 @@ middlewares.forEach((middleware) => {
 
 // importing routes
 const apiRouthes = [
-  { route: '/api', controller: user },
-  { route: '/api', controller: cart },
-  { route: '/api', controller: purchase },
-  { route: '/api', controller: product },
-  { route: '/api', controller: comment },
+  { route: '/api/users', controller: user },
+  { route: '/api/carts', controller: cart },
+  { route: '/api/purchases', controller: purchase },
+  { route: '/api/products', controller: product },
+  { route: '/api/comments', controller: comment },
 ];
 for (const controller of apiRouthes) {
   app.use(controller.route, controller.controller);

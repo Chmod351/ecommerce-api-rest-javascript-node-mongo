@@ -9,7 +9,7 @@ const router = Router();
 router.get('/products', caching('10 minutes'), productController.getProduct);
 
 router.get(
-  '/products/tag',
+  '/tag',
   caching('10 minutes'),
   cleanBody,
   validateQuery,
@@ -17,7 +17,7 @@ router.get(
 );
 
 router.get(
-  '/products/search',
+  '/search',
   caching('10 minutes'),
   cleanBody,
   validateQuery,
@@ -25,13 +25,13 @@ router.get(
 );
 
 router.get(
-  '/products/:id',
+  '/:id',
   caching('10 minutes'),
   productController.getProductById,
 );
 
 router.post(
-  '/products/create',
+  '/create',
   authMiddleware,
   cleanBody,
   adminCheck,
@@ -39,7 +39,7 @@ router.post(
 );
 
 router.put(
-  '/products/update/:id',
+  '/update/:id',
   authMiddleware,
   cleanBody,
   adminCheck,
@@ -47,7 +47,7 @@ router.put(
 );
 
 router.delete(
-  '/products/delete/:id',
+  '/delete/:id',
   authMiddleware,
   adminCheck,
   cleanBody,

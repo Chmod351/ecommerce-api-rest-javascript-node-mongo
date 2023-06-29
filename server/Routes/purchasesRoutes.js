@@ -7,41 +7,41 @@ const router = Router();
 router.post('/purchases/create', authMiddleware, purchaseController.createPurchase);
 
 router.get(
-  '/purchases/getAll',
+  '/getAll',
   authMiddleware,
   adminCheck,
   purchaseController.getAllPurchase,
 );
 
 router.get(
-  '/purchases/:userId',
+  '/:userId',
   authMiddleware,
   purchaseController.getUserPurchase,
 );
 
 router.delete(
-  '/purchases/:id',
+  '/:id',
   authMiddleware,
   purchaseController.cleanPurchase,
 );
 
 router.put(
-  '/purchases/status/:id',
+  '/status/:id',
   authMiddleware,
   adminCheck,
   purchaseController.updatePurchaseState,
 );
 
 router.get(
-  '/purchases/monthly',
+  '/monthly',
   authMiddleware,
   adminCheck,
   purchaseController.getMonthly,
 );
 
-router.post('/purchases/payment', authMiddleware, purchaseController.payment);
+router.post('/payment', authMiddleware, purchaseController.payment);
 router.post(
-  '/purchases/order',
+  '/order',
   authMiddleware,
   purchaseController.createPurchase,
 );
