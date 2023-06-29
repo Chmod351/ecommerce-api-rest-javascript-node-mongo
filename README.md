@@ -120,4 +120,4 @@ npm run test
 -  Make `git pull` before create your PR
 
 # Licence
-The Project is GPL Project 
+The Project is under GPL Licence
