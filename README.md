@@ -112,3 +112,10 @@ npm run test
 ```
 
 # Contribution.
+
+-  Read The Documentation
+-  Fork The Development Branch
+-  Make Atomic Changes , keep them small keep them easy
+-  You have to provide Evidences in your PRs (Postman requests,covering  much edge cases as you can)
+-  Make `git pull` before create your PR
+
