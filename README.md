@@ -78,8 +78,9 @@ STRIPE_TOKEN=sk_text_z&&2DbCJa9d3gZkxFwJdE$&hHbRe47KHxAF%&N#qRVx*zVFG$W
 | Get Monthly Purchases | `/api/purchases/monthly`            | Get       |
 | Get All Purchase      | `/api/purchases/getAll`             | Get       |
 | Get user Purchase     | `/api/purchases/:userId`            | Get       |
-| Delete Purchase       | `/api/purchases/:purchaseId`        | Delete    |
 | Edit Status Purchase  | `/api/purchases/status/:purchaseId` | Put       |
+| Delete Purchase       | `/api/purchases/:purchaseId`        | Delete    |
+
 
 [Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#31c36708-d610-4480-8c8a-628bb32dcfde)
 
