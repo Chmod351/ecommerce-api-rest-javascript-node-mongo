@@ -13,15 +13,13 @@ const purchaseService = {
   processPayment,
 };
 
+// find purchase by id
 async function findPurchaseById(id) {
   const purchase = await Purchase.findById(id);
-  if (purchase) {
     return purchase;
-  } else {
-    throw new NotFoundError(`Purchase with id ${id} Not found`);
-  }
-}
 
+}
+// create purchases
 async function createPurchase(userId, cartId, amount, shippingAddress) {
   const purchase = new Purchase({
     userId,
@@ -32,7 +30,7 @@ async function createPurchase(userId, cartId, amount, shippingAddress) {
 
   return await purchase.save();
 }
-
+// get all purchases
 async function getAllPurchase(page, size) {
   // get a pagination with purchases instead all purchases
   const actualPage = parseInt(page) || 1;
@@ -50,11 +48,11 @@ async function getAllPurchase(page, size) {
 
   return { products, totalPages };
 }
-
+// get user purchases
 async function getUserPurchase(id) {
   return await Purchase.find({ userId: id });
 }
-
+// get monthly purchases
 async function getMonthly() {
   //show the last 2 months sales
   const date = new Date();
@@ -78,12 +76,11 @@ async function getMonthly() {
   ]);
   return income;
 }
-
+// delete purchases
 async function cleanPurchase(id) {
-  await findPurchaseById(id);
   return await Purchase.findByIdAndDelete(id);
 }
-
+// change status purchases
 async function updatePurchaseState(id, status) {
   await findPurchaseById(id);
   const newStatus = await Purchase.findOneAndUpdate(

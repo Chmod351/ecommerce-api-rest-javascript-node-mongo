@@ -7,15 +7,7 @@ const commentService = {
   createComment,
 };
 
-// get comment by id
-async function getCommentById(id) {
-  const comment = await Comment.findById(id);
-  if (comment) {
-    return comment;
-  } else {
-    return new NotFoundError(`Comment Not Found`);
-  }
-}
+
 
 // create comment
 async function createComment(userId, calification, description) {
@@ -40,7 +32,6 @@ async function getAllComment(page, size) {
 
 // delete comment by id
 async function deleteComment(commentId) {
-  await getCommentById(commentId);
   const res = await Comment.findByIdAndDelete(commentId);
   return res;
 }

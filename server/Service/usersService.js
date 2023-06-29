@@ -52,7 +52,7 @@ async function signIn(user) {
 }
 
 async function checkLength(item, num) {
-if (item.length >= num) {
+  if (item.length >= num) {
     return true;
   } else {
     throw new BadRequestError(
@@ -71,15 +71,14 @@ async function signUp(user) {
       return obj;
     }, {});
 
-  const registeredUser = await findByEmail(filteredUser.email);
   const validatePass = await checkLength(filteredUser.password, 8);
-  if (!registeredUser && validatePass) {
+  if (validatePass) {
     const encryptPassword = await encrypt.hashPassword(filteredUser.password);
     const createUser = new User({ ...filteredUser, password: encryptPassword });
     const newUser = await createUser.save();
     return newUser;
   } else {
-    throw new BadRequestError('email already in use');
+    throw new BadRequestError('password does not match');
   }
 }
 

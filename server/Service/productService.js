@@ -23,7 +23,7 @@ function isValidObjectId(id) {
     return false;
   }
 }
-
+// get product by id
 async function getProductById(productId) {
   if (productId && isValidObjectId(productId)) {
     const product = await Product.findById(productId);
@@ -32,6 +32,7 @@ async function getProductById(productId) {
     throw new NotFoundError(`Product with id ${productId} Not found`);
   }
 }
+// pagination products
 
 async function getProduct(page, size) {
   // Pagination for products
@@ -51,6 +52,7 @@ async function getProduct(page, size) {
   return { products, totalPages };
 }
 
+// recomendations && categories
 async function getProductByTag(category, page, size) {
   const actualPage = parseInt(page) || 1;
   const pageSize = parseInt(size) || 8;
@@ -67,6 +69,7 @@ async function getProductByTag(category, page, size) {
   return { products, totalPages };
 }
 
+// create products
 async function createProduct(
   name,
   img,
@@ -89,13 +92,14 @@ async function createProduct(
   });
   return await newProduct.save();
 }
-
+// products by query
 async function searchProduct(query) {
   const product = await Product.find({
     name: { $regex: query, $options: 'i' },
   }).limit(40);
   return product;
 }
+// change products properties
 
 async function updateProduct(productId, newPrice, hot, newDescription) {
   const updatedProperties = {};
@@ -117,9 +121,8 @@ async function updateProduct(productId, newPrice, hot, newDescription) {
   );
   return result;
 }
-
+// delete products
 async function deleteProduct(productId) {
-  await getProductById(productId);
   return await Product.findOneAndDelete(productId);
 }
 

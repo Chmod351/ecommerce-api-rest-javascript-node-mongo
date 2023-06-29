@@ -9,17 +9,13 @@ const cartService = {
   getAll,
 };
 
-// get cart by id 
+// get cart by id
 async function findCartById(id) {
   const cart = await ShoppingCart.findById(id);
-  if (cart) {
-    return cart;
-  } else {
-    return new NotFoundError(`Cart Not Found`);
-  }
+  return cart;
 }
 
-// create cart 
+// create cart
 async function createCart(products, userId) {
   const newCart = new ShoppingCart({ products, userId });
   return await newCart.save();
@@ -44,7 +40,7 @@ async function getAll(page, size) {
   return { carts, totalPages };
 }
 
-// get user carts by user id 
+// get user carts by user id
 async function getUserCart(userId) {
   await userService.getUser(userId);
   return await ShoppingCart.findOne({ userId });
@@ -52,7 +48,6 @@ async function getUserCart(userId) {
 
 // edit user cart by id
 async function editCart(body, cartId) {
-  await findCartById(cartId);
   return await ShoppingCart.findByIdAndUpdate(
     cartId,
     {
@@ -64,7 +59,6 @@ async function editCart(body, cartId) {
 
 //delete user cart by cart id
 async function deleteCart(cartId) {
-  await findCartById(cartId);
   return await ShoppingCart.findByIdAndDelete(cartId);
 }
 
