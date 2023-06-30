@@ -10,9 +10,9 @@ const responseControllers = {
 };
 
 function createResponse(req, res, next) {
-  console.log(req.params.commentId)
+  console.log(req.params.commentId);
   responseService
-    .createResponse(req.user.id, req.params.id, req.body.description)
+    .createResponse(req.user.id, req.params.commentId, req.body.description)
     .then((response) => res.json(response))
     .catch((error) => next(error));
 }
@@ -31,7 +31,7 @@ function hideResponse(req, res, next) {
 
 function getAllResponse(req, res, next) {
   responseService
-    .getAllComments(req.query.page, req.query.size)
+    .getAllResponse(req.query.page, req.query.size)
     .then((response) => res.json(response))
     .catch((error) => next(error));
 }

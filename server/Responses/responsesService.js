@@ -9,7 +9,7 @@ const responseService = {
 // create response
 async function createResponse(userId, description) {
   const newResponse = new Response({ description, userId });
-  const res=await newResponse.save();
+  const res = await newResponse.save();
   return res;
 }
 
@@ -24,9 +24,7 @@ async function getAllResponse(page, size) {
 
 // delete response
 async function deleteResponse(responseId) {
-  return await Response.findByIdAndDelete(responseId);
+  return await Response.findByIdAndUpdate(responseId);
 }
-
-
 
 export default responseService;

@@ -12,7 +12,7 @@ router.post(
 );
 
 router.put(
-  '/delete/:responsesId',
+  '/hide/:responsesId',
   authMiddleware,
   responseControllers.hideResponse,
 );
