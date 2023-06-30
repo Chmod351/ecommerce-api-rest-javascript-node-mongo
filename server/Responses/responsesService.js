@@ -6,11 +6,14 @@ const responseService = {
   createResponse,
 };
 
+// create response
 async function createResponse(userId, description) {
   const newResponse = new Response({ description, userId });
-  return await newResponse.save();
+  const res=await newResponse.save();
+  return res;
 }
 
+//get responses
 async function getAllResponse(page, size) {
   // create pagination instead get all responses
   const pageNumber = parseInt(page) || 1;
@@ -19,6 +22,7 @@ async function getAllResponse(page, size) {
   return await Response.find().skip(skipCount).limit(pageSize);
 }
 
+// delete response
 async function deleteResponse(responseId) {
   return await Response.findByIdAndDelete(responseId);
 }
