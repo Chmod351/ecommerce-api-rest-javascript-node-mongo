@@ -33,6 +33,7 @@ const apiRouthes = [
   { route: '/api/comments', controller: comment },
   { route: '/api/responses', controller: response },
 ];
+
 for (const controller of apiRouthes) {
   app.use(controller.route, controller.controller);
 }

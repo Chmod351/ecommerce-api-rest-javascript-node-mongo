@@ -1,6 +1,10 @@
 const request = require('supertest');
 const { expect } = require('chai');
-const myRequest = request('http://localhost:4000/api');
+const config = require('dotenv');
+config.dotenv();
+const PORT = process.env.PORT;
+
+const myRequest = request(`http://localhost:${PORT}/api/products`);
 
 describe('product endpoint', () => {
   it('should return a list of products', async () => {
@@ -28,7 +32,7 @@ describe('product endpoint', () => {
   });
   it('should return products with a specific tag', async () => {
     const category = 'elegante';
-    const res = await myRequest.get(`/products/tags?tag=${category}`);
+    const res = await myRequest.get(`/tag?tag=${category}`);
     expect(res.statusCode).to.equal(200);
     expect(res.body).to.be.an('array');
     expect(res.body.length).to.be.at.least(1);
@@ -62,7 +66,7 @@ describe('product endpoint', () => {
   });
   it('should search for products with a specific query', async () => {
     const query = '';
-    const res = await myRequest.get('/products/search').query({ q: query });
+    const res = await myRequest.get('/search').query({ q: query });
     expect(res.statusCode).to.equal(200);
     expect(res.body).to.be.an('array');
     expect(res.body.length).to.be.at.least(1);
@@ -95,7 +99,7 @@ describe('product endpoint', () => {
 
   it('should hide a product', async () => {
     const productId = '60b4c47e5f5e5a001f5e5d6e';
-    const res = await myRequest.put(`/products/hide/${productId}`);
+    const res = await myRequest.put(`/hide/${productId}`);
     expect(res.statusCode).to.equal(200);
     expect(res.body).to.deep.equal({
       message: `product with id ${productId} was hidden`,
@@ -106,7 +110,7 @@ describe('product endpoint', () => {
 describe('unauthorized user', () => {
   it('should return 401 unauthorized', async () => {
     const productId = '60b4c47e5f5e5a001f5e5d6e';
-    const res = await myRequest.put(`/products/hide/${productId}`);
+    const res = await myRequest.put(`/hide/${productId}`);
     expect(res.statusCode).to.equal(401);
   });
   it('should return 401 unauthorized', async () => {
@@ -130,7 +134,7 @@ describe('unauthorized user', () => {
       tags: ['elegante'],
       hot: true,
     };
-    const res = await myRequest.post('/products').send(newProduct);
+    const res = await myRequest.post().send(newProduct);
     expect(res.statusCode).to.equal(401);
   });
 });
