@@ -1,6 +1,5 @@
-import ShoppingCart from '../Models/shopinCartModel.js';
-import { NotFoundError } from '../helpers/errorHandler.js';
-import userService from '../Service/usersService.js';
+import ShoppingCart from './shopinCartModel.js';
+import userService from '../Users/usersService.js';
 const cartService = {
   createCart,
   editCart,

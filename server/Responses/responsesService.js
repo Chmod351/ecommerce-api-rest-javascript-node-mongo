@@ -1,10 +1,15 @@
-import Response from '../Models/responsesModel.js';
+import Response from './responsesModel.js';
 
 const responseService = {
   getAllResponse,
   deleteResponse,
   createResponse,
 };
+
+async function createResponse(userId, description) {
+  const newResponse = new Response({ description, userId });
+  return await newResponse.save();
+}
 
 async function getAllResponse(page, size) {
   // create pagination instead get all responses
@@ -18,9 +23,6 @@ async function deleteResponse(responseId) {
   return await Response.findByIdAndDelete(responseId);
 }
 
-async function createResponse(userId, description) {
-  const newResponse = new Response({ description, userId });
-  return await newResponse.save();
-}
+
 
 export default responseService;

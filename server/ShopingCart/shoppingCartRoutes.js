@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import cartController from '../Controllers/shopingCartController.js';
+import cartController from './shopingCartController.js';
 import authMiddleware from '../helpers/jwt.js';
 import adminCheck from '../helpers/adminCheck.js';
 import { cleanBody } from '../helpers/sanitizer.js';

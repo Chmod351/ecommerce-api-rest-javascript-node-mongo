@@ -2,12 +2,12 @@ import express from 'express';
 import importMiddlewares from './middlewaresHandler.js';
 import { connect } from './server.js';
 import { config } from 'dotenv';
-import user from './server/Routes/userRoutes.js';
-import cart from './server/Routes/shoppingCartRoutes.js';
-import product from './server/Routes/productRoutes.js';
-import purchase from './server/Routes/purchasesRoutes.js';
-import comment from './server/Routes/commentsRoutes.js';
-import response from './server/Routes/responsesRoutes.js';
+import user from './server/Users/userRoutes.js';
+import cart from './server/ShopingCart/shoppingCartRoutes.js';
+import product from './server/Products/productRoutes.js';
+import purchase from './server/Purchases/purchasesRoutes.js';
+import comment from './server/Comments/commentsRoutes.js';
+import response from './server/Responses/responsesRoutes.js';
 import { errorHandler } from './server/helpers/errorHandler.js';
 
 //config

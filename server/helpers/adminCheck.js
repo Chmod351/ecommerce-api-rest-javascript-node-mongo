@@ -1,4 +1,4 @@
-import User from '../Models/userModel.js';
+import User from '../Users/userModel.js';
 import { UnauthorizedError } from './errorHandler.js';
 
 async function adminCheck(req, res, next) {

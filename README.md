@@ -43,64 +43,7 @@ STRIPE_TOKEN=sk_text_YourStripeToken
 
 # Available Endpoints
 
-| User Actions    | Routes                    | Http Verb |
-| --------------- | ------------------------- | --------- |
-| Sign In         | `/api/users/signIn`       | Post      |
-| Sign Up         | `/api/users/signUp`       | Post      |
-| User Stats      | `/api/users/stats`        | Get       |
-| Find user by Id | `/api/users/find/:userId` | Get       |
-
 [Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#f3eb5112-676b-46c6-89a2-f5dd6b6c0927)
-
-| Products Actions     | Routes                            | Http Verb |
-| -------------------- | --------------------------------- | --------- |
-| Create Product       | `/api/products/create`            | Post      |
-| Get All Product      | `/api/products`                   | Get       |
-| Get Product by Tag   | `/api/products/tag`               | Get       |
-| Get Product By Query | `/api/products/search`            | Get       |
-| Get Product By Id    | `/api/products/:productId`        | Get       |
-| Edit Product Info    | `/api/products/update/:productId` | Put       |
-| Delete Product       | `/api/products/delete/:productId` | Put       |
-
-[Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#da18f92d-0285-461d-86d8-af8f93f4b079)
-
-| Cart Actions  | Routes               | Http Verb |
-| ------------- | -------------------- | --------- |
-| Create Cart   | `/api/carts/create`  | Post      |
-| Get All Carts | `/api/carts/getAll`  | Get       |
-| Get user Cart | `/api/carts/:userId` | Get       |
-| Edit Cart     | `/api/carts/:cartId` | Put       |
-| Delete Cart   | `/api/carts/:cartId` | Delete    |
-
-[Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#30fad45b-31df-4ebc-a672-1a16c89c1267)
-
-| Purchases Actions     | Routes                              | Http Verb |
-| --------------------- | ----------------------------------- | --------- |
-| Create Purchase       | `/api/purchases/create`             | Post      |
-| Payment               | `/api/purchases/payment`            | Post      |
-| Get Monthly Purchases | `/api/purchases/monthly`            | Get       |
-| Get All Purchase      | `/api/purchases/getAll`             | Get       |
-| Get user Purchase     | `/api/purchases/:userId`            | Get       |
-| Edit Status Purchase  | `/api/purchases/status/:purchaseId` | Put       |
-| Delete Purchase       | `/api/purchases/:purchaseId`        | Delete    |
-
-[Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#31c36708-d610-4480-8c8a-628bb32dcfde)
-
-| Comments Actions      | Routes                           | Http Verb |
-| --------------------- | -------------------------------- | --------- |
-| Create Comments       | `/api/comments/create/productId` | Post      |
-| Get Products Comments | `/api/comments/getAll/productId` | Get       |
-| Delete Comments       | `/api/comments/delete/commentId` | Delete    |
-
-[Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#31c36708-d610-4480-8c8a-628bb32dcfde)
-
-| Responses Actions      | Routes                            | Http Verb |
-| ---------------------- | --------------------------------- | --------- |
-| Create Responses       | `/api/responses/create/commentId` | Post      |
-| Get Comments Responses | `/api/responses/getAll/commentId` | Get       |
-| Delete Responses       | `/api/responses/responseId`       | Delete    |
-
-[Postman Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#31c36708-d610-4480-8c8a-628bb32dcfde)
 
 ## Tests
 

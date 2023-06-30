@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import authMiddleware from '../helpers/jwt.js';
 import adminCheck from '../helpers/adminCheck.js';
-import productController from '../Controllers/productController.js';
+import productController from './productController.js';
 import { caching } from '../helpers/cache.js';
 import { cleanBody, validateQuery } from '../helpers/sanitizer.js';
 const router = Router();

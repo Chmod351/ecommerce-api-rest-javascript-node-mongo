@@ -1,5 +1,5 @@
-import responsesActions from '../Service/responsesService.js';
-import Response from '../Models/responsesModel.js';
+import responseService from './responsesService.js';
+import Response from './responsesModel.js';
 // function to check ownership
 import isResourceOwner from '../helpers/isOwner.js';
 
@@ -10,8 +10,9 @@ const responseControllers = {
 };
 
 function createResponse(req, res, next) {
-  responsesActions
-    .createResponse(req.user.id, req.params.commentId, req.body.description)
+  console.log(req.params.commentId)
+  responseService
+    .createResponse(req.user.id, req.params.id, req.body.description)
     .then((response) => res.json(response))
     .catch((error) => next(error));
 }
@@ -19,7 +20,7 @@ function createResponse(req, res, next) {
 function hideResponse(req, res, next) {
   const isOwner = isResourceOwner(Response, req.params.responseId, req.user.id);
   if (isOwner) {
-    responsesActions
+    responseService
       .hideResponse(req.params.responseId)
       .then((response) => res.json(response))
       .catch((error) => next(error));
@@ -29,7 +30,7 @@ function hideResponse(req, res, next) {
 }
 
 function getAllResponse(req, res, next) {
-  responsesActions
+  responseService
     .getAllComments(req.query.page, req.query.size)
     .then((response) => res.json(response))
     .catch((error) => next(error));

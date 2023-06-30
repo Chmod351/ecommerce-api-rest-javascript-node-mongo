@@ -1,4 +1,4 @@
-import productService from '../Service/productService.js';
+import productService from './productService.js';
 
 const productController = {
   getProductById,

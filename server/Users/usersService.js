@@ -1,5 +1,5 @@
 import Encrypt from '../helpers/bcrypt.js';
-import User from '../Models/userModel.js';
+import User from './userModel.js';
 import { JWT_TOKEN } from '../../index.js';
 import Token from '../helpers/token.js';
 import {

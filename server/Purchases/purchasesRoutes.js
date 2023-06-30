@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import purchaseController from '../Controllers/purchasesController.js';
+import purchaseController from './purchasesController.js';
 import authMiddleware from '../helpers/jwt.js';
 import adminCheck from '../helpers/adminCheck.js';
 const router = Router();

@@ -1,5 +1,5 @@
-import Comment from '../Models/commentModel.js';
-import commentService from '../Service/commentService.js';
+import Comment from './commentModel.js';
+import commentService from './commentService.js';
 // function to check ownership
 import isResourceOwner from '../helpers/isOwner.js';
 

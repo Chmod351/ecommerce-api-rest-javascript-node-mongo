@@ -1,4 +1,4 @@
-import responseControllers from '../Controllers/responsesController.js';
+import responseControllers from './responsesController.js';
 import express from 'express';
 import { cleanBody } from '../helpers/sanitizer.js';
 import authMiddleware from '../helpers/jwt.js';
@@ -11,10 +11,10 @@ router.post(
   responseControllers.createResponse,
 );
 
-router.delete(
+router.put(
   '/delete/:responsesId',
   authMiddleware,
-  responseControllers.deleteResponse,
+  responseControllers.hideResponse,
 );
 
 router.get('/getAll', authMiddleware, responseControllers.getAllResponse);

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import usersController from '../Controllers/usersControllers.js';
+import usersController from './usersControllers.js';
 import adminCheck from '../helpers/adminCheck.js';
 import authMiddleware from '../helpers/jwt.js';
 import {cleanBody} from '../helpers/sanitizer.js';

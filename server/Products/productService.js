@@ -1,4 +1,4 @@
-import Product from '../Models/productModel.js';
+import Product from './productController.js';
 import mongoose from 'mongoose';
 import { NotFoundError } from '../helpers/errorHandler.js';
 

@@ -1,4 +1,4 @@
-import purchaseService from '../Service/purchasesService.js';
+import purchaseService from './purchasesService.js';
 
 const purchaseController = {
   createPurchase,

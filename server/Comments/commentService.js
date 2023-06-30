@@ -1,4 +1,4 @@
-import Comment from '../Models/commentModel.js';
+import Comment from './commentModel.js';
 
 const commentService = {
   getAllComment,
