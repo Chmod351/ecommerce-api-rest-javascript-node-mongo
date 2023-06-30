@@ -50,14 +50,14 @@ STRIPE_TOKEN=sk_text_YourStripeToken
 - The aplication was tested with [Jest](https://jestjs.io/) and [Supertest](https://www.npmjs.com/package/supertest)
 
 ```
-npm run test
+npm test
 
 ```
 
 # Contribution.
 
 -  Read The Documentation
--  Fork The Development Branch
+-  Fork The Project
 -  Make Atomic Changes , keep them small keep them easy
 -  You have to provide Evidences in your PRs (Postman requests,covering  much edge cases as you can)
 -  Make `git pull` before create your PR
