@@ -51,6 +51,7 @@ async function getAllPurchase(page, size) {
 async function getUserPurchase(id) {
   return await Purchase.find({ userId: id });
 }
+
 // get monthly purchases
 async function getMonthly() {
   //show the last 2 months sales

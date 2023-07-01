@@ -11,7 +11,6 @@ const purchaseController = {
 };
 
 function createPurchase(req, res, next) {
-
   purchaseService
     .createPurchase(
       req.user.id,
@@ -32,12 +31,13 @@ function getAllPurchase(req, res, next) {
 
 function getUserPurchase(req, res, next) {
   purchaseService
-    .getUserPurchase(req.user.id)
+    .getUserPurchase(req.params.userId)
     .then((purchase) => res.json(purchase))
     .catch((error) => next(error));
 }
 
 function getMonthly(req, res, next) {
+  console.log("aadas")
   purchaseService
     .getMonthly(req.user.id)
     .then((purchase) => res.json(purchase))
