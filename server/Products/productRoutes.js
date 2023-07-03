@@ -4,9 +4,10 @@ import adminCheck from '../helpers/adminCheck.js';
 import productController from './productController.js';
 import { caching } from '../helpers/cache.js';
 import { cleanBody, validateQuery } from '../helpers/sanitizer.js';
+
 const router = Router();
 
-router.get('/all', caching('10 minutes'), productController.getProduct);
+router.get('/', caching('10 minutes'), productController.getProduct);
 
 router.get(
   '/tag',
@@ -50,5 +51,4 @@ router.delete(
   cleanBody,
   productController.deleteProduct,
 );
-
 export default router;

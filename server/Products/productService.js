@@ -1,4 +1,4 @@
-import Product from './productController.js';
+import Product from './productModel.js';
 import mongoose from 'mongoose';
 import { NotFoundError } from '../helpers/errorHandler.js';
 
@@ -32,14 +32,13 @@ async function getProductById(productId) {
     throw new NotFoundError(`Product with id ${productId} Not found`);
   }
 }
-// pagination products
 
+// GET ALL PRODUCTS pagination products
 async function getProduct(page, size) {
   // Pagination for products
   const actualPage = parseInt(page) || 1;
   const pageSize = parseInt(size) || 8;
   const skipCount = (actualPage - 1) * pageSize;
-
   const totalCount = await Product.countDocuments();
   const totalPages = Math.ceil(totalCount / pageSize);
 
@@ -48,7 +47,7 @@ async function getProduct(page, size) {
     { $skip: skipCount },
     { $limit: pageSize },
   ]);
-
+console.log(products);
   return { products, totalPages };
 }
 
