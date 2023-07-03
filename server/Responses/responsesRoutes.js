@@ -3,7 +3,7 @@ import express from 'express';
 import { cleanBody } from '../helpers/sanitizer.js';
 import authMiddleware from '../helpers/jwt.js';
 const router = express.Router();
-
+router.get('/getAll', authMiddleware, responseControllers.getAllResponse);
 router.post(
   '/create/:commentId',
   authMiddleware,
@@ -17,6 +17,6 @@ router.put(
   responseControllers.hideResponse,
 );
 
-router.get('/getAll', authMiddleware, responseControllers.getAllResponse);
+
 
 export default router;
