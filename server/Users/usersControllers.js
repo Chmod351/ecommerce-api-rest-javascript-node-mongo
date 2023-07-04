@@ -1,4 +1,5 @@
 import userService from './usersService.js';
+const maxAge = 24 * 60 * 60 * 1000;
 
 const usersController = {
   signIn,
@@ -16,7 +17,8 @@ function signIn(req, res, next) {
         res.cookie('token', sendToken, {
           httpOnly: true,
           secure: true,
-          sameSite: "None",
+          sameSite: 'None',
+          maxAge: maxAge,
         });
         res.json(user);
       } else {
