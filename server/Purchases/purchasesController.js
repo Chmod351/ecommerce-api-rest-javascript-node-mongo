@@ -37,7 +37,7 @@ function getUserPurchase(req, res, next) {
 }
 
 function getMonthly(req, res, next) {
-  console.log("aadas")
+  console.log('aadas');
   purchaseService
     .getMonthly(req.user.id)
     .then((purchase) => res.json(purchase))

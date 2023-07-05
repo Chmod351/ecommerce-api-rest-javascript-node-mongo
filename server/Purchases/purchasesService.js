@@ -15,20 +15,24 @@ const purchaseService = {
 // find purchase by id
 async function findPurchaseById(id) {
   const purchase = await Purchase.findById(id);
-    return purchase;
-
+  return purchase;
 }
-// create purchases
+
 async function createPurchase(userId, cartId, amount, shippingAddress) {
-  const purchase = new Purchase({
-    userId,
-    cartId,
-    amount,
-    shippingAddress,
-  });
-
-  return await purchase.save();
+  try {
+    const purchase = new Purchase({
+      userId,
+      cartId,
+      amount,
+      shippingAddress,
+    });
+    const res = await purchase.save();
+    return res;
+  } catch (error) {
+    throw error; // Rethrow the error to handle it in the calling code
+  }
 }
+
 // get all purchases
 async function getAllPurchase(page, size) {
   // get a pagination with purchases instead all purchases
