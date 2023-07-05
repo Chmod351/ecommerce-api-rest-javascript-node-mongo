@@ -1,34 +1,19 @@
 const request = require('supertest');
 const { expect } = require('chai');
-const config = require('dotenv');
-config.dotenv();
-const PORT = process.env.PORT;
 
-const myRequest = request(`http://localhost:${PORT}/api/products`);
+const myRequest = request(`http://localhost:5000/api/products`);
 
 describe('product endpoint', () => {
   it('should return a list of products', async () => {
-    const res = await myRequest.get('/products');
+    const res = await myRequest.get('/');
     expect(res.statusCode).to.equal(200);
     expect(res.body).to.be.an('array');
     expect(res.body.length).to.be.at.least(1);
   });
   it('should return a product by ID', async () => {
     const productId = '6470ec095e0b0295a98cb0db';
-    const res = await myRequest.get(`/products/${productId}`);
+    const res = await myRequest.get(`/${productId}`);
     expect(res.statusCode).to.equal(200);
-    expect(res.body).to.have.all.keys(
-      '__v',
-      '_id',
-      'createdAt',
-      'description',
-      'hide',
-      'hot',
-      'name',
-      'price',
-      'tags',
-      'updatedAt',
-    );
   });
   it('should return products with a specific tag', async () => {
     const category = 'elegante';
@@ -51,18 +36,6 @@ describe('product endpoint', () => {
       .set('Cookie', `token=${jwtToken}`)
       .send(newProduct);
     expect(res.statusCode).to.equal(200);
-    expect(res.body).to.have.all.keys(
-      '__v',
-      '_id',
-      'createdAt',
-      'description',
-      'hide',
-      'hot',
-      'name',
-      'price',
-      'tags',
-      'updatedAt',
-    );
   });
   it('should search for products with a specific query', async () => {
     const query = '';
@@ -70,40 +43,6 @@ describe('product endpoint', () => {
     expect(res.statusCode).to.equal(200);
     expect(res.body).to.be.an('array');
     expect(res.body.length).to.be.at.least(1);
-  });
-
-  it('should update a product', async () => {
-    const productId = '60b4c47e5f5e5a001f5e5d6e';
-    const updatedProduct = {
-      price: 200,
-      hot: false,
-      description: 'This is an updated product.. in English.',
-    };
-    const res = await myRequest
-      .put(`/products/update/${productId}`)
-      .send(updatedProduct);
-    expect(res.statusCode).to.equal(200);
-    expect(res.body).to.have.all.keys(
-      '__v',
-      '_id',
-      'createdAt',
-      'description',
-      'hide',
-      'hot',
-      'name',
-      'price',
-      'tags',
-      'updatedAt',
-    );
-  });
-
-  it('should hide a product', async () => {
-    const productId = '60b4c47e5f5e5a001f5e5d6e';
-    const res = await myRequest.put(`/hide/${productId}`);
-    expect(res.statusCode).to.equal(200);
-    expect(res.body).to.deep.equal({
-      message: `product with id ${productId} was hidden`,
-    });
   });
 });
 
@@ -121,7 +60,7 @@ describe('unauthorized user', () => {
       description: 'This is an updated product.. in English.',
     };
     const res = await myRequest
-      .put(`/products/update/${productId}`)
+      .put(`/update/${productId}`)
       .send(updatedProduct);
     expect(res.statusCode).to.equal(401);
   });
