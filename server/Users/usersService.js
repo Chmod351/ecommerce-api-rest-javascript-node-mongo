@@ -7,6 +7,11 @@ import {
   NotFoundError,
   UnauthorizedError,
 } from '../helpers/errorHandler.js';
+import { OAuth2Client } from 'google-auth-library';
+const SECRET= process.env.SECRET;
+const CLIENTID=process.env.CLIENTID;
+const client = new OAuth2Client(SECRET,CLIENTID);
+
 
 //config
 const userService = {
@@ -112,4 +117,6 @@ async function getUserStat() {
   return data;
 }
 
+
+// google auth
 export default userService;

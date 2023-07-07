@@ -9,6 +9,8 @@ router.post('/signIn', cleanBody, usersController.signIn);
 
 router.post('/signUp', cleanBody, usersController.signUp);
 
+router.get('/google/signIn',cleanBody,usersController.signIn);
+
 router.get('/stats', authMiddleware, adminCheck, usersController.getStat);
 
 router.get('/find/:userId', usersController.getUser);
