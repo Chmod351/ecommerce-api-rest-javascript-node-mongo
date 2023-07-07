@@ -9,7 +9,7 @@ router.post('/signIn', cleanBody, usersController.signIn);
 
 router.post('/signUp', cleanBody, usersController.signUp);
 
-router.get('/google/signIn', cleanBody, usersController.googleToken);
+router.get('/google/signIn/:token', cleanBody, usersController.googleToken);
 
 router.get('/stats', authMiddleware, adminCheck, usersController.getStat);
 
