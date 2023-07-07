@@ -8,10 +8,8 @@ import {
   UnauthorizedError,
 } from '../helpers/errorHandler.js';
 import { OAuth2Client } from 'google-auth-library';
-const SECRET= process.env.SECRET;
-const CLIENTID=process.env.CLIENTID;
-const client = new OAuth2Client(SECRET,CLIENTID);
-
+const SECRET = process.env.SECRET;
+const CLIENTID = process.env.CLIENTID;
 
 //config
 const userService = {
@@ -19,11 +17,13 @@ const userService = {
   signUp,
   getUser,
   getUserStat,
+  googleToken,
 };
 
 //create instances to call clases
 const encrypt = new Encrypt();
 const jwt = new Token();
+const client = new OAuth2Client(SECRET, CLIENTID);
 
 async function findByEmail(email) {
   const alreadyExist = await User.findOne({ email: { $eq: email } });
@@ -117,6 +117,16 @@ async function getUserStat() {
   return data;
 }
 
-
 // google auth
+
+async function googleToken(token) {
+  const ticket = await client.verifyIdToken({
+    idToken: token,
+    audience: CLIENTID,
+  });
+  const payload = ticket.getPayload();
+  const userId = payload.sub;
+  return userId;
+}
+
 export default userService;

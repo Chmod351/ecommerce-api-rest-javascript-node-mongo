@@ -6,6 +6,7 @@ const usersController = {
   signUp,
   getUser,
   getStat,
+  googleToken,
 };
 
 function signIn(req, res, next) {
@@ -45,6 +46,13 @@ function getStat(req, res, next) {
 function getUser(req, res, next) {
   userService
     .getUser(req.params.userId)
+    .then((user) => res.json(user))
+    .catch((error) => next(error));
+}
+
+function googleToken(req, res, next) {
+  userService
+    .googleToken(req.params.token)
     .then((user) => res.json(user))
     .catch((error) => next(error));
 }
