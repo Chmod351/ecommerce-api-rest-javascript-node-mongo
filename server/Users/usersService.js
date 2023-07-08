@@ -18,6 +18,7 @@ const userService = {
   getUser,
   getUserStat,
   googleToken,
+  findByEmail,
 };
 
 //create instances to call clases
@@ -30,29 +31,23 @@ async function findByEmail(email) {
   if (alreadyExist) {
     return alreadyExist;
   } else {
-    return false;
+    return null;
   }
 }
 
 async function signIn(user) {
-  const existingUser = await findByEmail(user.email);
-
-  if (!existingUser) {
-    throw new Error('not found');
+  const isPasswordMatch = await encrypt.comparePassword(
+    user.password,
+    existingUser.password,
+  );
+  if (!isPasswordMatch) {
+    throw new UnauthorizedError('wrong credentials');
   } else {
-    const isPasswordMatch = await encrypt.comparePassword(
-      user.password,
-      existingUser.password,
-    );
-    if (!isPasswordMatch) {
-      throw new UnauthorizedError('wrong credentials');
-    } else {
-      const userId = existingUser._id.toString();
-      const token = await jwt.generateToken(userId, JWT_TOKEN, {
-        expiresIn: '48h',
-      });
-      return { user: existingUser, sendToken: token };
-    }
+    const userId = existingUser._id.toString();
+    const token = await jwt.generateToken(userId, JWT_TOKEN, {
+      expiresIn: '48h',
+    });
+    return { user: existingUser, sendToken: token };
   }
 }
 
@@ -126,10 +121,7 @@ async function googleToken(token) {
   });
   const payload = ticket.getPayload();
   const userId = payload;
-  const jwtToken = await jwt.generateToken(userId.sub, JWT_TOKEN, {
-    expiresIn: '48h',
-  });
-  return { user: userId, sendToken: jwtToken };
+  return { user: userId };
 }
 
 export default userService;

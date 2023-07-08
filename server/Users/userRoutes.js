@@ -14,5 +14,6 @@ router.get('/google/signIn/:token', cleanBody, usersController.googleToken);
 router.get('/stats', authMiddleware, adminCheck, usersController.getStat);
 
 router.get('/find/:userId', usersController.getUser);
+router.post('/findByEmail', cleanBody, usersController.findByEmail);
 
 export default router;

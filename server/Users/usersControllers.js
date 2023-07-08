@@ -7,6 +7,7 @@ const usersController = {
   getUser,
   getStat,
   googleToken,
+  findByEmail,
 };
 
 function signIn(req, res, next) {
@@ -49,22 +50,17 @@ function getUser(req, res, next) {
     .catch((error) => next(error));
 }
 
+function findByEmail(req, res, next) {
+  userService
+    .findByEmail(req.body.email)
+    .then((user) => res.json(user))
+    .catch((error) => next(error));
+}
+
 function googleToken(req, res, next) {
   userService
     .googleToken(req.params.token)
-    .then(({ user, sendToken }) => {
-      if (user) {
-        res.cookie('token', sendToken, {
-          httpOnly: true,
-          secure: true,
-          sameSite: 'None',
-          maxAge: maxAge,
-        });
-        res.json(user);
-      } else {
-        res.status(500);
-      }
-    })
+    .then((user) => res.json(user))
     .catch((error) => next(error));
 }
 
