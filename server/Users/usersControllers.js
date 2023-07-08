@@ -52,7 +52,19 @@ function getUser(req, res, next) {
 function googleToken(req, res, next) {
   userService
     .googleToken(req.params.token)
-    .then((user) => res.json(user))
+    .then(({ user, sendToken }) => {
+      if (user) {
+        res.cookie('token', sendToken, {
+          httpOnly: true,
+          secure: true,
+          sameSite: 'None',
+          maxAge: maxAge,
+        });
+        res.json(user);
+      } else {
+        res.status(500);
+      }
+    })
     .catch((error) => next(error));
 }
 
