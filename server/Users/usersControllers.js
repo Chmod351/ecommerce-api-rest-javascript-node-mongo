@@ -10,7 +10,6 @@ const usersController = {
 };
 
 function signIn(req, res, next) {
-  console.log(req.body);
   userService
     .signIn(req.body)
     .then(({ user, sendToken }) => {

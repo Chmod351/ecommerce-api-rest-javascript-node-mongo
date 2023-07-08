@@ -13,5 +13,4 @@ const apiRouthes = [
     { route: '/api/comments', controller: comment },
     { route: '/api/responses', controller: response },
   ];
-  console.log(apiRouthes, product)
   export default apiRouthes
