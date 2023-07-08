@@ -125,7 +125,6 @@ async function googleToken(token) {
     audience: CLIENTID,
   });
   const payload = ticket.getPayload();
-  console.log(payload);
   const userId = payload;
   return userId;
 }
