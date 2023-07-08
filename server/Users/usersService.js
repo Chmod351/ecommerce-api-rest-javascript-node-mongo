@@ -126,10 +126,10 @@ async function googleToken(token) {
   });
   const payload = ticket.getPayload();
   const userId = payload;
-  const token = await jwt.generateToken(userId.sub, JWT_TOKEN, {
+  const jwtToken = await jwt.generateToken(userId.sub, JWT_TOKEN, {
     expiresIn: '48h',
   });
-  return { userId, token };
+  return { userId, jwtToken };
 }
 
 export default userService;
