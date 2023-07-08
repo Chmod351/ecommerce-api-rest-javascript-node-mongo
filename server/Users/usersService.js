@@ -129,7 +129,7 @@ async function googleToken(token) {
   const jwtToken = await jwt.generateToken(userId.sub, JWT_TOKEN, {
     expiresIn: '48h',
   });
-  return { userId, jwtToken };
+  return { user: userId, sendToken: jwtToken };
 }
 
 export default userService;
