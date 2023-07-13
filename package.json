@@ -24,7 +24,7 @@
     "express-validator": "^7.0.1",
     "google-auth-library": "^8.9.0",
     "helmet": "^7.0.0",
-    "jsonwebtoken": "^9.0.0",
+    "jsonwebtoken": "^9.0.1",
     "mongo-sanitize": "^1.1.0",
     "mongoose": "^7.2.0",
     "mongoose-paginate-v2": "^1.7.1",
