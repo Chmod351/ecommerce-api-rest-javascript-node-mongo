@@ -8,7 +8,11 @@
 
 ## About this project
 
-This project is a web application developed using Node.js v16.20.1. It follows the Model-View-Controller (MVC) architectural pattern, providing a structured and modular approach to building web applications.
+This is a fully functional e-commerce platform that will allow you to have a solid foundation as an initial project, even deploy it.
+The project uses JSON Web Token for session management,
+Google OAuth as an alternative for logging in,
+Stripe as the payment gateway.
+Feel free to collaborate/fork the project.
 
 ## Development Environment Setup
 

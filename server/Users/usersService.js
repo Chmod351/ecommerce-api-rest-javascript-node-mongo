@@ -36,6 +36,7 @@ async function findByEmail(email) {
 }
 
 async function signIn(user) {
+  const existingUser = await findByEmail(user.email);
   const isPasswordMatch = await encrypt.comparePassword(
     user.password,
     existingUser.password,

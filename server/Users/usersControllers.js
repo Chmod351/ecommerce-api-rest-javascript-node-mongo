@@ -11,6 +11,7 @@ const usersController = {
 };
 
 function signIn(req, res, next) {
+console.log("aca");
   userService
     .signIn(req.body)
     .then(({ user, sendToken }) => {
