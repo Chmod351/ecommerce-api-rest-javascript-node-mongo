@@ -10,17 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 16
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
 
-    - name: Install Newman
-      run: npm install -g newman
+      - name: Install Newman
+        run: npm install -g newman
 
-    - name: Run Postman tests
-      run: newman run ./v1.0.0-alpha.postman_collection.json
-
+      - name: Run Postman tests
+        run: newman run ./v1.0.0-alpha.postman_collection.json
