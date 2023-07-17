@@ -22,4 +22,4 @@ jobs:
         run: npm install -g newman
 
       - name: Run Postman tests
-        run: newman run ./v1.0.0-alpha.postman_collection.json
+        run: newman run "/github/workspace/.github/workflows/v1.0.0-alpha.postman_collection.json"
