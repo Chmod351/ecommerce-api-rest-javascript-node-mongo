@@ -1,7 +1,5 @@
+<img src="https://github.com/yamilt351/api-rest/assets/88646148/6fa7be51-ea03-4be7-9f31-3b6365e68f46" width="100" height="100">
 
-<p width="100" height="100">
-  ![68747470733a2f2f6861636b65726e6f6f6e2e636f6d2f686e2d696d616765732f312a6c41523955685f674a376470323365307668793548672e706e67](https://github.com/yamilt351/api-rest/assets/88646148/6fa7be51-ea03-4be7-9f31-3b6365e68f46)
-</p>
 
 
 # INDEX
