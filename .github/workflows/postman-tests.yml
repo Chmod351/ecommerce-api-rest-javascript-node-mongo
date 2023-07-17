@@ -1,9 +1,10 @@
-name: Postman Tests
+name: Postman Test
 
 on:
   pull_request:
     branches:
       - main
+      - development
 
 jobs:
   build:
@@ -16,10 +17,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 18
+          node-version: 16
 
       - name: Install Newman
         run: npm install -g newman
 
       - name: Run Postman tests
-        run: newman run /github/workspace/.github/workflows/v1.0.0-alpha.postman_collection.json
+        run: newman run ./v1.0.0-alpha.postman_collection.json
