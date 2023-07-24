@@ -1,7 +1,6 @@
 <img src="https://github.com/yamilt351/api-rest/assets/88646148/6fa7be51-ea03-4be7-9f31-3b6365e68f46" width="100" height="100" align="center">
 
 
-
 # INDEX
 - [About this project](#About-this-project)
 - [Development Environment Setup](#Development-Environment-Setup)
@@ -45,6 +44,15 @@ STRIPE_TOKEN=sk_text_YourStripeToken
 
 ```
 
+```
+SECRET:your_google_oauth_secret
+```
+
+```
+CLIENTID:your_google_oauth_cliendId
+```
+
+
 - Start the application using `npm run dev` or `yarn run dev` to launch the application.
 - Access the application in a web browser using the provided URL or port number.
 
@@ -60,6 +68,15 @@ STRIPE_TOKEN=sk_text_YourStripeToken
 npm test
 
 ```
+
+# Live demo & Product Explanation.
+
+[Demo](https://ciervademo.onrender.com/)
+This a simple demo. 
+Shoping Cart State is hanlde by the frontend, so you can store the shoping cart items init and still keep it even if the user is not loged into the app.
+This guarantee an excelent user experience btw, bc the user can explore your site before making orders.
+The backend provide pagination for some routes, for more info [check the Documentation](https://documenter.getpostman.com/view/21643141/2s93sXcaLf#f3eb5112-676b-46c6-89a2-f5dd6b6c0927)
+
 
 # Contribution.
 

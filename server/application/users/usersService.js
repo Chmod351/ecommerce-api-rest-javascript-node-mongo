@@ -1,15 +1,17 @@
-import Encrypt from '../helpers/bcrypt.js';
 import User from './userModel.js';
-import { JWT_TOKEN } from '../../index.js';
-import Token from '../helpers/token.js';
+import { JWT_TOKEN } from '../../../index.js';
+import Token from '../../helpers/token.js';
+import Encrypt from '../../helpers/bcrypt.js';
 import {
   BadRequestError,
   NotFoundError,
   UnauthorizedError,
-} from '../helpers/errorHandler.js';
+} from '../../helpers/errorHandler.js';
 import { OAuth2Client } from 'google-auth-library';
-const SECRET = process.env.SECRET;
-const CLIENTID = process.env.CLIENTID;
+import envConfig from '../../config/envConfig.js';
+
+const SECRET = envConfig.SECRET;
+const CLIENTID = envConfig.CLIENTID;
 
 //config
 const userService = {
@@ -31,7 +33,7 @@ async function findByEmail(email) {
   if (alreadyExist) {
     return alreadyExist;
   } else {
-    return null;
+    throw new NotFoundError(`user with ${email} not found`);
   }
 }
 

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import purchaseController from './purchasesController.js';
-import authMiddleware from '../helpers/jwt.js';
-import adminCheck from '../helpers/adminCheck.js';
+import authMiddleware from '../../helpers/jwt.js';
+import adminCheck from '../../helpers/adminCheck.js';
 const router = Router();
 
 router.post('/create', authMiddleware, purchaseController.createPurchase);
