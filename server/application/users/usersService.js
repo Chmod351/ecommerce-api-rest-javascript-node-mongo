@@ -66,22 +66,21 @@ async function checkLength(item, num) {
 
 async function signUp(user) {
   const allowedFields = ['email', 'password', 'username'];
-
   const filteredUser = Object.keys(user) //check if user contains allowedFields
     .filter((key) => allowedFields.includes(key))
     .reduce((obj, key) => {
       obj[key] = user[key];
       return obj;
     }, {});
+  await checkLength(filteredUser.password, 8);
 
-  const validatePass = await checkLength(filteredUser.password, 8);
-  if (validatePass) {
+  try {
     const encryptPassword = await encrypt.hashPassword(filteredUser.password);
     const createUser = new User({ ...filteredUser, password: encryptPassword });
     const newUser = await createUser.save();
     return newUser;
-  } else {
-    throw new BadRequestError('password does not match');
+  } catch (error) {
+    throw new BadRequestError(error.message);
   }
 }
 

@@ -63,9 +63,8 @@ CLIENTID:your_google_oauth_cliendId
 ## Tests
 
 - The aplication was tested with [Jest](https://jestjs.io/) and [Supertest](https://www.npmjs.com/package/supertest)
-
 ```
-npm test
+npm run test
 
 ```
 
