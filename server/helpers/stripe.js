@@ -1,8 +1,7 @@
 import IPaymentProvider from './paymentProcess.js';
-import { config } from 'dotenv';
-config();
+import envConfig from '../config/envConfig.js';
 import stripe from 'stripe';
-const stripeInstance = stripe(process.env.STRIPE_TOKEN);
+const stripeInstance = stripe(envConfig.STRIPE);
 
 export default class StripePaymentProvider extends IPaymentProvider {
   async createPayment(tokenId, amount) {

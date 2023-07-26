@@ -1,17 +1,8 @@
 import userService from './usersService.js';
 const maxAge = 24 * 60 * 60 * 1000;
 
-const usersController = {
-  signIn,
-  signUp,
-  getUser,
-  getStat,
-  googleToken,
-  findByEmail,
-};
-
 function signIn(req, res, next) {
-console.log("aca");
+  console.log('aca');
   userService
     .signIn(req.body)
     .then(({ user, sendToken }) => {
@@ -31,6 +22,7 @@ console.log("aca");
 }
 
 function signUp(req, res, next) {
+  console.log('controller');
   userService
     .signUp(req.body)
     .then((user) => res.json(user))
@@ -65,4 +57,12 @@ function googleToken(req, res, next) {
     .catch((error) => next(error));
 }
 
+const usersController = {
+  signIn,
+  signUp,
+  getUser,
+  getStat,
+  googleToken,
+  findByEmail,
+};
 export default usersController;
