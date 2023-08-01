@@ -27,7 +27,7 @@
     "jsonwebtoken": "^9.0.1",
     "mongo-sanitize": "^1.1.0",
     "mongoose": "^7.4.1",
-    "mongoose-paginate-v2": "^1.7.1",
+    "mongoose-paginate-v2": "^1.7.31",
     "morgan": "^1.10.0",
     "stripe": "^12.12.0"
   },
