@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "jest",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
@@ -26,8 +26,8 @@
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.1",
     "mongo-sanitize": "^1.1.0",
-    "mongoose": "^7.3.4",
-    "mongoose-paginate-v2": "^1.7.1",
+    "mongoose": "^7.4.1",
+    "mongoose-paginate-v2": "^1.7.31",
     "morgan": "^1.10.0",
     "stripe": "^12.12.0"
   },

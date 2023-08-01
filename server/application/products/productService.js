@@ -1,6 +1,6 @@
 import Product from './productModel.js';
 import mongoose from 'mongoose';
-import { NotFoundError } from '../helpers/errorHandler.js';
+import { NotFoundError } from '../../helpers/errorHandler.js';
 
 const productService = {
   getProduct,

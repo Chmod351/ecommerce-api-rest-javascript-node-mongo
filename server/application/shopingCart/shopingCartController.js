@@ -1,7 +1,7 @@
 import cartService from './shopingCartService.js';
 // function to check ownership
-import isResourceOwner from '../helpers/isOwner.js';
-import Cart from '../ShopingCart/shopinCartModel.js';
+import isResourceOwner from '../../helpers/isOwner.js';
+import Cart from './shopinCartModel.js';
 
 const cartController = {
   createCart,

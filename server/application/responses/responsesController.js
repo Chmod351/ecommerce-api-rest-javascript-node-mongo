@@ -1,7 +1,7 @@
 import responseService from './responsesService.js';
 import Response from './responsesModel.js';
 // function to check ownership
-import isResourceOwner from '../helpers/isOwner.js';
+import isResourceOwner from '../../helpers/isOwner.js';
 
 const responseControllers = {
   createResponse,

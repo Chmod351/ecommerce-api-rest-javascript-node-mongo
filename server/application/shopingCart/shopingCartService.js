@@ -1,5 +1,6 @@
 import ShoppingCart from './shopinCartModel.js';
-import userService from '../Users/usersService.js';
+import userService from '../users/usersService.js';
+
 const cartService = {
   createCart,
   editCart,

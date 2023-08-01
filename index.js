@@ -1,16 +1,14 @@
 import express from 'express';
-import importMiddlewares from './middlewaresHandler.js';
-import { connect } from './server.js';
-import { config } from 'dotenv';
+import importMiddlewares from './server/config/middlewaresConfig.js';
+import { connect } from './server/config/serverConfig.js';
 import { errorHandler } from './server/helpers/errorHandler.js';
-import apiRouthes from './server/api/routes.js';
+import apiRouthes from './server/config/endpointsConfig.js';
+import envConfig from './server/config/envConfig.js';
 
 //config
-
-config();
 const app = express();
 const PORT = process.env.PORT;
-export const JWT_TOKEN = process.env.JWT_TOKEN;
+export const JWT_TOKEN = envConfig.JWT;
 
 // importing middlewares
 const middlewares = await importMiddlewares();

@@ -1,5 +1,5 @@
 import Purchase from './purchasesModel.js';
-import StripePaymentProvider from '../helpers/stripe.js';
+import StripePaymentProvider from '../../helpers/stripe.js';
 const paymentProvider = new StripePaymentProvider();
 
 const purchaseService = {

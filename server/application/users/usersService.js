@@ -1,15 +1,17 @@
-import Encrypt from '../helpers/bcrypt.js';
 import User from './userModel.js';
-import { JWT_TOKEN } from '../../index.js';
-import Token from '../helpers/token.js';
+import { JWT_TOKEN } from '../../../index.js';
+import Token from '../../helpers/token.js';
+import Encrypt from '../../helpers/bcrypt.js';
 import {
   BadRequestError,
   NotFoundError,
   UnauthorizedError,
-} from '../helpers/errorHandler.js';
+} from '../../helpers/errorHandler.js';
 import { OAuth2Client } from 'google-auth-library';
-const SECRET = process.env.SECRET;
-const CLIENTID = process.env.CLIENTID;
+import envConfig from '../../config/envConfig.js';
+
+const SECRET = envConfig.SECRET;
+const CLIENTID = envConfig.CLIENTID;
 
 //config
 const userService = {
@@ -31,7 +33,7 @@ async function findByEmail(email) {
   if (alreadyExist) {
     return alreadyExist;
   } else {
-    return null;
+    throw new NotFoundError(`user with ${email} not found`);
   }
 }
 
@@ -64,22 +66,21 @@ async function checkLength(item, num) {
 
 async function signUp(user) {
   const allowedFields = ['email', 'password', 'username'];
-
   const filteredUser = Object.keys(user) //check if user contains allowedFields
     .filter((key) => allowedFields.includes(key))
     .reduce((obj, key) => {
       obj[key] = user[key];
       return obj;
     }, {});
+  await checkLength(filteredUser.password, 8);
 
-  const validatePass = await checkLength(filteredUser.password, 8);
-  if (validatePass) {
+  try {
     const encryptPassword = await encrypt.hashPassword(filteredUser.password);
     const createUser = new User({ ...filteredUser, password: encryptPassword });
     const newUser = await createUser.save();
     return newUser;
-  } else {
-    throw new BadRequestError('password does not match');
+  } catch (error) {
+    throw new BadRequestError(error.message);
   }
 }
 
